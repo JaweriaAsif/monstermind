@@ -25,7 +25,7 @@ class Btn extends StatelessWidget {
           child: Text(
             text,
             style: const TextStyle(
-              fontSize: 25,
+              fontSize: 27,
             ),
           ),
           onPressed: () {
@@ -39,7 +39,7 @@ class Btn extends StatelessWidget {
                 MaterialStateProperty.all<Color>(const Color(0xff2EADB5)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
+                borderRadius: BorderRadius.circular(30.0),
                 side: const BorderSide(color: Color(0xff2EADB5)),
               ),
             ),
