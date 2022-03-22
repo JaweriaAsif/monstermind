@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/button.dart';
+import 'package:monstermind/main.dart';
 import 'package:monstermind/textfield.dart';
 
-final _formKey = GlobalKey<FormState>();
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 String _name = '';
 
 class Signup2 extends StatefulWidget {
@@ -69,6 +70,14 @@ class _Signup2State extends State<Signup2> {
                       child: Btn(
                         text: 'Next',
                         onPress: () {
+                          final FormState form =
+                              _formKey.currentState as FormState;
+                          if (form.validate()) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => const MyApp()),
+                            );
+                          }
                           // Navigator.of(context).push(
                           //   MaterialPageRoute(
                           //       builder: (context) => const Signup2()),

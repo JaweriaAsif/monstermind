@@ -16,6 +16,7 @@ class Textfield extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(50, 0, 50, 10),
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: controller,
         style: const TextStyle(
           fontSize: 18,
@@ -24,10 +25,10 @@ class Textfield extends StatelessWidget {
           hintText: label,
         ),
         validator: (text) {
-          if (controller.text == null || controller.text.isEmpty) {
+          if (text == null || text.isEmpty) {
             return 'Can\'t be empty';
           }
-          if (controller.text.length > 12) {
+          if (text.length > 12) {
             return 'Too long';
           }
           return null;
@@ -46,12 +47,12 @@ class DateTextfield extends StatelessWidget {
 
   final TextEditingController controller;
   DateTime selectedDate;
-
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(50, 0, 50, 10),
-      child: TextField(
+      child: TextFormField(
         readOnly: true,
         controller: controller,
         style: const TextStyle(
@@ -61,7 +62,7 @@ class DateTextfield extends StatelessWidget {
           hintText: 'Date of Birth',
         ),
         onTap: () async {
-          bool selected = await _selectDate(context);
+          selected = await _selectDate(context);
           if (selected) {
             controller.text = selectedDate.day.toString() +
                 "/" +
@@ -69,6 +70,18 @@ class DateTextfield extends StatelessWidget {
                 "/" +
                 selectedDate.year.toString();
           }
+        },
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (text) {
+          if (!selected) {
+            return 'Please select a Date of Birth';
+          } else if (selectedDate.isAfter(DateTime.now()) ||
+              (selectedDate.day == DateTime.now().day &&
+                  selectedDate.month == DateTime.now().month &&
+                  selectedDate.year == DateTime.now().year)) {
+            return 'Please select a valid Date of Birth';
+          }
+          return null;
         },
       ),
     );
@@ -100,7 +113,7 @@ class _DropdownState extends State<Dropdown> {
   @override
   Widget build(BuildContext context) {
     List<String> categories = ["Male", "Female"];
-    // String _currentSelectedValue = "Male";
+
     Object? _category;
 
     return Padding(
@@ -117,6 +130,13 @@ class _DropdownState extends State<Dropdown> {
             ),
           );
         }).toList(),
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (text) {
+          if (_category == null || _category.toString().isEmpty) {
+            return 'Please select a Gender';
+          }
+          return null;
+        },
         onChanged: (newValue) {
           gender = _category.toString();
           setState(() => _category = newValue);
@@ -127,9 +147,6 @@ class _DropdownState extends State<Dropdown> {
           hintStyle: TextStyle(
             fontSize: 18,
           ),
-          // errorText: errorSnapshot.data == 0
-          //     ? Localization.of(context).categoryEmpty
-          //     : null),
         ),
       ),
     );
