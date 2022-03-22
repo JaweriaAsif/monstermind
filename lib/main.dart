@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/button.dart';
+import 'package:monstermind/signup2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,12 +35,29 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Stack(fit: StackFit.expand, children: [
-        const Image(
-          image: AssetImage('assets/images/Sign up 1.png'),
-          fit: BoxFit.fill,
+        child: Stack(
+          children: [
+            Stack(
+              fit: StackFit.expand,
+              children: const [
+                Image(
+                  image: AssetImage('assets/images/Sign up 1.png'),
+                  fit: BoxFit.fill,
+                ),
+              ],
+            ),
+            Btn(
+              text: 'Sign Up',
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const Signup2()),
+                );
+              },
+              alignment: const Alignment(0, 0.13),
+            ),
+          ],
         ),
-      ])),
+      ),
     );
   }
 }
