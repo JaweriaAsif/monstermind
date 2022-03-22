@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/button.dart';
 import 'package:monstermind/textfield.dart';
 
+final _formKey = GlobalKey<FormState>();
+String _name = '';
+
 class Signup2 extends StatefulWidget {
   const Signup2({Key? key}) : super(key: key);
 
@@ -14,10 +17,17 @@ class _Signup2State extends State<Signup2> {
   final TextEditingController _controllerGender = TextEditingController();
   final TextEditingController _controllerDOB = TextEditingController();
 
-  DateTime selectedDate = DateTime.now();
+  // void _submit() {
+  //   // validate all the form fields
+  //   if (_formKey.currentState!.validate()) {
+  //     // on success, notify the parent widget
+  //     widget.onSubmit(_name);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    DateTime selectedDate = DateTime.now();
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -32,73 +42,48 @@ class _Signup2State extends State<Signup2> {
                   fit: BoxFit.fill,
                 ),
               ),
-              Column(
-                children: [
-                  const SizedBox(
-                    height: 500,
-                  ),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 500,
+                    ),
 
-                  //
-                  Textfield(
-                    controller: _controllerUsername,
-                    label: 'Username',
-                  ),
+                    // Form(child: )
+                    //
+                    Textfield(
+                      controller: _controllerUsername,
+                      label: 'Username',
+                    ),
 
-                  Textfield(
-                    controller: _controllerGender,
-                    label: 'Gender',
-                  ),
+                    const Dropdown(),
 
-                  InkWell(
-                    child: Textfield(
+                    DateTextfield(
                       controller: _controllerDOB,
-                      label: 'Date of Birth',
+                      selectedDate: selectedDate,
                     ),
-                    onTap: () async {
-                      bool selected = await _selectDate(context);
-                      if (selected) {
-                        _controllerDOB.text = selectedDate.day.toString() +
-                            "/" +
-                            selectedDate.month.toString() +
-                            "/" +
-                            selectedDate.year.toString();
-                      }
-                    },
-                  ),
-                  //
-                  Padding(
-                    padding: const EdgeInsets.only(top: 25),
-                    child: Btn(
-                      text: 'Next',
-                      onPress: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const Signup2()),
-                        );
-                      },
-                      alignment: const Alignment(0, 0.95),
+
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25),
+                      child: Btn(
+                        text: 'Next',
+                        onPress: () {
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const Signup2()),
+                          // );
+                        },
+                        alignment: const Alignment(0, 0.95),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  Future<bool> _selectDate(BuildContext context) async {
-    final DateTime? selected = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(DateTime.now().year),
-      lastDate: DateTime(DateTime.now().year + 80),
-    );
-    if (selected != null) {
-      selectedDate = selected;
-      return true;
-    }
-    return false;
   }
 }

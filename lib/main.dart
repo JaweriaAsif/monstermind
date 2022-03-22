@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:monstermind/button.dart';
 import 'package:monstermind/signup2.dart';
 
+String gender = ""; //DB
+
 void main() {
   runApp(const MyApp());
 }
