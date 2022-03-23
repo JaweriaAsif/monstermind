@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/main.dart';
 
 class Textfield extends StatelessWidget {
-  Textfield({
+  const Textfield({
     Key? key,
     required this.controller,
     required this.label,
@@ -48,6 +48,7 @@ class DateTextfield extends StatelessWidget {
   final TextEditingController controller;
   DateTime selectedDate;
   bool selected = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -73,12 +74,14 @@ class DateTextfield extends StatelessWidget {
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (text) {
-          if (!selected) {
+          if (text == null || text.isEmpty) {
             return 'Please select a Date of Birth';
-          } else if (selectedDate.isAfter(DateTime.now()) ||
+          } else if (selectedDate.isAfter(DateTime
+                  .now()) /*||
               (selectedDate.day == DateTime.now().day &&
                   selectedDate.month == DateTime.now().month &&
-                  selectedDate.year == DateTime.now().year)) {
+                  selectedDate.year == DateTime.now().year)*/
+              ) {
             return 'Please select a valid Date of Birth';
           }
           return null;
@@ -91,8 +94,8 @@ class DateTextfield extends StatelessWidget {
     final DateTime? selected = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(DateTime.now().year),
-      lastDate: DateTime(DateTime.now().year + 80),
+      firstDate: DateTime(DateTime.now().year - 90),
+      lastDate: DateTime(DateTime.now().year + 1),
     );
     if (selected != null) {
       selectedDate = selected;
@@ -110,6 +113,13 @@ class Dropdown extends StatefulWidget {
 }
 
 class _DropdownState extends State<Dropdown> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    gender = "";
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> categories = ["Male", "Female"];
@@ -130,16 +140,20 @@ class _DropdownState extends State<Dropdown> {
             ),
           );
         }).toList(),
+        onChanged: (newValue) {
+          print("before: " + gender);
+          gender = newValue.toString();
+          print("after: " + gender);
+          setState(() {
+            _category = newValue;
+          });
+        },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (text) {
-          if (_category == null || _category.toString().isEmpty) {
+          if (gender.isEmpty) {
             return 'Please select a Gender';
           }
           return null;
-        },
-        onChanged: (newValue) {
-          gender = _category.toString();
-          setState(() => _category = newValue);
         },
         value: _category,
         decoration: const InputDecoration(
