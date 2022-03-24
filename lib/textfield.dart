@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:monstermind/main.dart';
+import 'package:monstermind/signup2.dart';
+// import 'package:monstermind/main.dart';
 
 class Textfield extends StatelessWidget {
   const Textfield({
@@ -14,7 +15,7 @@ class Textfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(50, 0, 50, 10),
+      padding: const EdgeInsets.fromLTRB(50, 0, 50, 5),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: controller,
@@ -29,7 +30,7 @@ class Textfield extends StatelessWidget {
             return 'Can\'t be empty';
           }
           if (text.length > 12) {
-            return 'Too long';
+            return 'Too long - must be shorter than 12 characters';
           }
           return null;
         },
@@ -52,7 +53,7 @@ class DateTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(50, 0, 50, 10),
+      padding: const EdgeInsets.fromLTRB(50, 0, 50, 5),
       child: TextFormField(
         readOnly: true,
         controller: controller,
@@ -65,6 +66,7 @@ class DateTextfield extends StatelessWidget {
         onTap: () async {
           selected = await _selectDate(context);
           if (selected) {
+            DOB = selectedDate;
             controller.text = selectedDate.day.toString() +
                 "/" +
                 selectedDate.month.toString() +
@@ -76,12 +78,7 @@ class DateTextfield extends StatelessWidget {
         validator: (text) {
           if (text == null || text.isEmpty) {
             return 'Please select a Date of Birth';
-          } else if (selectedDate.isAfter(DateTime
-                  .now()) /*||
-              (selectedDate.day == DateTime.now().day &&
-                  selectedDate.month == DateTime.now().month &&
-                  selectedDate.year == DateTime.now().year)*/
-              ) {
+          } else if (selectedDate.isAfter(DateTime.now())) {
             return 'Please select a valid Date of Birth';
           }
           return null;
@@ -127,7 +124,7 @@ class _DropdownState extends State<Dropdown> {
     Object? _category;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(50, 0, 50, 10),
+      padding: const EdgeInsets.fromLTRB(50, 0, 50, 5),
       child: DropdownButtonFormField(
         items: categories.map((String category) {
           return DropdownMenuItem(
@@ -141,9 +138,7 @@ class _DropdownState extends State<Dropdown> {
           );
         }).toList(),
         onChanged: (newValue) {
-          print("before: " + gender);
           gender = newValue.toString();
-          print("after: " + gender);
           setState(() {
             _category = newValue;
           });

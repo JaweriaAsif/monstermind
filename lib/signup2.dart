@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/button.dart';
+import 'package:monstermind/hello.dart';
 import 'package:monstermind/main.dart';
 import 'package:monstermind/textfield.dart';
+import 'package:monstermind/user.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-String _name = '';
+
+String gender = ""; // kachra DB
+late DateTime DOB; // kachra DB
+User user = User();
 
 class Signup2 extends StatefulWidget {
   const Signup2({Key? key}) : super(key: key);
@@ -15,16 +20,7 @@ class Signup2 extends StatefulWidget {
 
 class _Signup2State extends State<Signup2> {
   final TextEditingController _controllerUsername = TextEditingController();
-  final TextEditingController _controllerGender = TextEditingController();
   final TextEditingController _controllerDOB = TextEditingController();
-
-  // void _submit() {
-  //   // validate all the form fields
-  //   if (_formKey.currentState!.validate()) {
-  //     // on success, notify the parent widget
-  //     widget.onSubmit(_name);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -50,38 +46,33 @@ class _Signup2State extends State<Signup2> {
                     const SizedBox(
                       height: 500,
                     ),
-
-                    // Form(child: )
-                    //
                     Textfield(
                       controller: _controllerUsername,
                       label: 'Username',
                     ),
-
                     const Dropdown(),
-
                     DateTextfield(
                       controller: _controllerDOB,
                       selectedDate: selectedDate,
                     ),
-
                     Padding(
-                      padding: const EdgeInsets.only(top: 25),
+                      padding: const EdgeInsets.only(top: 20),
                       child: Btn(
                         text: 'Next',
                         onPress: () {
                           final FormState form =
                               _formKey.currentState as FormState;
                           if (form.validate()) {
+                            user = User(
+                              name: _controllerUsername.text,
+                              gender: gender,
+                              DOB: DOB,
+                            );
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => const MyApp()),
+                                  builder: (context) => const Hello()),
                             );
                           }
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //       builder: (context) => const Signup2()),
-                          // );
                         },
                         alignment: const Alignment(0, 0.95),
                       ),
