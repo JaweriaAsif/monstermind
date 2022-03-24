@@ -11,6 +11,7 @@ class Option extends StatelessWidget {
   final String path;
   final String text;
   final Color color;
+  //add widget to nav to
 
   @override
   Widget build(BuildContext context) {
