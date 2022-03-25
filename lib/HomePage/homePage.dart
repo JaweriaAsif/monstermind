@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/HomePage/option.dart';
+import 'package:monstermind/avatar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,6 +13,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0.0,
+      //   actions: [
+      //     Padding(
+      //       padding: const EdgeInsets.only(right: 10),
+      //       child: Avatar(),
+      //     ),
+      //   ],
+      //   automaticallyImplyLeading: false,
+      // ),
       body: Stack(
         children: [
           SizedBox(
@@ -22,6 +35,7 @@ class _HomePageState extends State<HomePage> {
               fit: BoxFit.fill,
             ),
           ),
+          Avatar(),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
