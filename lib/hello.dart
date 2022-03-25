@@ -11,6 +11,8 @@ class Hello extends StatefulWidget {
 }
 
 class _HelloState extends State<Hello> {
+  bool isTapped = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -24,8 +26,10 @@ class _HelloState extends State<Hello> {
   }
 
   route() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const HomePage()));
+    if (!isTapped) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
+    }
   }
 
   @override
@@ -34,6 +38,7 @@ class _HelloState extends State<Hello> {
       body: Center(
         child: InkWell(
           onTap: () {
+            isTapped = true;
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const HomePage()),
             );

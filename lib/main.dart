@@ -4,8 +4,6 @@ import 'package:monstermind/button.dart';
 import 'package:monstermind/signup2.dart';
 import 'package:monstermind/user.dart';
 
-//DB
-
 void main() {
   runApp(const MyApp());
 }

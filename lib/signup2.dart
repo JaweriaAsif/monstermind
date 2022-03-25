@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/button.dart';
 import 'package:monstermind/hello.dart';
-import 'package:monstermind/main.dart';
 import 'package:monstermind/textfield.dart';
 import 'package:monstermind/user.dart';
 
