@@ -35,7 +35,9 @@ class _HomePageState extends State<HomePage> {
               fit: BoxFit.fill,
             ),
           ),
-          Avatar(),
+          AvatarAppbar(
+            back: false,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [

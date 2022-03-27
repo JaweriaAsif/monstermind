@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   google_fonts: ^2.1.0 
+  assorted_layout_widgets: ^5.5.0
   flutter:
     sdk: flutter
 
