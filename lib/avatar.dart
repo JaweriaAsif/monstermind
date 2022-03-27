@@ -90,11 +90,13 @@ class AvatarAppbar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //back button
-
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: IconButton(
-                    onPressed: onBack,
+                    onPressed: onBack ??
+                        () {
+                          Navigator.pop(context);
+                        },
                     icon: const Icon(
                       Icons.arrow_back_ios,
                       color: Color(0xff1D9EA6),

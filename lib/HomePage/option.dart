@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
 class Option extends StatelessWidget {
-  const Option({
+  Option({
     Key? key,
     required this.path,
     required this.color,
     required this.text,
+    required this.ontap,
   }) : super(key: key);
 
   final String path;
   final String text;
   final Color color;
-  //add widget to nav to
+  final Function() ontap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -53,7 +54,7 @@ class Option extends StatelessWidget {
             ),
 
             //todo
-            onTap: () {},
+            onTap: ontap,
           ),
         ],
       ),

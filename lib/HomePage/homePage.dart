@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/HomePage/option.dart';
+import 'package:monstermind/LetsMain/learnMain.dart';
+
 import 'package:monstermind/avatar.dart';
+import 'package:monstermind/hello.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -40,24 +43,29 @@ class _HomePageState extends State<HomePage> {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              SizedBox(
-                height: 150,
-              ),
+            children: [
+              const SizedBox(height: 150),
               Option(
                 path: 'assets/images/remi.png',
-                color: Color(0xff8D64BF),
+                color: const Color(0xff8D64BF),
                 text: "Learn",
+                ontap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const LearnMain()),
+                  );
+                },
               ),
               Option(
                 path: 'assets/images/crab.png',
-                color: Color(0xffEE412A),
+                color: const Color(0xffEE412A),
                 text: "Sing",
+                ontap: () {},
               ),
               Option(
                 path: 'assets/images/aloo.png',
-                color: Color(0xffF1B111),
+                color: const Color(0xffF1B111),
                 text: "Play",
+                ontap: () {},
               ),
             ],
           ),
