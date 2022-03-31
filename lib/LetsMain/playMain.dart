@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/LetsMain/Games/alphabetGame.dart';
 import 'package:monstermind/LetsMain/letsPageMain.dart';
 import 'package:monstermind/LetsMain/optionTile.dart';
 import 'package:monstermind/avatar.dart';
@@ -31,7 +32,11 @@ class _PlayMainState extends State<PlayMain> {
         imgPath: 'assets/images/alphabets.png',
         text: 'Alphabets',
         color: const Color(0xffF8DA6B),
-        ontap: () {},
+        ontap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const AlphabetGame()),
+          );
+        },
       ),
 
       //shapes
