@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/HomePage/option.dart';
 import 'package:monstermind/LetsMain/learnMain.dart';
+import 'package:monstermind/LetsMain/playMain.dart';
 
 import 'package:monstermind/avatar.dart';
 import 'package:monstermind/hello.dart';
@@ -65,7 +66,11 @@ class _HomePageState extends State<HomePage> {
                 path: 'assets/images/aloo.png',
                 color: const Color(0xffF1B111),
                 text: "Play",
-                ontap: () {},
+                ontap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const PlayMain()),
+                  );
+                },
               ),
             ],
           ),
