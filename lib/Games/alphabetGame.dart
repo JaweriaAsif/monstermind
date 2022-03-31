@@ -14,29 +14,28 @@ class _AlphabetGameState extends State<AlphabetGame> {
   @override
   Widget build(BuildContext context) {
     options = [
-      //numbers
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/H.png',
         text: '',
         ontap: () {
           Navigator.pop(context);
         },
       ),
-      // alphabets
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/R.png',
         text: '',
         ontap: () {},
       ),
-
-      //shapes
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/Z.png',
         text: '',
         ontap: () {},
       ),
-      //colours
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/B.png',
         text: '',
         ontap: () {},

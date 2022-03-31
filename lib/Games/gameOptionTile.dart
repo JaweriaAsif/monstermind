@@ -5,12 +5,12 @@ class GameOptionTile extends StatelessWidget {
     Key? key,
     required this.imgPath,
     required this.text,
-    // required this.color,
+    required this.height,
     required this.ontap,
   }) : super(key: key);
 
   final String imgPath;
-  // final Color color;
+  final double height;
   final String text;
   final Function() ontap;
 
@@ -33,12 +33,12 @@ class GameOptionTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 110,
+                    height: height,
                     child: Image(
                       image: AssetImage(imgPath),
                     ),
                   ),
-                  const SizedBox(height: 3),
+                  const SizedBox(height: 4),
                   text == ""
                       ? SizedBox()
                       : Text(

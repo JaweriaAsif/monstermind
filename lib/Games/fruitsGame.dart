@@ -14,29 +14,28 @@ class _FruitsGameState extends State<FruitsGame> {
   @override
   Widget build(BuildContext context) {
     options = [
-      //numbers
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/strawberry.png',
         text: 'Strawberry',
         ontap: () {
           Navigator.pop(context);
         },
       ),
-      // alphabets
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/apple.png',
         text: 'Apple',
         ontap: () {},
       ),
-
-      //shapes
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/orange.png',
         text: 'Orange',
         ontap: () {},
       ),
-      //colours
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/grapes.png',
         text: 'Grapes',
         ontap: () {},

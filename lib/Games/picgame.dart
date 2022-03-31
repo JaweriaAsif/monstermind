@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/avatar.dart';
 
-class Game extends StatelessWidget {
-  const Game({Key? key, required this.question, required this.list})
+class PicGame extends StatelessWidget {
+  const PicGame(
+      {Key? key,
+      required this.question,
+      required this.questionimagepath,
+      required this.questionimagewidth,
+      required this.list})
       : super(key: key);
-
+  final String questionimagepath;
+  final double questionimagewidth;
   final String question;
   final Widget list;
 
@@ -17,11 +23,11 @@ class Game extends StatelessWidget {
           AvatarAppbar(),
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: (MediaQuery.of(context).size.height / 3) * 1,
+            height: (MediaQuery.of(context).size.height / 3) * 1.45,
             child: Stack(
               children: [
                 Align(
-                  alignment: const Alignment(0.8, -0.5),
+                  alignment: const Alignment(0.8, -0.7),
                   child: IconButton(
                     onPressed: () {
                       //add audio
@@ -33,7 +39,6 @@ class Game extends StatelessWidget {
                 ),
                 SizedBox(
                   width: (MediaQuery.of(context).size.width / 3) * 2.28,
-                  // height: (MediaQuery.of(context).size.height / 3) * 0.8,
                   child: Stack(children: [
                     const Image(
                       image: AssetImage('assets/images/speechbubble.png'),
@@ -64,7 +69,7 @@ class Game extends StatelessWidget {
                   ]),
                 ),
                 const Align(
-                  alignment: Alignment.bottomRight,
+                  alignment: const Alignment(1, 0),
                   child: SizedBox(
                     width: 150,
                     child: Image(
@@ -72,10 +77,21 @@ class Game extends StatelessWidget {
                     ),
                   ),
                 ),
+                Align(
+                  alignment: const Alignment(-0.5, 0.85),
+                  child: SizedBox(
+                    height: 200,
+                    width: questionimagewidth,
+                    child: Image(
+                      image: AssetImage(questionimagepath),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          const SizedBox(height: 50),
+          // const SizedBox(height: 30),
           Expanded(child: list),
         ],
       ),

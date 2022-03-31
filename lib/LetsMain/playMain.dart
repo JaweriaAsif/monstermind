@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/Games/alphabetGame.dart';
 import 'package:monstermind/Games/animalsGame.dart';
 import 'package:monstermind/Games/bodyPartGame.dart';
+import 'package:monstermind/Games/colourGame.dart';
 import 'package:monstermind/Games/fruitsGame.dart';
+import 'package:monstermind/Games/numberGame.dart';
+import 'package:monstermind/Games/shapeGame.dart';
 import 'package:monstermind/LetsMain/letsPageMain.dart';
 import 'package:monstermind/LetsMain/optionTile.dart';
 
@@ -26,7 +29,9 @@ class _PlayMainState extends State<PlayMain> {
         text: 'Numbers',
         color: const Color(0xffF8DA6B),
         ontap: () {
-          Navigator.pop(context);
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const NumberGame()),
+          );
         },
       ),
       // alphabets
@@ -46,14 +51,21 @@ class _PlayMainState extends State<PlayMain> {
         imgPath: 'assets/images/shapes.png',
         text: 'Shapes',
         color: const Color(0xffF8DA6B),
-        ontap: () {},
+        ontap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const ShapeGame()),
+          );
+        },
       ),
       //colours
       OptionTile(
         imgPath: 'assets/images/colours.png',
         text: 'Colours',
         color: const Color(0xffF8DA6B),
-        ontap: () {},
+        ontap: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ColourGame()));
+        },
       ),
 
       //animals

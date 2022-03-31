@@ -2,47 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameoptionTile.dart';
 
-class BodyPartGame extends StatefulWidget {
-  const BodyPartGame({Key? key}) : super(key: key);
+import 'picgame.dart';
+
+class NumberGame extends StatefulWidget {
+  const NumberGame({Key? key}) : super(key: key);
 
   @override
-  State<BodyPartGame> createState() => _BodyPartGameState();
+  State<NumberGame> createState() => _NumberGameState();
 }
 
-class _BodyPartGameState extends State<BodyPartGame> {
+class _NumberGameState extends State<NumberGame> {
   List<GameOptionTile> options = [];
   @override
   Widget build(BuildContext context) {
     options = [
       GameOptionTile(
-        height: 110,
-        imgPath: 'assets/images/arm.png',
-        text: 'Arm',
+        height: 60,
+        imgPath: 'assets/images/2.png',
+        text: 'Two',
         ontap: () {
           Navigator.pop(context);
         },
       ),
       GameOptionTile(
-        height: 110,
-        imgPath: 'assets/images/nose.png',
-        text: 'Nose',
+        height: 60,
+        imgPath: 'assets/images/1.png',
+        text: 'One',
         ontap: () {},
       ),
       GameOptionTile(
-        height: 110,
-        imgPath: 'assets/images/ear.png',
-        text: 'Ear',
+        height: 60,
+        imgPath: 'assets/images/5.png',
+        text: 'Five',
         ontap: () {},
       ),
       GameOptionTile(
-        height: 110,
-        imgPath: 'assets/images/foot.png',
-        text: 'Foot',
+        height: 60,
+        imgPath: 'assets/images/3.png',
+        text: 'Three',
         ontap: () {},
       ),
     ];
-    return Game(
-      question: "Select the body part from the audio",
+    return PicGame(
+      question: "How many are these?",
+      questionimagepath: 'assets/images/3trees.png',
+      questionimagewidth: 300,
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => GameOptionRow(

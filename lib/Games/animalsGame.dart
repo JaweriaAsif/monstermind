@@ -14,29 +14,28 @@ class _AnimalGameState extends State<AnimalGame> {
   @override
   Widget build(BuildContext context) {
     options = [
-      //numbers
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/cow.png',
         text: 'Cow',
         ontap: () {
           Navigator.pop(context);
         },
       ),
-      // alphabets
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/whale.png',
         text: 'Whale',
         ontap: () {},
       ),
-
-      //shapes
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/elephant.png',
         text: 'Elephant',
         ontap: () {},
       ),
-      //colours
       GameOptionTile(
+        height: 110,
         imgPath: 'assets/images/duck.png',
         text: 'Duck',
         ontap: () {},
