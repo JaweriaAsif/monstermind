@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:monstermind/LetsMain/Games/game.dart';
-import 'package:monstermind/LetsMain/Games/gameoptionTile.dart';
-import 'package:monstermind/LetsMain/optionTile.dart';
+import 'package:monstermind/Games/game.dart';
+import 'package:monstermind/Games/gameoptionTile.dart';
 
 class AlphabetGame extends StatefulWidget {
   const AlphabetGame({Key? key}) : super(key: key);
@@ -19,7 +18,6 @@ class _AlphabetGameState extends State<AlphabetGame> {
       GameOptionTile(
         imgPath: 'assets/images/H.png',
         text: '',
-        color: const Color(0xffffffff),
         ontap: () {
           Navigator.pop(context);
         },
@@ -28,7 +26,6 @@ class _AlphabetGameState extends State<AlphabetGame> {
       GameOptionTile(
         imgPath: 'assets/images/R.png',
         text: '',
-        color: const Color(0xffffffff),
         ontap: () {},
       ),
 
@@ -36,19 +33,17 @@ class _AlphabetGameState extends State<AlphabetGame> {
       GameOptionTile(
         imgPath: 'assets/images/Z.png',
         text: '',
-        color: const Color(0xffffffff),
         ontap: () {},
       ),
       //colours
       GameOptionTile(
         imgPath: 'assets/images/B.png',
         text: '',
-        color: const Color(0xffffffff),
         ontap: () {},
       ),
     ];
     return Game(
-      question: "Select the correct alphabet from the audio",
+      question: "Select the alphabet from the audio",
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => GameOptionRow(

@@ -5,12 +5,12 @@ class GameOptionTile extends StatelessWidget {
     Key? key,
     required this.imgPath,
     required this.text,
-    required this.color,
+    // required this.color,
     required this.ontap,
   }) : super(key: key);
 
   final String imgPath;
-  final Color color;
+  // final Color color;
   final String text;
   final Function() ontap;
 
@@ -20,7 +20,7 @@ class GameOptionTile extends StatelessWidget {
       child: InkWell(
         onTap: ontap,
         child: Card(
-          color: color,
+          color: const Color(0xffffffff),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
           child: Align(
@@ -33,7 +33,7 @@ class GameOptionTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 120,
+                    height: 110,
                     child: Image(
                       image: AssetImage(imgPath),
                     ),

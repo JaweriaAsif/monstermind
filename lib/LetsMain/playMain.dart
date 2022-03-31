@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:monstermind/LetsMain/Games/alphabetGame.dart';
+import 'package:monstermind/Games/alphabetGame.dart';
+import 'package:monstermind/Games/animalsGame.dart';
+import 'package:monstermind/Games/bodyPartGame.dart';
+import 'package:monstermind/Games/fruitsGame.dart';
 import 'package:monstermind/LetsMain/letsPageMain.dart';
 import 'package:monstermind/LetsMain/optionTile.dart';
-import 'package:monstermind/avatar.dart';
 
 class PlayMain extends StatefulWidget {
   const PlayMain({Key? key}) : super(key: key);
@@ -59,14 +61,22 @@ class _PlayMainState extends State<PlayMain> {
         imgPath: 'assets/images/animals.png',
         text: 'Animals',
         color: const Color(0xffF8DA6B),
-        ontap: () {},
+        ontap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const AnimalGame()),
+          );
+        },
       ),
       //body parts
       OptionTile(
         imgPath: 'assets/images/body.png',
         text: 'BodyParts',
         color: const Color(0xffF8DA6B),
-        ontap: () {},
+        ontap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const BodyPartGame()),
+          );
+        },
       ),
 
       //fruits
@@ -74,7 +84,11 @@ class _PlayMainState extends State<PlayMain> {
         imgPath: 'assets/images/fruits.png',
         text: 'Fruits',
         color: const Color(0xffF8DA6B),
-        ontap: () {},
+        ontap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const FruitsGame()),
+          );
+        },
       ),
 
       //comparing

@@ -17,7 +17,7 @@ class Game extends StatelessWidget {
           AvatarAppbar(),
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 3,
+            height: (MediaQuery.of(context).size.height / 3) * 1,
             child: Stack(
               children: [
                 Align(
@@ -32,19 +32,19 @@ class Game extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: (MediaQuery.of(context).size.width / 3) * 2.2,
-                  //  height: (MediaQuery.of(context).size.height / 3) * 2,
+                  width: (MediaQuery.of(context).size.width / 3) * 2.28,
+                  // height: (MediaQuery.of(context).size.height / 3) * 0.8,
                   child: Stack(children: [
                     Image(
                       image: AssetImage('assets/images/speechbubble.png'),
                     ),
                     Column(children: [
-                      SizedBox(height: 35),
+                      SizedBox(height: 74),
                       Row(
                         children: [
-                          SizedBox(width: 15),
+                          SizedBox(width: 36),
                           SizedBox(
-                            width: 250,
+                            width: 235,
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
@@ -52,7 +52,7 @@ class Game extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: const Color(0xffF1B111),
-                                  fontSize: 30,
+                                  fontSize: 25,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
