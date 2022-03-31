@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/Flashcards/cardPage.dart';
 import 'package:monstermind/LetsMain/letsPageMain.dart';
 import 'package:monstermind/LetsMain/optionTile.dart';
 import 'package:monstermind/avatar.dart';
@@ -22,16 +23,14 @@ class _LearnMainState extends State<LearnMain> {
         imgPath: 'assets/images/numbers.png',
         text: 'Numbers',
         color: const Color(0xffD3BDF4),
-        ontap: () {
-          Navigator.pop(context);
-        },
+        ontap: () => toCardMain(context, "numbers"),
       ),
       // alphabets
       OptionTile(
         imgPath: 'assets/images/alphabets.png',
         text: 'Alphabets',
         color: const Color(0xffD3BDF4),
-        ontap: () {},
+        ontap: () => toCardMain(context, "alphabets"),
       ),
 
       //shapes
@@ -39,14 +38,14 @@ class _LearnMainState extends State<LearnMain> {
         imgPath: 'assets/images/shapes.png',
         text: 'Shapes',
         color: const Color(0xffD3BDF4),
-        ontap: () {},
+        ontap: () => toCardMain(context, "shapes"),
       ),
       //colours
       OptionTile(
         imgPath: 'assets/images/colours.png',
         text: 'Colours',
         color: const Color(0xffD3BDF4),
-        ontap: () {},
+        ontap: () => toCardMain(context, "colours"),
       ),
 
       //animals
@@ -54,14 +53,14 @@ class _LearnMainState extends State<LearnMain> {
         imgPath: 'assets/images/animals.png',
         text: 'Animals',
         color: const Color(0xffD3BDF4),
-        ontap: () {},
+        ontap: () => toCardMain(context, "animals"),
       ),
       //body parts
       OptionTile(
         imgPath: 'assets/images/body.png',
         text: 'BodyParts',
         color: const Color(0xffD3BDF4),
-        ontap: () {},
+        ontap: () => toCardMain(context, "body"),
       ),
 
       //fruits
@@ -69,21 +68,21 @@ class _LearnMainState extends State<LearnMain> {
         imgPath: 'assets/images/fruits.png',
         text: 'Fruits',
         color: const Color(0xffD3BDF4),
-        ontap: () {},
+        ontap: () => toCardMain(context, "fruits"),
       ),
       //veggies
       OptionTile(
         imgPath: 'assets/images/vegetables.png',
         text: 'Vegetabless',
         color: const Color(0xffD3BDF4),
-        ontap: () {},
+        ontap: () => toCardMain(context, "veggies"),
       ),
     ];
 
     return LetsPageMain(
       imgPath: 'assets/images/remi bg.jpg',
       title: 'Flash Cards',
-      titleColour: Color(0xff8D64BF),
+      titleColour: const Color(0xff8D64BF),
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => OptionRow(
@@ -92,6 +91,12 @@ class _LearnMainState extends State<LearnMain> {
         ),
         itemCount: 4,
       ),
+    );
+  }
+
+  void toCardMain(BuildContext context, String from) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => CardPage(from: from)),
     );
   }
 }
