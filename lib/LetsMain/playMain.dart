@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/Games/comparisonGame.dart';
 import 'package:monstermind/Games/alphabetGame.dart';
 import 'package:monstermind/Games/animalsGame.dart';
 import 'package:monstermind/Games/bodyPartGame.dart';
@@ -108,7 +109,11 @@ class _PlayMainState extends State<PlayMain> {
         imgPath: 'assets/images/compare.png',
         text: 'Comparisons',
         color: const Color(0xffF8DA6B),
-        ontap: () {},
+        ontap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const ComparisonGame()),
+          );
+        },
       ),
     ];
 
