@@ -73,7 +73,7 @@ class _LearnMainState extends State<LearnMain> {
       //veggies
       OptionTile(
         imgPath: 'assets/images/vegetables.png',
-        text: 'Vegetabless',
+        text: 'Vegetables',
         color: const Color(0xffD3BDF4),
         ontap: () => toCardMain(context, "veggies"),
       ),
