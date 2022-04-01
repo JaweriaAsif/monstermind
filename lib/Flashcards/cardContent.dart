@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class CardContent {
   List _list = [];
-  String from = "";
+  String? from = "";
 
-  CardContent({required this.from});
+  CardContent({this.from});
 
   List get list {
     if (from == "alphabets") {
@@ -236,6 +238,20 @@ class CardContent {
         imgPath: "assets/images/radish.png",
       ),
     ];
+  }
+
+  int getquest(List list) {
+    return Random().nextInt(list.length);
+  }
+
+  List getlistof4(List list) {
+    List l = [];
+    for (var i = 0; i < 4; i++) {
+      int ran = Random().nextInt(list.length);
+      l.add(list[ran]);
+      list.removeAt(ran);
+    }
+    return l;
   }
 }
 

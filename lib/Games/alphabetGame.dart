@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
-import 'package:monstermind/Games/gameoptionTile.dart';
+import 'package:monstermind/Games/gameOptionTile.dart';
 
 class AlphabetGame extends StatefulWidget {
   const AlphabetGame({Key? key}) : super(key: key);
@@ -10,42 +13,78 @@ class AlphabetGame extends StatefulWidget {
 }
 
 class _AlphabetGameState extends State<AlphabetGame> {
-  List<GameOptionTile> options = [];
+  List<TextGameOptionTile> options = [];
+  List list = CardContent(from: "alphabets").list;
+  List<Color> colors = const [
+    Color(0xff5CD978),
+    Color(0xffD9825C),
+    Color(0xff28AAF2),
+    Color(0xffE445B8),
+    Color(0xffF11162),
+    Color(0xffFF3C3C),
+    Color(0xffC915D8),
+  ];
   @override
   Widget build(BuildContext context) {
+    List alphabets = CardContent().getlistof4(list);
+    int answer = CardContent().getquest(alphabets);
+
+    // List color = CardContent().getlistof4(colors);
     options = [
-      GameOptionTile(
-        height: 110,
-        imgPath: 'assets/images/H.png',
-        text: '',
+      TextGameOptionTile(
+        textcolor: colors[Random().nextInt(colors.length)],
+        text: alphabets[0],
         ontap: () {
-          Navigator.pop(context);
+          if (0 == answer) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const AlphabetGame()),
+            );
+          }
         },
       ),
-      GameOptionTile(
-        height: 110,
-        imgPath: 'assets/images/R.png',
-        text: '',
-        ontap: () {},
+      TextGameOptionTile(
+        textcolor: colors[Random().nextInt(colors.length)],
+        text: alphabets[1],
+        ontap: () {
+          if (1 == answer) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const AlphabetGame()),
+            );
+          }
+        },
       ),
-      GameOptionTile(
-        height: 110,
-        imgPath: 'assets/images/Z.png',
-        text: '',
-        ontap: () {},
+      TextGameOptionTile(
+        textcolor: colors[Random().nextInt(colors.length)],
+        text: alphabets[2],
+        ontap: () {
+          if (2 == answer) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const AlphabetGame()),
+            );
+          }
+        },
       ),
-      GameOptionTile(
-        height: 110,
-        imgPath: 'assets/images/B.png',
-        text: '',
-        ontap: () {},
+      TextGameOptionTile(
+        textcolor: colors[Random().nextInt(colors.length)],
+        text: alphabets[3],
+        ontap: () {
+          if (3 == answer) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const AlphabetGame()),
+            );
+          }
+        },
       ),
     ];
     return Game(
       question: "Select the alphabet from the audio",
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
-        itemBuilder: (context, index) => GameOptionRow(
+        itemBuilder: (context, index) => TextGameOptionRow(
           tile1: options[index * 2],
           tile2: options[index * 2 + 1],
         ),

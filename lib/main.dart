@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monstermind/button.dart';
 import 'package:monstermind/signup2.dart';
-import 'package:monstermind/user.dart';
 
 void main() {
   runApp(const MyApp());
