@@ -38,13 +38,17 @@ class _CardPageState extends State<CardPage> {
             AvatarAppbar(),
             ColumnSuper(
               children: [
+                //card
                 FlashCard(
                   content: list[index],
                   from: widget.from,
                 ),
+
+                //monster + arrow buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    //remi
                     const Align(
                       alignment: Alignment.bottomLeft,
                       child: Image(
@@ -53,6 +57,8 @@ class _CardPageState extends State<CardPage> {
                         fit: BoxFit.fill,
                       ),
                     ),
+
+                    //arrows
                     Padding(
                       padding: const EdgeInsets.only(right: 50),
                       child: Row(
@@ -72,8 +78,10 @@ class _CardPageState extends State<CardPage> {
                               ),
                             ),
                           ),
+
                           //space
                           const SizedBox(width: 20),
+
                           //front arrow
                           IconButton(
                             onPressed: () {
