@@ -22,6 +22,9 @@ class FlashCard extends StatefulWidget {
 class _FlashCardState extends State<FlashCard> {
   @override
   Widget build(BuildContext context) {
+    setTtsConfig();
+    speak();
+
     List<Color> colors = const [
       Color(0xff5CD978),
       Color(0xffD9825C),
@@ -31,8 +34,6 @@ class _FlashCardState extends State<FlashCard> {
       Color(0xffFF3C3C),
       Color(0xffC915D8),
     ];
-
-    setTtsConfig();
 
     return SizedBox(
       width: MediaQuery.of(context).size.width - 80,
@@ -46,7 +47,7 @@ class _FlashCardState extends State<FlashCard> {
                 padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
                 child: IconButton(
                   onPressed: () {
-                    flutterTts.speak("I am speaking");
+                    speak();
                   },
                   icon: const Icon(
                     Icons.volume_up_rounded,
@@ -136,5 +137,18 @@ class _FlashCardState extends State<FlashCard> {
         ),
       ),
     );
+  }
+
+  void speak() {
+    String toSpeak = "";
+    if (widget.from == "numbers") {
+      toSpeak = (widget.content as TextPicCard).bottomText;
+    } else if (widget.from == "alphabets") {
+      toSpeak = (widget.content as String).substring(0, 1);
+    } else {
+      toSpeak = (widget.content as PicTextCard).text;
+    }
+
+    flutterTts.speak(toSpeak);
   }
 }

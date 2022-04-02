@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_tts/flutter_tts.dart';
 
 final FlutterTts flutterTts = FlutterTts();
@@ -5,5 +7,5 @@ final FlutterTts flutterTts = FlutterTts();
 setTtsConfig() {
   flutterTts.setSpeechRate(0.4);
   flutterTts.setVolume(1);
-  flutterTts.setLanguage("en-UK");
+  flutterTts.setLanguage("en-US");
 }

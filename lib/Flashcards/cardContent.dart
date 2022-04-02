@@ -101,7 +101,7 @@ class CardContent {
     ];
   }
 
-  //function: create animals list
+  //function: create colours list
   List<PicTextCard> coloursList() {
     return [
       PicTextCard(
@@ -127,7 +127,12 @@ class CardContent {
       PicTextCard(
         text: "Purple",
         imgPath: "assets/images/purple.png",
-        color: const Color(0xffC915D8),
+        color: const Color(0xff8709D4),
+      ),
+      PicTextCard(
+        text: "Orange",
+        imgPath: "assets/images/orangee.png",
+        color: const Color(0xffFF8929),
       ),
     ];
   }
