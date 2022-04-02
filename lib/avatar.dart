@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/Points&Profile/profile.dart';
 import 'package:monstermind/signup2.dart';
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 
@@ -18,9 +19,11 @@ class AvatarState extends State<Avatar> {
         padding: const EdgeInsets.all(10),
         child: RowSuper(
           children: [
+            //name and points
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                //coloured box with name
                 Container(
                   constraints: const BoxConstraints(minWidth: 100),
                   child: Card(
@@ -40,6 +43,7 @@ class AvatarState extends State<Avatar> {
                     ),
                   ),
                 ),
+                //points
                 Padding(
                   padding: const EdgeInsets.only(left: 19),
                   child: Align(
@@ -55,13 +59,22 @@ class AvatarState extends State<Avatar> {
                 ),
               ],
             ),
-            Image(
-              width: 70,
-              height: 70,
-              image: (user.gender == "Male")
-                  ? (const AssetImage('assets/images/boy avatar.png'))
-                  : (const AssetImage('assets/images/girl avatar.png')),
-              fit: BoxFit.fill,
+
+            //avatar pic
+            InkWell(
+              child: Image(
+                width: 70,
+                height: 70,
+                image: (user.gender == "Male")
+                    ? (const AssetImage('assets/images/boy avatar.png'))
+                    : (const AssetImage('assets/images/girl avatar.png')),
+                fit: BoxFit.fill,
+              ),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const Profile()),
+                );
+              },
             ),
           ],
           innerDistance: -30.0,
