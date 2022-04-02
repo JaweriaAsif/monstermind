@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/signup2.dart';
+import 'package:provider/provider.dart';
 
 //Avatar + username
 class PicAndName extends StatelessWidget {
@@ -50,7 +52,7 @@ class PointsState extends State<Points> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 15),
           child: Text(
-            user.points.toString() + " points",
+            "${context.watch<PointsProvider>().points} points",
             style: const TextStyle(
               color: Colors.white,
               fontSize: 16,

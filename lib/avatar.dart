@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/Points&Profile/profile.dart';
 import 'package:monstermind/signup2.dart';
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
+import 'package:provider/provider.dart';
 
 class Avatar extends StatefulWidget {
   const Avatar({Key? key}) : super(key: key);
@@ -48,7 +50,7 @@ class AvatarState extends State<Avatar> {
                   padding: const EdgeInsets.only(left: 19),
                   child: Align(
                     child: Text(
-                      "${user.points} points",
+                      "${context.watch<PointsProvider>().points} points",
                       style: const TextStyle(
                         color: Color(0xff1D9EA6),
                         fontWeight: FontWeight.w600,
