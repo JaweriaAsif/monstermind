@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:monstermind/Flashcards/cardContent.dart';
 
 class FlashCard extends StatelessWidget {
-  const FlashCard({Key? key, required this.content, required this.from})
-      : super(key: key);
+  FlashCard({Key? key, required this.content, required this.from})
+      : super(
+          key: key,
+        ) {
+    tts.setLanguage('en');
+    tts.setSpeechRate(0.4);
+  }
 
   final content;
   final String from;
+  final FlutterTts tts = FlutterTts();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +39,9 @@ class FlashCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                     tts.speak("text");
+                  },
                   icon: const Icon(
                     Icons.volume_up_rounded,
                     size: 40,
