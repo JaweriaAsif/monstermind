@@ -2,9 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/Games/ComparisonGame.dart';
+// import 'package:monstermind/Games/comparisonGame.dart';
 import 'package:monstermind/avatar.dart';
 
-class CompGame extends StatelessWidget {
+class CompGame extends StatefulWidget {
   CompGame({
     Key? key,
     required this.question,
@@ -15,9 +16,18 @@ class CompGame extends StatelessWidget {
   final String questionimagepath;
   //final double questionimagewidth;
   final String question;
-  final List<double> heights = [120, 60, 250];
+
+  @override
+  State<CompGame> createState() => _CompGameState();
+}
+
+class _CompGameState extends State<CompGame> {
+  final List<double> heights = [110, 60, 220];
+
   late double? height1;
+
   late double? height2;
+
   late double? height3;
 
   @override
@@ -31,7 +41,7 @@ class CompGame extends StatelessWidget {
 
     double quest(String question) {
       if (question == "largest") {
-        return 250;
+        return 220;
       }
       return 60;
     }
@@ -75,7 +85,7 @@ class CompGame extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "Select the ${question} object",
+                                "Select the ${widget.question} object",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: const Color(0xffF1B111),
@@ -113,14 +123,15 @@ class CompGame extends StatelessWidget {
                       height: true ? height1 = randomheight() : null,
                       //width: questionimagewidth,
                       child: Image(
-                        image: AssetImage(questionimagepath),
+                        image: AssetImage(widget.questionimagepath),
                         fit: BoxFit.fill,
                       ),
                     ),
                     onTap: () {
-                      if (quest(question) == height1) {
+                      if (quest(widget.question) == height1) {
                         // height1 = null;
                         // correctheight = null;
+                        // setState(() {});
                         Navigator.pop(context);
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -137,14 +148,15 @@ class CompGame extends StatelessWidget {
                       height: true ? height2 = randomheight() : null,
                       //width: questionimagewidth,
                       child: Image(
-                        image: AssetImage(questionimagepath),
+                        image: AssetImage(widget.questionimagepath),
                         fit: BoxFit.fill,
                       ),
                     ),
                     onTap: () {
-                      if (quest(question) == height2) {
+                      if (quest(widget.question) == height2) {
                         //height2 = null;
                         // correctheight = null;
+                        // setState(() {});
                         Navigator.pop(context);
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -161,12 +173,13 @@ class CompGame extends StatelessWidget {
                       height: true ? height3 = randomheight() : null,
                       //width: questionimagewidth,
                       child: Image(
-                        image: AssetImage(questionimagepath),
+                        image: AssetImage(widget.questionimagepath),
                         fit: BoxFit.fill,
                       ),
                     ),
                     onTap: () {
-                      if (quest(question) == height3) {
+                      if (quest(widget.question) == height3) {
+                        // setState(() {});
                         Navigator.pop(context);
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -179,7 +192,7 @@ class CompGame extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
           // Expanded(child: list),
         ],
       ),
