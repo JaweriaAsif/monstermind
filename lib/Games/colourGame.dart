@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
-import 'package:monstermind/Games/gameoptionTile.dart';
+import 'package:monstermind/Games/gameOptionTile.dart';
 
 import 'picgame.dart';
 
@@ -13,39 +16,100 @@ class ColourGame extends StatefulWidget {
 
 class _ColourGameState extends State<ColourGame> {
   List<GameOptionTile> options = [];
+  List list = CardContent(from: "colours").list;
+  List<ObjectColor> ques = [
+    ObjectColor(
+      imgPath: "assets/images/balloon.png",
+      color: const Color(0xffF11162),
+    ),
+    ObjectColor(
+      imgPath: "assets/images/strawberry.png",
+      color: const Color(0xffF11162),
+    ),
+    ObjectColor(
+      imgPath: "assets/images/grapes.png",
+      color: const Color(0xffC915D8),
+    ),
+    ObjectColor(
+      imgPath: "assets/images/eggplant.png",
+      color: const Color(0xffC915D8),
+    ),
+    ObjectColor(
+      imgPath: "assets/images/octopus.png",
+      color: const Color(0xffC915D8),
+    ),
+    ObjectColor(
+      imgPath: "assets/images/giraffe.png",
+      color: const Color(0xffF9DF00),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    int answer = Random().nextInt(ques.length);
+    List colours = CardContent().getlistof4colours(ques[answer].color, list);
+
     options = [
       GameOptionTile(
         height: 60,
-        imgPath: 'assets/images/blue.png',
-        text: 'Blue',
+        imgPath: colours[0].imgPath,
+        text: colours[0].text,
+        textcolor: colours[0].color,
         ontap: () {
-          Navigator.pop(context);
+          if (colours[0].color == ques[answer].color) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ColourGame()),
+            );
+          }
         },
       ),
       GameOptionTile(
         height: 60,
-        imgPath: 'assets/images/yellow.png',
-        text: 'Yellow',
-        ontap: () {},
+        imgPath: colours[1].imgPath,
+        text: colours[1].text,
+        textcolor: colours[1].color,
+        ontap: () {
+          if (colours[1].color == ques[answer].color) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ColourGame()),
+            );
+          }
+        },
       ),
       GameOptionTile(
         height: 60,
-        imgPath: 'assets/images/red.png',
-        text: 'Red',
-        ontap: () {},
+        imgPath: colours[2].imgPath,
+        text: colours[2].text,
+        textcolor: colours[2].color,
+        ontap: () {
+          if (colours[2].color == ques[answer].color) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ColourGame()),
+            );
+          }
+        },
       ),
       GameOptionTile(
         height: 60,
-        imgPath: 'assets/images/green.png',
-        text: 'Green',
-        ontap: () {},
+        imgPath: colours[3].imgPath,
+        text: colours[3].text,
+        textcolor: colours[3].color,
+        ontap: () {
+          if (colours[3].color == ques[answer].color) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ColourGame()),
+            );
+          }
+        },
       ),
     ];
     return PicGame(
       question: "What color is this?",
-      questionimagepath: 'assets/images/balloon.png',
+      questionimagepath: ques[answer].imgPath,
       questionimagewidth: 150,
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
@@ -57,4 +121,14 @@ class _ColourGameState extends State<ColourGame> {
       ),
     );
   }
+}
+
+class ObjectColor {
+  String imgPath;
+  Color color;
+
+  ObjectColor({
+    required this.color,
+    required this.imgPath,
+  });
 }

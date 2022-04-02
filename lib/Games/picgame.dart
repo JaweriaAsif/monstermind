@@ -17,7 +17,7 @@ class PicGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF8DA6B),
+      backgroundColor: const Color(0xffFCE79A),
       body: Column(
         children: [
           AvatarAppbar(),
@@ -32,7 +32,7 @@ class PicGame extends StatelessWidget {
                     onPressed: () {
                       //add audio
                     },
-                    icon: const Icon(Icons.keyboard_voice_rounded),
+                    icon: const Icon(Icons.volume_up_rounded),
                     color: Colors.white,
                     iconSize: 50,
                   ),
@@ -78,7 +78,7 @@ class PicGame extends StatelessWidget {
                   ),
                 ),
                 Align(
-                  alignment: const Alignment(-0.5, 0.85),
+                  alignment: const Alignment(-0.5, 0.9),
                   child: SizedBox(
                     height: 200,
                     width: questionimagewidth,

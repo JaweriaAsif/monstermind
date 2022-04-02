@@ -11,7 +11,7 @@ class Game extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF8DA6B),
+      backgroundColor: const Color(0xffFCE79A),
       body: Column(
         children: [
           AvatarAppbar(),
@@ -26,7 +26,7 @@ class Game extends StatelessWidget {
                     onPressed: () {
                       //add audio
                     },
-                    icon: const Icon(Icons.keyboard_voice_rounded),
+                    icon: const Icon(Icons.volume_up_rounded),
                     color: Colors.white,
                     iconSize: 50,
                   ),
@@ -75,7 +75,7 @@ class Game extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 20),
           Expanded(child: list),
         ],
       ),

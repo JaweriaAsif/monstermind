@@ -7,11 +7,13 @@ class GameOptionTile extends StatelessWidget {
     required this.text,
     required this.height,
     required this.ontap,
+    this.textcolor,
   }) : super(key: key);
 
   final String imgPath;
   final double height;
   final String text;
+  final Color? textcolor;
   final Function() ontap;
 
   @override
@@ -26,8 +28,8 @@ class GameOptionTile extends StatelessWidget {
           child: Align(
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: 20,
-                horizontal: 20,
+                vertical: 16,
+                horizontal: 16,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -39,15 +41,15 @@ class GameOptionTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  text == ""
-                      ? const SizedBox()
-                      : Text(
-                          text,
-                          style: const TextStyle(
-                            color: const Color(0xffF000000),
-                            fontSize: 20,
-                          ),
-                        ),
+                  Text(
+                    text,
+                    style: TextStyle(
+                      color: textcolor == null
+                          ? const Color(0xffF000000)
+                          : textcolor,
+                      fontSize: 20,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -84,10 +86,12 @@ class TextGameOptionTile extends StatelessWidget {
   const TextGameOptionTile({
     Key? key,
     required this.text,
+    this.bottomtext,
     required this.textcolor,
     required this.ontap,
   }) : super(key: key);
   final Color textcolor;
+  final String? bottomtext;
   final String text;
   final Function() ontap;
 
@@ -117,6 +121,15 @@ class TextGameOptionTile extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  bottomtext == null
+                      ? const SizedBox(height: 4)
+                      : Text(
+                          bottomtext!,
+                          style: TextStyle(
+                            color: textcolor,
+                            fontSize: 20,
+                          ),
+                        ),
                 ],
               ),
             ),
