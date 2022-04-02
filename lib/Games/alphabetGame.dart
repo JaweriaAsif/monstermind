@@ -36,11 +36,10 @@ class _AlphabetGameState extends State<AlphabetGame> {
         text: alphabets[0],
         ontap: () {
           if (0 == answer) {
-            setState(() {});
-            // Navigator.pop(context);
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(builder: (context) => const AlphabetGame()),
-            // );
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const AlphabetGame()),
+            );
           }
         },
       ),
@@ -49,11 +48,10 @@ class _AlphabetGameState extends State<AlphabetGame> {
         text: alphabets[1],
         ontap: () {
           if (1 == answer) {
-            setState(() {});
-            // Navigator.pop(context);
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(builder: (context) => const AlphabetGame()),
-            // );
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const AlphabetGame()),
+            );
           }
         },
       ),
@@ -62,11 +60,10 @@ class _AlphabetGameState extends State<AlphabetGame> {
         text: alphabets[2],
         ontap: () {
           if (2 == answer) {
-            setState(() {});
-            // Navigator.pop(context);
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(builder: (context) => const AlphabetGame()),
-            // );
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const AlphabetGame()),
+            );
           }
         },
       ),
@@ -75,11 +72,10 @@ class _AlphabetGameState extends State<AlphabetGame> {
         text: alphabets[3],
         ontap: () {
           if (3 == answer) {
-            setState(() {});
-            // Navigator.pop(context);
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(builder: (context) => const AlphabetGame()),
-            // );
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const AlphabetGame()),
+            );
           }
         },
       ),

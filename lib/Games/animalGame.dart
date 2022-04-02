@@ -3,77 +3,77 @@ import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameoptionTile.dart';
 
-class BodyPartGame extends StatefulWidget {
-  const BodyPartGame({Key? key}) : super(key: key);
+class AnimalGame extends StatefulWidget {
+  const AnimalGame({Key? key}) : super(key: key);
 
   @override
-  State<BodyPartGame> createState() => _BodyPartGameState();
+  State<AnimalGame> createState() => _AnimalGameState();
 }
 
-class _BodyPartGameState extends State<BodyPartGame> {
+class _AnimalGameState extends State<AnimalGame> {
   List<GameOptionTile> options = [];
-  List list = CardContent(from: "body").list;
+  List list = CardContent(from: "animals").list;
 
   @override
   Widget build(BuildContext context) {
-    List bodyparts = CardContent().getlistof4(list);
-    int answer = CardContent().getquest(bodyparts);
+    List animals = CardContent().getlistof4(list);
+    int answer = CardContent().getquest(animals);
     options = [
       GameOptionTile(
         height: 110,
-        imgPath: bodyparts[0].imgPath,
-        text: bodyparts[0].text,
+        imgPath: animals[0].imgPath,
+        text: animals[0].text,
         ontap: () {
           if (0 == answer) {
             Navigator.pop(context);
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const BodyPartGame()),
+              MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
           }
         },
       ),
       GameOptionTile(
         height: 110,
-        imgPath: bodyparts[1].imgPath,
-        text: bodyparts[1].text,
+        imgPath: animals[1].imgPath,
+        text: animals[1].text,
         ontap: () {
           if (1 == answer) {
             Navigator.pop(context);
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const BodyPartGame()),
+              MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
           }
         },
       ),
       GameOptionTile(
         height: 110,
-        imgPath: bodyparts[2].imgPath,
-        text: bodyparts[2].text,
+        imgPath: animals[2].imgPath,
+        text: animals[2].text,
         ontap: () {
           if (2 == answer) {
             Navigator.pop(context);
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const BodyPartGame()),
+              MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
           }
         },
       ),
       GameOptionTile(
         height: 110,
-        imgPath: bodyparts[3].imgPath,
-        text: bodyparts[3].text,
+        imgPath: animals[3].imgPath,
+        text: animals[3].text,
         ontap: () {
           if (3 == answer) {
             Navigator.pop(context);
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const BodyPartGame()),
+              MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
           }
         },
       ),
     ];
     return Game(
-      question: "Select the body part from the audio",
+      question: "Select the animal from the audio",
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => GameOptionRow(

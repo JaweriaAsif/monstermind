@@ -47,7 +47,7 @@ class _CompGameState extends State<CompGame> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xffF8DA6B),
+      backgroundColor: const Color(0xffFCE79A),
       body: Column(
         children: [
           AvatarAppbar(),
@@ -63,7 +63,7 @@ class _CompGameState extends State<CompGame> {
                     onPressed: () {
                       //add audio
                     },
-                    icon: const Icon(Icons.keyboard_voice_rounded),
+                    icon: const Icon(Icons.volume_up_rounded),
                     color: Colors.white,
                     iconSize: 50,
                   ),

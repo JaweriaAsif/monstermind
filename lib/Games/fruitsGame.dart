@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameoptionTile.dart';
 
@@ -11,34 +12,64 @@ class FruitsGame extends StatefulWidget {
 
 class _FruitsGameState extends State<FruitsGame> {
   List<GameOptionTile> options = [];
+  List list = CardContent(from: "fruits").list;
+
   @override
   Widget build(BuildContext context) {
+    List fruits = CardContent().getlistof4(list);
+    int answer = CardContent().getquest(fruits);
     options = [
       GameOptionTile(
         height: 110,
-        imgPath: 'assets/images/strawberry.png',
-        text: 'Strawberry',
+        imgPath: fruits[0].imgPath,
+        text: fruits[0].text,
         ontap: () {
-          Navigator.pop(context);
+          if (0 == answer) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const FruitsGame()),
+            );
+          }
         },
       ),
       GameOptionTile(
         height: 110,
-        imgPath: 'assets/images/apple.png',
-        text: 'Apple',
-        ontap: () {},
+        imgPath: fruits[1].imgPath,
+        text: fruits[1].text,
+        ontap: () {
+          if (1 == answer) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const FruitsGame()),
+            );
+          }
+        },
       ),
       GameOptionTile(
         height: 110,
-        imgPath: 'assets/images/orange.png',
-        text: 'Orange',
-        ontap: () {},
+        imgPath: fruits[2].imgPath,
+        text: fruits[2].text,
+        ontap: () {
+          if (2 == answer) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const FruitsGame()),
+            );
+          }
+        },
       ),
       GameOptionTile(
         height: 110,
-        imgPath: 'assets/images/grapes.png',
-        text: 'Grapes',
-        ontap: () {},
+        imgPath: fruits[3].imgPath,
+        text: fruits[3].text,
+        ontap: () {
+          if (3 == answer) {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const FruitsGame()),
+            );
+          }
+        },
       ),
     ];
     return Game(
