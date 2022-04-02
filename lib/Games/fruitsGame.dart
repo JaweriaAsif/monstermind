@@ -20,8 +20,7 @@ class _FruitsGameState extends State<FruitsGame> {
     List fruits = CardContent().getlistof4(list);
     int answer = CardContent().getquest(fruits);
     setTtsConfig();
-    flutterTts.speak(
-        "Select the ${fruits[answer].text}");
+    flutterTts.speak("Select the ${fruits[answer].text}");
     options = [
       GameOptionTile(
         height: 110,
@@ -78,10 +77,8 @@ class _FruitsGameState extends State<FruitsGame> {
     ];
     return Game(
       question: "Select the fruit from the audio",
-      onPressed: (){
-        flutterTts.speak(
-        "Select the fruit ${fruits[answer]text}");
-        
+      onPressed: () {
+        flutterTts.speak("Select the fruit ${fruits[answer].text}");
       },
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),

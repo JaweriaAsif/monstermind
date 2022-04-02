@@ -53,11 +53,23 @@ String calculateAge() {
     }
   }
 
+  //age in months
   if (age == 0) {
-    if (day2 > day1) {
-      return (11 - month1 + month2).toString() + " months";
+    int months = 0;
+
+    //born this year
+    if (currentDate.year == birthDate.year) {
+      months = month1 - month2;
+      if (day2 > day1) months--;
+      return months.toString() + " months";
     }
-    return (12 - month1 + month2).toString() + " months";
+
+    //born last year
+    months = 12 - month2 + month1;
+    if (day2 > day1) months--;
+    return months.toString() + " months";
   }
+
+  //age in years
   return age.toString() + " years";
 }
