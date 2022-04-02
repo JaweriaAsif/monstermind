@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:monstermind/Flashcards/cardContent.dart';
+import 'package:monstermind/tts.dart';
 
-class FlashCard extends StatelessWidget {
+class FlashCard extends StatefulWidget {
   FlashCard({Key? key, required this.content, required this.from})
       : super(
           key: key,
         ) {
-    tts.setLanguage('en');
-    tts.setSpeechRate(0.4);
+    // flutterTts.setLanguage('en');
   }
 
   final content;
   final String from;
-  final FlutterTts tts = FlutterTts();
 
+  @override
+  State<FlashCard> createState() => _FlashCardState();
+}
+
+class _FlashCardState extends State<FlashCard> {
   @override
   Widget build(BuildContext context) {
     List<Color> colors = const [
@@ -27,6 +31,8 @@ class FlashCard extends StatelessWidget {
       Color(0xffFF3C3C),
       Color(0xffC915D8),
     ];
+
+    setTtsConfig();
 
     return SizedBox(
       width: MediaQuery.of(context).size.width - 80,
@@ -40,7 +46,7 @@ class FlashCard extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
                 child: IconButton(
                   onPressed: () {
-                     tts.speak("text");
+                    flutterTts.speak("I am speaking");
                   },
                   icon: const Icon(
                     Icons.volume_up_rounded,
@@ -58,15 +64,16 @@ class FlashCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   //space on top of num card
-                  if (from == "numbers") ...[
+                  if (widget.from == "numbers") ...[
                     const SizedBox(height: 20),
                   ],
                   //alphabet card content
-                  if (from == "alphabets" || from == "numbers") ...[
+                  if (widget.from == "alphabets" ||
+                      widget.from == "numbers") ...[
                     Text(
-                      from == "alphabets"
-                          ? content
-                          : (content as TextPicCard).topText,
+                      widget.from == "alphabets"
+                          ? widget.content
+                          : (widget.content as TextPicCard).topText,
                       style: TextStyle(
                           fontSize: 110,
                           fontWeight: FontWeight.w900,
@@ -75,38 +82,41 @@ class FlashCard extends StatelessWidget {
                   ],
 
                   //numbers card content
-                  if (from == "numbers") ...[
+                  if (widget.from == "numbers") ...[
                     Text(
-                      (content as TextPicCard).bottomText,
+                      (widget.content as TextPicCard).bottomText,
                       style: const TextStyle(fontSize: 30),
                     ),
                     const SizedBox(height: 30),
                     Image(
                       height: 110,
-                      image: AssetImage((content as TextPicCard).imgPath),
+                      image:
+                          AssetImage((widget.content as TextPicCard).imgPath),
                       fit: BoxFit.fill,
                     ),
                   ],
 
                   //other cards
-                  if (from != "alphabets" && from != "numbers") ...[
+                  if (widget.from != "alphabets" &&
+                      widget.from != "numbers") ...[
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 30),
                       child: Container(
                         constraints: const BoxConstraints(
                             maxWidth: 200, maxHeight: 200, minHeight: 120),
                         child: Image(
-                          image: AssetImage((content as PicTextCard).imgPath),
+                          image: AssetImage(
+                              (widget.content as PicTextCard).imgPath),
                           fit: BoxFit.fill,
                         ),
                       ),
                     ),
                     Text(
-                      (content as PicTextCard).text,
+                      (widget.content as PicTextCard).text,
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.w600,
-                        color: (content as PicTextCard).color,
+                        color: (widget.content as PicTextCard).color,
                       ),
                     ),
                   ],
