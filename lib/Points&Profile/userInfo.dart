@@ -13,18 +13,23 @@ class _UserInfoState extends State<UserInfo> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const PicAndName(),
-            const Points(),
-            infoRow(info: "Gender", title: user.gender),
-            infoRow(
-              title: "Age",
-              info: calculateAge(),
-            ),
-          ],
-        ));
+      padding: const EdgeInsets.only(bottom: 60),
+      child: Column(
+        children: [
+          const PicAndName(),
+          const Padding(
+            padding: EdgeInsets.only(top: 5, bottom: 25),
+            child: Points(),
+          ),
+          infoRow(title: "Gender", info: user.gender),
+          const SizedBox(height: 5),
+          infoRow(
+            title: "Age",
+            info: calculateAge(),
+          ),
+        ],
+      ),
+    );
   }
 }
 

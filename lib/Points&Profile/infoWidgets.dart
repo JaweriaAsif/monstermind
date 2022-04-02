@@ -44,7 +44,26 @@ class Points extends StatefulWidget {
 class PointsState extends State<Points> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      constraints: BoxConstraints(minWidth: 110),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 15),
+          child: Text(
+            user.points.toString() + " points",
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        color: const Color(0xff1D9EA6),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25.0),
+        ),
+      ),
+    );
   }
 }
 
@@ -52,8 +71,8 @@ class PointsState extends State<Points> {
 class infoRow extends StatelessWidget {
   const infoRow({
     Key? key,
-    required this.info,
     required this.title,
+    required this.info,
   }) : super(key: key);
 
   final String title;
@@ -64,8 +83,20 @@ class infoRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(title + ": "),
-        Text(info),
+        Text(
+          title + ": ",
+          style: const TextStyle(
+            color: Color(0xff12777D),
+            fontSize: 20,
+          ),
+        ),
+        Text(
+          info,
+          style: const TextStyle(
+            color: Color(0xffA4B7B8),
+            fontSize: 18,
+          ),
+        ),
       ],
     );
   }
