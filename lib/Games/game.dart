@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/avatar.dart';
 
 class Game extends StatelessWidget {
-  const Game({Key? key, required this.question, required this.list})
+  const Game({Key? key, required this.question, required this.list, required this.onPressed})
       : super(key: key);
 
   final String question;
   final Widget list;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class Game extends StatelessWidget {
                   alignment: const Alignment(0.8, -0.5),
                   child: IconButton(
                     onPressed: () {
-                      //add audio
+                      onPressed();
                     },
                     icon: const Icon(Icons.volume_up_rounded),
                     color: Colors.white,

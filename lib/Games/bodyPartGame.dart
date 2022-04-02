@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameoptionTile.dart';
+import 'package:monstermind/tts.dart';
 
 class BodyPartGame extends StatefulWidget {
   const BodyPartGame({Key? key}) : super(key: key);
@@ -18,6 +19,10 @@ class _BodyPartGameState extends State<BodyPartGame> {
   Widget build(BuildContext context) {
     List bodyparts = CardContent().getlistof4(list);
     int answer = CardContent().getquest(bodyparts);
+
+    setTtsConfig();
+    flutterTts.speak(
+        "Select the ${bodyparts[answer].text}");
     options = [
       GameOptionTile(
         height: 110,
@@ -74,6 +79,10 @@ class _BodyPartGameState extends State<BodyPartGame> {
     ];
     return Game(
       question: "Select the body part from the audio",
+      onPressed: (){
+         flutterTts.speak(
+        "Select the ${bodyparts[answer].text}");
+      },
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => GameOptionRow(

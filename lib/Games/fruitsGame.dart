@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameoptionTile.dart';
+import 'package:monstermind/tts.dart';
 
 class FruitsGame extends StatefulWidget {
   const FruitsGame({Key? key}) : super(key: key);
@@ -18,6 +19,9 @@ class _FruitsGameState extends State<FruitsGame> {
   Widget build(BuildContext context) {
     List fruits = CardContent().getlistof4(list);
     int answer = CardContent().getquest(fruits);
+    setTtsConfig();
+    flutterTts.speak(
+        "Select the ${fruits[answer].text}");
     options = [
       GameOptionTile(
         height: 110,
@@ -74,6 +78,11 @@ class _FruitsGameState extends State<FruitsGame> {
     ];
     return Game(
       question: "Select the fruit from the audio",
+      onPressed: (){
+        flutterTts.speak(
+        "Select the fruit ${fruits[answer]text}");
+        
+      },
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => GameOptionRow(
