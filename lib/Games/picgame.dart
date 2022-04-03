@@ -7,12 +7,14 @@ class PicGame extends StatelessWidget {
       required this.question,
       required this.questionimagepath,
       required this.questionimagewidth,
-      required this.list})
+      required this.list,
+      required this.onPressed})
       : super(key: key);
   final String questionimagepath;
   final double questionimagewidth;
   final String question;
   final Widget list;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {

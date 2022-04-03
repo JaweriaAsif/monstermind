@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/Rhymes/rhymes.dart';
 import 'package:monstermind/Rhymes/ryhmesProvider.dart';
+import 'package:monstermind/Rhymes/video.dart';
 import 'package:provider/provider.dart';
 
 class RhymeTile extends StatefulWidget {
@@ -53,7 +54,11 @@ class _RhymeTileState extends State<RhymeTile> {
                       color: Colors.white,
                     ),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const Video()),
+              );
+            },
           ),
         ),
         shape: RoundedRectangleBorder(

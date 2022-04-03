@@ -31,6 +31,8 @@ dependencies:
   flutter_tts: ^3.3.3
   google_fonts: ^2.1.0 
   assorted_layout_widgets: ^5.5.0
+  youtube_player_flutter: ^8.0.0
+  video_player: ^2.2.18
   flutter:
     sdk: flutter
 
@@ -64,6 +66,7 @@ flutter:
  
   assets:
     - assets/images/
+    - assets/videos/
    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

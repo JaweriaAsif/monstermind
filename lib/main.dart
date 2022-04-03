@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/Rhymes/ryhmesProvider.dart';
 import 'package:monstermind/button.dart';
+
 import 'package:monstermind/signup2.dart';
 import 'package:provider/provider.dart';
 
@@ -48,6 +50,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    //set potrait
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+
     return Scaffold(
       body: Center(
         child: Stack(
