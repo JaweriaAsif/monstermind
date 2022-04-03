@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameoptionTile.dart';
+import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/tts.dart';
+import 'package:provider/provider.dart';
 
 class FruitsGame extends StatefulWidget {
   const FruitsGame({Key? key}) : super(key: key);
@@ -32,6 +34,7 @@ class _FruitsGameState extends State<FruitsGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const FruitsGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -45,6 +48,7 @@ class _FruitsGameState extends State<FruitsGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const FruitsGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -58,6 +62,7 @@ class _FruitsGameState extends State<FruitsGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const FruitsGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -71,6 +76,7 @@ class _FruitsGameState extends State<FruitsGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const FruitsGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),

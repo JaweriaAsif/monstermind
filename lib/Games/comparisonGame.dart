@@ -2,10 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/Games/compGame.dart';
-//import 'package:monstermind/Games/compGame.dart';
-//import 'package:monstermind/Games/game.dart';
-//import 'package:monstermind/Games/gameoptionTile.dart';
-//import 'picgame.dart';
 
 List<String> objectspath = [
   'assets/images/elephant.png',
@@ -27,7 +23,6 @@ class ComparisonGame extends StatefulWidget {
 }
 
 class _ComparisonGameState extends State<ComparisonGame> {
-  //List<GameOptionTile> options = [];
   @override
   Widget build(BuildContext context) {
     return CompGame(

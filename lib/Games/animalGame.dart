@@ -3,6 +3,8 @@ import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameoptionTile.dart';
 import 'package:monstermind/tts.dart';
+import 'package:monstermind/Points&Profile/pointsProvider.dart';
+import 'package:provider/provider.dart';
 
 class AnimalGame extends StatefulWidget {
   const AnimalGame({Key? key}) : super(key: key);
@@ -19,10 +21,9 @@ class _AnimalGameState extends State<AnimalGame> {
   Widget build(BuildContext context) {
     List animals = CardContent().getlistof4(list);
     int answer = CardContent().getquest(animals);
-    
+
     setTtsConfig();
-    flutterTts.speak(
-        "Select the animal ${animals[answer].text}");
+    flutterTts.speak("Select the animal ${animals[answer].text}");
     options = [
       GameOptionTile(
         height: 110,
@@ -34,6 +35,7 @@ class _AnimalGameState extends State<AnimalGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -47,6 +49,7 @@ class _AnimalGameState extends State<AnimalGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -60,6 +63,7 @@ class _AnimalGameState extends State<AnimalGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -73,15 +77,15 @@ class _AnimalGameState extends State<AnimalGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
     ];
     return Game(
       question: "Select the animal from the audio",
-       onPressed: () {
-        flutterTts.speak(
-            "Select the animal ${animals[answer].text}");
+      onPressed: () {
+        flutterTts.speak("Select the animal ${animals[answer].text}");
       },
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameOptionTile.dart';
+import 'package:monstermind/Points&Profile/pointsProvider.dart';
+import 'package:provider/provider.dart';
 
 import 'picgame.dart';
 
@@ -61,6 +63,7 @@ class _ColourGameState extends State<ColourGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const ColourGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -75,6 +78,7 @@ class _ColourGameState extends State<ColourGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const ColourGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -89,6 +93,7 @@ class _ColourGameState extends State<ColourGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const ColourGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -103,6 +108,7 @@ class _ColourGameState extends State<ColourGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const ColourGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),

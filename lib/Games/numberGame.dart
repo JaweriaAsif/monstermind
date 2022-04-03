@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/colourGame.dart';
 import 'package:monstermind/Games/gameOptionTile.dart';
+import 'package:monstermind/Points&Profile/pointsProvider.dart';
+import 'package:provider/provider.dart';
 
 import 'picgame.dart';
 
@@ -41,6 +43,7 @@ class _NumberGameState extends State<NumberGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const NumberGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
@@ -54,6 +57,7 @@ class _NumberGameState extends State<NumberGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const NumberGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
@@ -67,6 +71,7 @@ class _NumberGameState extends State<NumberGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const NumberGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
@@ -80,6 +85,7 @@ class _NumberGameState extends State<NumberGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const NumberGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],

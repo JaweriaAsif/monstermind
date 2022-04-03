@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameoptionTile.dart';
+import 'package:monstermind/Points&Profile/pointsProvider.dart';
+import 'package:provider/provider.dart';
 
 import 'picgame.dart';
 
@@ -52,6 +54,7 @@ class _ShapeGameState extends State<ShapeGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const ShapeGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -66,6 +69,7 @@ class _ShapeGameState extends State<ShapeGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const ShapeGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -80,6 +84,7 @@ class _ShapeGameState extends State<ShapeGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const ShapeGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -94,6 +99,7 @@ class _ShapeGameState extends State<ShapeGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const ShapeGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),

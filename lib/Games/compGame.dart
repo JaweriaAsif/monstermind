@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/Games/ComparisonGame.dart';
+import 'package:monstermind/Points&Profile/pointsProvider.dart';
 // import 'package:monstermind/Games/comparisonGame.dart';
 import 'package:monstermind/avatar.dart';
+import 'package:provider/provider.dart';
 
 class CompGame extends StatefulWidget {
   CompGame({
@@ -129,14 +131,12 @@ class _CompGameState extends State<CompGame> {
                     ),
                     onTap: () {
                       if (quest(widget.question) == height1) {
-                        // height1 = null;
-                        // correctheight = null;
-                        // setState(() {});
                         Navigator.pop(context);
                         Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) => const ComparisonGame()),
                         );
+                        context.read<PointsProvider>().addPoints(10);
                       }
                     },
                   ),
@@ -154,14 +154,12 @@ class _CompGameState extends State<CompGame> {
                     ),
                     onTap: () {
                       if (quest(widget.question) == height2) {
-                        //height2 = null;
-                        // correctheight = null;
-                        // setState(() {});
                         Navigator.pop(context);
                         Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) => const ComparisonGame()),
                         );
+                        context.read<PointsProvider>().addPoints(10);
                       }
                     },
                   ),
@@ -179,12 +177,12 @@ class _CompGameState extends State<CompGame> {
                     ),
                     onTap: () {
                       if (quest(widget.question) == height3) {
-                        // setState(() {});
                         Navigator.pop(context);
                         Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) => const ComparisonGame()),
                         );
+                        context.read<PointsProvider>().addPoints(10);
                       }
                     },
                   ),
