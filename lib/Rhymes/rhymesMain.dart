@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/LetsMain/letsPageMain.dart';
 import 'package:monstermind/Rhymes/rhymeTile.dart';
 import 'package:monstermind/Rhymes/rhymes.dart';
+import 'package:monstermind/Rhymes/ryhmesProvider.dart';
+import 'package:provider/provider.dart';
 
 class RhymesMain extends StatefulWidget {
   const RhymesMain({Key? key}) : super(key: key);
@@ -13,6 +15,8 @@ class RhymesMain extends StatefulWidget {
 class _RhymesMainState extends State<RhymesMain> {
   @override
   Widget build(BuildContext context) {
+    List<Rhymes> rhymes = context.watch<RhymesProvider>().rhymes;
+
     return LetsPageMain(
       imgPath: 'assets/images/crab bg.jpg',
       title: 'Rhymes',

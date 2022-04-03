@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/Rhymes/rhymes.dart';
+import 'package:monstermind/Rhymes/ryhmesProvider.dart';
+import 'package:provider/provider.dart';
 
 class RhymeTile extends StatefulWidget {
   const RhymeTile({
@@ -16,6 +18,8 @@ class RhymeTile extends StatefulWidget {
 class _RhymeTileState extends State<RhymeTile> {
   @override
   Widget build(BuildContext context) {
+    List<Rhymes> rhymes = context.watch<RhymesProvider>().rhymes;
+
     return SizedBox(
       height: 75,
       child: Card(
@@ -37,12 +41,9 @@ class _RhymeTileState extends State<RhymeTile> {
             ),
             trailing: IconButton(
               onPressed: () {
-                widget.rhyme.isFav = !(widget.rhyme.isFav);
-                rhymes.remove(widget.rhyme);
-                addInOrder(widget.rhyme);
-                setState(() {});
+                context.read<RhymesProvider>().changeFav(widget.rhyme);
               },
-              icon: widget.rhyme.isFav
+              icon: context.read<RhymesProvider>().isFav(widget.rhyme)
                   ? const Icon(
                       Icons.favorite_rounded,
                       color: Colors.white,
