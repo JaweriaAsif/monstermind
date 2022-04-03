@@ -41,8 +41,28 @@ class _ColourGameState extends State<ColourGame> {
       color: const Color(0xffC915D8),
     ),
     ObjectColor(
+      imgPath: "assets/images/broccoli.png",
+      color: const Color(0xff5CD978),
+    ),
+    ObjectColor(
       imgPath: "assets/images/giraffe.png",
       color: const Color(0xffF9DF00),
+    ),
+    ObjectColor(
+      imgPath: "assets/images/lemon.png",
+      color: const Color(0xffF9DF00),
+    ),
+    ObjectColor(
+      imgPath: "assets/images/fish.png",
+      color: const Color(0xff2EA3F8),
+    ),
+    ObjectColor(
+      imgPath: "assets/images/orange.png",
+      color: const Color(0xffFF8929),
+    ),
+    ObjectColor(
+      imgPath: "assets/images/carrot.png",
+      color: const Color(0xffFF8929),
     ),
   ];
 
