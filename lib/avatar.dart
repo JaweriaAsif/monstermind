@@ -15,6 +15,9 @@ class Avatar extends StatefulWidget {
 class AvatarState extends State<Avatar> {
   @override
   Widget build(BuildContext context) {
+    int points = context.watch<PointsProvider>().points;
+    double minW = 90 + (points.toString().length * 10);
+
     return Align(
       alignment: Alignment.topRight,
       child: Padding(
@@ -27,7 +30,7 @@ class AvatarState extends State<Avatar> {
               children: [
                 //coloured box with name
                 Container(
-                  constraints: const BoxConstraints(minWidth: 100),
+                  constraints: BoxConstraints(minWidth: minW),
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(15, 3, 25, 3),
@@ -50,7 +53,7 @@ class AvatarState extends State<Avatar> {
                   padding: const EdgeInsets.only(left: 19),
                   child: Align(
                     child: Text(
-                      "${context.watch<PointsProvider>().points} points",
+                      "$points points",
                       style: const TextStyle(
                         color: Color(0xff1D9EA6),
                         fontWeight: FontWeight.w600,

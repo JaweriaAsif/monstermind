@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameOptionTile.dart';
+import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/tts.dart';
+import 'package:provider/provider.dart';
 
 class AlphabetGame extends StatefulWidget {
   const AlphabetGame({Key? key}) : super(key: key);
@@ -45,6 +47,7 @@ class _AlphabetGameState extends State<AlphabetGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const AlphabetGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -57,6 +60,7 @@ class _AlphabetGameState extends State<AlphabetGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const AlphabetGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -69,6 +73,7 @@ class _AlphabetGameState extends State<AlphabetGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const AlphabetGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
@@ -81,13 +86,13 @@ class _AlphabetGameState extends State<AlphabetGame> {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const AlphabetGame()),
             );
+            context.read<PointsProvider>().addPoints(10);
           }
         },
       ),
     ];
     return Game(
       question: "Select the alphabet from the audio",
-      
       onPressed: () {
         flutterTts.speak(
             "Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");

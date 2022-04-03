@@ -52,6 +52,7 @@ class _RhymeTileState extends State<RhymeTile> {
                       color: Colors.white,
                     ),
             ),
+            onTap: () {},
           ),
         ),
         shape: RoundedRectangleBorder(
