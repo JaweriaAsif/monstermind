@@ -7,6 +7,7 @@ import 'package:monstermind/Games/gameOptionTile.dart';
 import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:provider/provider.dart';
 
+import '../tts.dart';
 import 'picgame.dart';
 
 class ColourGame extends StatefulWidget {
@@ -70,7 +71,8 @@ class _ColourGameState extends State<ColourGame> {
   Widget build(BuildContext context) {
     int answer = Random().nextInt(ques.length);
     List colours = CardContent().getlistof4colours(ques[answer].color, list);
-
+    setTtsConfig();
+    flutterTts.speak("What color is this?");
     options = [
       GameOptionTile(
         height: 60,
@@ -84,6 +86,8 @@ class _ColourGameState extends State<ColourGame> {
               MaterialPageRoute(builder: (context) => const ColourGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak("${colours[0].color} ... What color is this?");
           }
         },
       ),
@@ -99,6 +103,8 @@ class _ColourGameState extends State<ColourGame> {
               MaterialPageRoute(builder: (context) => const ColourGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak("${colours[1].color} ... What color is this?");
           }
         },
       ),
@@ -114,6 +120,8 @@ class _ColourGameState extends State<ColourGame> {
               MaterialPageRoute(builder: (context) => const ColourGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak("${colours[2].color} ... What color is this?");
           }
         },
       ),
@@ -129,12 +137,17 @@ class _ColourGameState extends State<ColourGame> {
               MaterialPageRoute(builder: (context) => const ColourGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak("${colours[3].color} ... What color is this?");
           }
         },
       ),
     ];
     return PicGame(
       question: "What color is this?",
+      onPressed: () {
+        flutterTts.speak("What color is this?");
+      },
       questionimagepath: ques[answer].imgPath,
       questionimagewidth: 150,
       list: ListView.builder(

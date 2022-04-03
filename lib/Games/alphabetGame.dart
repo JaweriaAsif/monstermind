@@ -48,6 +48,9 @@ class _AlphabetGameState extends State<AlphabetGame> {
               MaterialPageRoute(builder: (context) => const AlphabetGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${alphabets[0].toString().substring(0, 1)} ... Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");
           }
         },
       ),
@@ -61,6 +64,9 @@ class _AlphabetGameState extends State<AlphabetGame> {
               MaterialPageRoute(builder: (context) => const AlphabetGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${alphabets[1].toString().substring(0, 1)} ... Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");
           }
         },
       ),
@@ -74,6 +80,9 @@ class _AlphabetGameState extends State<AlphabetGame> {
               MaterialPageRoute(builder: (context) => const AlphabetGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${alphabets[2].toString().substring(0, 1)} ... Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");
           }
         },
       ),
@@ -87,6 +96,9 @@ class _AlphabetGameState extends State<AlphabetGame> {
               MaterialPageRoute(builder: (context) => const AlphabetGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${alphabets[3].toString().substring(0, 1)} ... Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");
           }
         },
       ),

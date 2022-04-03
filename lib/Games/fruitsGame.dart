@@ -35,6 +35,9 @@ class _FruitsGameState extends State<FruitsGame> {
               MaterialPageRoute(builder: (context) => const FruitsGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${fruits[0].text} ... Select the fruit ${fruits[answer].text}");
           }
         },
       ),
@@ -49,6 +52,9 @@ class _FruitsGameState extends State<FruitsGame> {
               MaterialPageRoute(builder: (context) => const FruitsGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${fruits[1].text} ... Select the fruit ${fruits[answer].text}");
           }
         },
       ),
@@ -63,6 +69,9 @@ class _FruitsGameState extends State<FruitsGame> {
               MaterialPageRoute(builder: (context) => const FruitsGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${fruits[2].text} ... Select the fruit ${fruits[answer].text}");
           }
         },
       ),
@@ -77,6 +86,9 @@ class _FruitsGameState extends State<FruitsGame> {
               MaterialPageRoute(builder: (context) => const FruitsGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${fruits[3].text} ... Select the fruit ${fruits[answer].text}");
           }
         },
       ),

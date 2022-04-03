@@ -36,6 +36,9 @@ class _AnimalGameState extends State<AnimalGame> {
               MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${animals[0].text} ... Select the animal ${animals[answer].text}");
           }
         },
       ),
@@ -50,6 +53,9 @@ class _AnimalGameState extends State<AnimalGame> {
               MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${animals[1].text} ... Select the animal ${animals[answer].text}");
           }
         },
       ),
@@ -64,6 +70,9 @@ class _AnimalGameState extends State<AnimalGame> {
               MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${animals[2].text} ... Select the animal ${animals[answer].text}");
           }
         },
       ),
@@ -78,6 +87,9 @@ class _AnimalGameState extends State<AnimalGame> {
               MaterialPageRoute(builder: (context) => const AnimalGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${animals[3].text} ... Select the animal ${animals[answer].text}");
           }
         },
       ),

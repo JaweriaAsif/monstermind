@@ -5,6 +5,7 @@ import 'package:monstermind/Flashcards/cardContent.dart';
 import 'package:monstermind/Games/game.dart';
 import 'package:monstermind/Games/gameoptionTile.dart';
 import 'package:monstermind/Points&Profile/pointsProvider.dart';
+import 'package:monstermind/tts.dart';
 import 'package:provider/provider.dart';
 
 import 'picgame.dart';
@@ -41,6 +42,8 @@ class _ShapeGameState extends State<ShapeGame> {
   Widget build(BuildContext context) {
     int answer = Random().nextInt(ques.length);
     List shapes = CardContent().getlistof4shapes(ques[answer].shape, list);
+    setTtsConfig();
+    flutterTts.speak("What shape is this?");
 
     options = [
       GameOptionTile(
@@ -55,6 +58,8 @@ class _ShapeGameState extends State<ShapeGame> {
               MaterialPageRoute(builder: (context) => const ShapeGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak("${shapes[0].text} ... What shape is this?");
           }
         },
       ),
@@ -70,6 +75,8 @@ class _ShapeGameState extends State<ShapeGame> {
               MaterialPageRoute(builder: (context) => const ShapeGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak("${shapes[1].text} ... What shape is this?");
           }
         },
       ),
@@ -85,6 +92,8 @@ class _ShapeGameState extends State<ShapeGame> {
               MaterialPageRoute(builder: (context) => const ShapeGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak("${shapes[2].text} ... What shape is this?");
           }
         },
       ),
@@ -100,12 +109,17 @@ class _ShapeGameState extends State<ShapeGame> {
               MaterialPageRoute(builder: (context) => const ShapeGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak("${shapes[3].text} ... What shape is this?");
           }
         },
       ),
     ];
     return PicGame(
       question: "What shape is this?",
+      onPressed: () {
+        flutterTts.speak("What shape is this?");
+      },
       questionimagepath: ques[answer].imgPath,
       questionimagewidth: 200,
       list: ListView.builder(

@@ -36,6 +36,9 @@ class _BodyPartGameState extends State<BodyPartGame> {
               MaterialPageRoute(builder: (context) => const BodyPartGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${bodyparts[0].text} ... Select the ${bodyparts[answer].text}");
           }
         },
       ),
@@ -50,6 +53,9 @@ class _BodyPartGameState extends State<BodyPartGame> {
               MaterialPageRoute(builder: (context) => const BodyPartGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${bodyparts[1].text} ... Select the ${bodyparts[answer].text}");
           }
         },
       ),
@@ -64,6 +70,9 @@ class _BodyPartGameState extends State<BodyPartGame> {
               MaterialPageRoute(builder: (context) => const BodyPartGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${bodyparts[2].text} ... Select the ${bodyparts[answer].text}");
           }
         },
       ),
@@ -78,6 +87,9 @@ class _BodyPartGameState extends State<BodyPartGame> {
               MaterialPageRoute(builder: (context) => const BodyPartGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts.speak(
+                "${bodyparts[3].text} ... Select the ${bodyparts[answer].text}");
           }
         },
       ),

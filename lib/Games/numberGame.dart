@@ -7,6 +7,7 @@ import 'package:monstermind/Games/gameOptionTile.dart';
 import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:provider/provider.dart';
 
+import '../tts.dart';
 import 'picgame.dart';
 
 class NumberGame extends StatefulWidget {
@@ -33,6 +34,8 @@ class _NumberGameState extends State<NumberGame> {
   Widget build(BuildContext context) {
     List numbers = CardContent().getlistof4(list);
     int answer = CardContent().getquest(numbers);
+    setTtsConfig();
+    flutterTts.speak("How many are these?");
     options = [
       TextGameOptionTile(
         text: numbers[0].topText,
@@ -72,6 +75,9 @@ class _NumberGameState extends State<NumberGame> {
               MaterialPageRoute(builder: (context) => const NumberGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts
+                .speak("${numbers[3].bottomtext} ... How many are these?");
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
@@ -86,6 +92,9 @@ class _NumberGameState extends State<NumberGame> {
               MaterialPageRoute(builder: (context) => const NumberGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts
+                .speak("${numbers[3].bottomtext} ... How many are these?");
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
@@ -93,6 +102,9 @@ class _NumberGameState extends State<NumberGame> {
     ];
     return PicGame(
       question: "How many are these?",
+      onPressed: () {
+        flutterTts.speak("How many are these?");
+      },
       questionimagepath: numbers[answer].imgPath,
       questionimagewidth: 200,
       list: ListView.builder(

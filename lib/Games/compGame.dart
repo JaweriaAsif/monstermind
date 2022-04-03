@@ -7,6 +7,8 @@ import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/avatar.dart';
 import 'package:provider/provider.dart';
 
+import '../tts.dart';
+
 class CompGame extends StatefulWidget {
   CompGame({
     Key? key,
@@ -34,6 +36,8 @@ class _CompGameState extends State<CompGame> {
 
   @override
   Widget build(BuildContext context) {
+    setTtsConfig();
+    flutterTts.speak("Select the ${widget.question}.");
     double randomheight() {
       int ran = Random().nextInt(heights.length);
       double h = heights[ran];
@@ -63,7 +67,7 @@ class _CompGameState extends State<CompGame> {
                   alignment: const Alignment(0.8, -0.5),
                   child: IconButton(
                     onPressed: () {
-                      //add audio
+                      flutterTts.speak("Select the ${widget.question}.");
                     },
                     icon: const Icon(Icons.volume_up_rounded),
                     color: Colors.white,
@@ -87,7 +91,7 @@ class _CompGameState extends State<CompGame> {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "Select the ${widget.question} object",
+                                "Select the ${widget.question}.",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: const Color(0xffF1B111),
@@ -137,6 +141,8 @@ class _CompGameState extends State<CompGame> {
                               builder: (context) => const ComparisonGame()),
                         );
                         context.read<PointsProvider>().addPoints(10);
+                      } else {
+                        flutterTts.speak("Select the ${widget.question}.");
                       }
                     },
                   ),
@@ -160,6 +166,8 @@ class _CompGameState extends State<CompGame> {
                               builder: (context) => const ComparisonGame()),
                         );
                         context.read<PointsProvider>().addPoints(10);
+                      } else {
+                        flutterTts.speak("Select the ${widget.question}.");
                       }
                     },
                   ),
@@ -183,6 +191,8 @@ class _CompGameState extends State<CompGame> {
                               builder: (context) => const ComparisonGame()),
                         );
                         context.read<PointsProvider>().addPoints(10);
+                      } else {
+                        flutterTts.speak("Select the ${widget.question}.");
                       }
                     },
                   ),
