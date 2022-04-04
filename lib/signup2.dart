@@ -24,62 +24,65 @@ class _Signup2State extends State<Signup2> {
   @override
   Widget build(BuildContext context) {
     DateTime selectedDate = DateTime.now();
-    return Scaffold(
-      // resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Stack(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: const Image(
-                  image: AssetImage('assets/images/Sign up 2.png'),
-                  fit: BoxFit.fill,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        // resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Stack(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: const Image(
+                    image: AssetImage('assets/images/Sign up 2.png'),
+                    fit: BoxFit.fill,
+                  ),
                 ),
-              ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 500,
-                    ),
-                    Textfield(
-                      controller: _controllerUsername,
-                      label: 'Username',
-                    ),
-                    const Dropdown(),
-                    DateTextfield(
-                      controller: _controllerDOB,
-                      selectedDate: selectedDate,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Btn(
-                        text: 'Next',
-                        onPress: () {
-                          final FormState form =
-                              _formKey.currentState as FormState;
-                          if (form.validate()) {
-                            user = User(
-                              name: _controllerUsername.text,
-                              gender: gender,
-                              DOB: DOB,
-                            );
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => const Hello()),
-                            );
-                          }
-                        },
-                        alignment: const Alignment(0, 0.95),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 500,
                       ),
-                    ),
-                  ],
+                      Textfield(
+                        controller: _controllerUsername,
+                        label: 'Username',
+                      ),
+                      const Dropdown(),
+                      DateTextfield(
+                        controller: _controllerDOB,
+                        selectedDate: selectedDate,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Btn(
+                          text: 'Next',
+                          onPress: () {
+                            final FormState form =
+                                _formKey.currentState as FormState;
+                            if (form.validate()) {
+                              user = User(
+                                name: _controllerUsername.text,
+                                gender: gender,
+                                DOB: DOB,
+                              );
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => const Hello()),
+                              );
+                            }
+                          },
+                          alignment: const Alignment(0, 0.95),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

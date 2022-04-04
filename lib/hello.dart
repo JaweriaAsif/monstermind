@@ -34,38 +34,41 @@ class _HelloState extends State<Hello> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: InkWell(
-          onTap: () {
-            isTapped = true;
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );
-          },
-          child: Stack(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: const Image(
-                  image: AssetImage('assets/images/Username.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Align(
-                alignment: const Alignment(0.09, -0.18),
-                child: Text(
-                  "Hello, \n${user.name}!",
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff2EADB5),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Center(
+          child: InkWell(
+            onTap: () {
+              isTapped = true;
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            },
+            child: Stack(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: const Image(
+                    image: AssetImage('assets/images/Username.png'),
+                    fit: BoxFit.fill,
                   ),
-                  textAlign: TextAlign.center,
                 ),
-              ),
-            ],
+                Align(
+                  alignment: const Alignment(0.09, -0.18),
+                  child: Text(
+                    "Hello, \n${user.name}!",
+                    style: const TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff2EADB5),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

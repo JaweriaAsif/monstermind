@@ -48,7 +48,8 @@ class _VideoState extends State<Video> {
 
   @override
   Widget build(BuildContext context) {
-    controller = VideoPlayerController.asset('assets/videos/video.mp4');
+    controller =
+        VideoPlayerController.asset('assets/videos/Eyes Cold Lemonade.mp4');
 
     controller.initialize().then((value) {
       setState(() {});

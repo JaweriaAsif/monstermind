@@ -31,15 +31,15 @@ class _ColourGameState extends State<ColourGame> {
     ),
     ObjectColor(
       imgPath: "assets/images/grapes.png",
-      color: const Color(0xffC915D8),
+      color: const Color(0xff8709D4),
     ),
     ObjectColor(
       imgPath: "assets/images/eggplant.png",
-      color: const Color(0xffC915D8),
+      color: const Color(0xff8709D4),
     ),
     ObjectColor(
       imgPath: "assets/images/octopus.png",
-      color: const Color(0xffC915D8),
+      color: const Color(0xff8709D4),
     ),
     ObjectColor(
       imgPath: "assets/images/broccoli.png", //
