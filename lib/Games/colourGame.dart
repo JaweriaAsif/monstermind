@@ -21,12 +21,12 @@ class _ColourGameState extends State<ColourGame> {
   List<GameOptionTile> options = [];
   List list = CardContent(from: "colours").list;
   List<ObjectColor> ques = [
+    // ObjectColor(
+    //   imgPath: "assets/images/balloon.png",
+    //   color: const Color(0xffF11162),
+    // ),
     ObjectColor(
-      imgPath: "assets/images/balloon.png",
-      color: const Color(0xffF11162),
-    ),
-    ObjectColor(
-      imgPath: "assets/images/strawberry.png",
+      imgPath: "assets/images/strawberry.png", //
       color: const Color(0xffF11162),
     ),
     ObjectColor(
@@ -42,7 +42,7 @@ class _ColourGameState extends State<ColourGame> {
       color: const Color(0xffC915D8),
     ),
     ObjectColor(
-      imgPath: "assets/images/broccoli.png",
+      imgPath: "assets/images/broccoli.png", //
       color: const Color(0xff5CD978),
     ),
     ObjectColor(
@@ -54,11 +54,11 @@ class _ColourGameState extends State<ColourGame> {
       color: const Color(0xffF9DF00),
     ),
     ObjectColor(
-      imgPath: "assets/images/fish.png",
+      imgPath: "assets/images/fish.png", //
       color: const Color(0xff2EA3F8),
     ),
     ObjectColor(
-      imgPath: "assets/images/orange.png",
+      imgPath: "assets/images/orange.png", //
       color: const Color(0xffFF8929),
     ),
     ObjectColor(
@@ -87,7 +87,7 @@ class _ColourGameState extends State<ColourGame> {
             );
             context.read<PointsProvider>().addPoints(10);
           } else {
-            flutterTts.speak("${colours[0].color} ... What color is this?");
+            flutterTts.speak("${colours[0].text} ... What color is this?");
           }
         },
       ),
@@ -104,7 +104,7 @@ class _ColourGameState extends State<ColourGame> {
             );
             context.read<PointsProvider>().addPoints(10);
           } else {
-            flutterTts.speak("${colours[1].color} ... What color is this?");
+            flutterTts.speak("${colours[1].text} ... What color is this?");
           }
         },
       ),
@@ -121,7 +121,7 @@ class _ColourGameState extends State<ColourGame> {
             );
             context.read<PointsProvider>().addPoints(10);
           } else {
-            flutterTts.speak("${colours[2].color} ... What color is this?");
+            flutterTts.speak("${colours[2].text} ... What color is this?");
           }
         },
       ),
@@ -138,7 +138,7 @@ class _ColourGameState extends State<ColourGame> {
             );
             context.read<PointsProvider>().addPoints(10);
           } else {
-            flutterTts.speak("${colours[3].color} ... What color is this?");
+            flutterTts.speak("${colours[3].text} ... What color is this?");
           }
         },
       ),

@@ -18,18 +18,25 @@ class _RhymesMainState extends State<RhymesMain> {
   Widget build(BuildContext context) {
     List<Rhymes> rhymes = context.watch<RhymesProvider>().rhymes;
 
-    return LetsPageMain(
-      imgPath: 'assets/images/crab bg.jpg',
-      title: 'Rhymes',
-      titleColour: const Color(0xffEE412A),
-      list: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 25),
-        child: ListView.builder(
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          itemBuilder: (context, index) => RhymeTile(rhyme: rhymes[index]),
-          itemCount: rhymes.length,
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
+    if (!isLandscape) {
+      return LetsPageMain(
+        imgPath: 'assets/images/crab bg.jpg',
+        title: 'Rhymes',
+        titleColour: const Color(0xffEE412A),
+        list: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 25),
+          child: ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            itemBuilder: (context, index) => RhymeTile(rhyme: rhymes[index]),
+            itemCount: rhymes.length,
+          ),
         ),
-      ),
-    );
+      );
+    }
+
+    return Container();
   }
 }

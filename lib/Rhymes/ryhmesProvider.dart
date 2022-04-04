@@ -3,12 +3,36 @@ import 'package:monstermind/Rhymes/rhymes.dart';
 
 class RhymesProvider extends ChangeNotifier {
   final List<Rhymes> _rhymes = [
-    Rhymes(name: "Itsy Bitsy Spider", icon: "assets/images/spider.png"),
-    Rhymes(name: "Slippery Fish", icon: "assets/images/fish.png"),
-    Rhymes(name: "Eyes Cold Lemonade", icon: "assets/images/lemon.png"),
-    Rhymes(name: "Five Little Monkeys", icon: "assets/images/monkey.png"),
-    Rhymes(name: "Wheels on the Bus", icon: "assets/images/bus.png"),
-    Rhymes(name: "Twinkle Twinkle", icon: "assets/images/tiltedstar.png"),
+    Rhymes(
+      name: "Itsy Bitsy Spider",
+      icon: "assets/images/spider.png",
+      vidID: 'w_lCi8U49mY',
+    ),
+    Rhymes(
+      name: "Slippery Fish",
+      icon: "assets/images/fish.png",
+      vidID: 'BIvpZ4PPrx0',
+    ),
+    Rhymes(
+      name: "Eyes Cold Lemonade",
+      icon: "assets/images/lemon.png",
+      vidID: '165VjNKRNdw',
+    ),
+    Rhymes(
+      name: "Five Little Monkeys",
+      icon: "assets/images/monkey.png",
+      vidID: 'b0NHrFNZWh0',
+    ),
+    Rhymes(
+      name: "Wheels on the Bus",
+      icon: "assets/images/bus.png",
+      vidID: 'e_04ZrNroTo',
+    ),
+    Rhymes(
+      name: "Twinkle Twinkle",
+      icon: "assets/images/tiltedstar.png",
+      vidID: 'yCjJyiqpAuU',
+    ),
   ];
 
   List<Rhymes> get rhymes => _rhymes;

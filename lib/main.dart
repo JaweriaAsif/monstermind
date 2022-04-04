@@ -9,15 +9,19 @@ import 'package:monstermind/signup2.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => PointsProvider()),
-        ChangeNotifierProvider(create: (_) => RhymesProvider()),
-      ],
-      child: const MyApp(),
-    ),
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => PointsProvider()),
+          ChangeNotifierProvider(create: (_) => RhymesProvider()),
+        ],
+        child: const MyApp(),
+      ),
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -51,8 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     //set potrait
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+    // SystemChrome.setPreferredOrientations(
+    //     [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
 
     return Scaffold(
       body: Center(

@@ -8,7 +8,7 @@ class Rhymes {
     required this.name,
     required this.icon,
     this.isFav = false,
-    this.vidID = "", //req
+    required this.vidID,
   });
 
   bool isAbove(Rhymes r) {

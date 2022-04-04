@@ -6,93 +6,137 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:video_player/video_player.dart';
 
 class Video extends StatefulWidget {
-  const Video({Key? key}) : super(key: key);
+  const Video({Key? key, required this.id}) : super(key: key);
+
+  final String id;
 
   @override
   State<Video> createState() => _VideoState();
 }
 
 class _VideoState extends State<Video> {
-  // late YoutubePlayerController _controller;
+  late YoutubePlayerController _controller;
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   _controller = YoutubePlayerController(
-  //     initialVideoId: "BIvpZ4PPrx0",
-  //     flags: YoutubePlayerFlags(
-  //       autoPlay: false,
-  //       mute: false,
-  //     ),
-  //   );
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    //landscape orientation
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+
+    //youtube controller
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.id,
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+        // hideControls: true,
+      ),
+    );
+  }
+
+  @override
+  Future<void> dispose() async {
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    super.dispose();
+    // _interstitialAd.dispose();
+  }
 
   late VideoPlayerController controller;
 
   @override
   Widget build(BuildContext context) {
     controller = VideoPlayerController.asset('assets/videos/video.mp4');
+
     controller.initialize().then((value) {
       setState(() {});
     });
 
-    //make landscape
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
-
     //back button function
-    return WillPopScope(
-      onWillPop: () async {
-        //set potrait
-        await SystemChrome.setPreferredOrientations(
-            [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-        Navigator.pop(context);
-        return false;
-      },
-      child: Scaffold(
-        body: Stack(
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: const Image(
-                image: AssetImage('assets/images/rhyme.png'),
-                fit: BoxFit.fill,
-              ),
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        //custom back button
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Color(0xff1D9EA6),
             ),
-            AvatarAppbar(
-              onBack: () async {
-                await SystemChrome.setPreferredOrientations([
-                  DeviceOrientation.portraitDown,
-                  DeviceOrientation.portraitUp
-                ]);
-                Navigator.pop(context);
-              },
-            ),
-            AspectRatio(
-              aspectRatio: controller.value.aspectRatio,
-              child: VideoPlayer(controller),
-            ),
-
-            // SizedBox(
-            //   width: 400,
-            //   child: YoutubePlayer(
-            //     controller: YoutubePlayerController(
-            //       initialVideoId: 'BIvpZ4PPrx0', //Add videoID.
-            //       flags: YoutubePlayerFlags(
-            //         hideControls: false,
-            //         controlsVisibleAtStart: true,
-            //         autoPlay: false,
-            //         mute: false,
-            //       ),
-            //     ),
-            //     // showVideoProgressIndicator: true,
-            //     // progressIndicatorColor: AppColors.primary,
-            //   ),
-            // ),
-          ],
+          ),
         ),
+      ),
+      body: Stack(
+        children: [
+          //background
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: const Image(
+              image: AssetImage('assets/images/video bg.png'),
+              fit: BoxFit.fill,
+            ),
+          ),
+
+          //tv and video
+
+          Stack(
+            children: [
+              //tv
+              const Align(
+                alignment: Alignment(-0.5, 0),
+                child: Image(
+                  width: 550,
+                  image: AssetImage('assets/images/TV.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+
+              //video
+
+              Align(
+                alignment: const Alignment(-0.46, -0.04),
+                child: SizedBox(
+                  height: 245,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: YoutubePlayer(
+                        width: 400, controller: _controller, bottomActions: []),
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          // AvatarAppbar(),
+          // AspectRatio(
+          //   aspectRatio: controller.value.aspectRatio,
+          //   child: VideoPlayer(controller),
+          // ),
+
+          // SizedBox(
+          //   width: 400,
+          //   child: YoutubePlayer(
+          //     controller: YoutubePlayerController(
+          //       initialVideoId: 'BIvpZ4PPrx0', //Add videoID.
+          //       flags: YoutubePlayerFlags(
+          //         hideControls: false,
+          //         controlsVisibleAtStart: true,
+          //         autoPlay: false,
+          //         mute: false,
+          //       ),
+          //     ),
+          //     // showVideoProgressIndicator: true,
+          //     // progressIndicatorColor: AppColors.primary,
+          //   ),
+          // ),
+        ],
       ),
     );
   }

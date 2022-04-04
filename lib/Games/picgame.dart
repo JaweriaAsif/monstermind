@@ -81,8 +81,9 @@ class PicGame extends StatelessWidget {
                 ),
                 Align(
                   alignment: const Alignment(-0.5, 0.9),
-                  child: SizedBox(
-                    height: 200,
+                  child: Container(
+                    constraints:
+                        const BoxConstraints(maxHeight: 160, minHeight: 120),
                     width: questionimagewidth,
                     child: Image(
                       image: AssetImage(questionimagepath),

@@ -56,7 +56,11 @@ class _RhymeTileState extends State<RhymeTile> {
             ),
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const Video()),
+                MaterialPageRoute(
+                  builder: (context) => Video(
+                    id: widget.rhyme.vidID,
+                  ),
+                ),
               );
             },
           ),
