@@ -47,6 +47,9 @@ class _NumberGameState extends State<NumberGame> {
               MaterialPageRoute(builder: (context) => const NumberGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts
+                .speak("${numbers[0].bottomtext} ... How many are these?");
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
@@ -61,6 +64,9 @@ class _NumberGameState extends State<NumberGame> {
               MaterialPageRoute(builder: (context) => const NumberGame()),
             );
             context.read<PointsProvider>().addPoints(10);
+          } else {
+            flutterTts
+                .speak("${numbers[1].bottomtext} ... How many are these?");
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
@@ -77,7 +83,7 @@ class _NumberGameState extends State<NumberGame> {
             context.read<PointsProvider>().addPoints(10);
           } else {
             flutterTts
-                .speak("${numbers[3].bottomtext} ... How many are these?");
+                .speak("${numbers[2].bottomtext} ... How many are these?");
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
