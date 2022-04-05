@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/Rhymes/ryhmesProvider.dart';
 import 'package:monstermind/button.dart';
+import 'package:monstermind/signup1.dart';
 
 import 'package:monstermind/signup2.dart';
 import 'package:provider/provider.dart';
@@ -52,35 +55,83 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isTapped = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    startTime();
+  }
+
+  startTime() async {
+    var duration = const Duration(seconds: 6);
+    return Timer(duration, route);
+  }
+
+  route() {
+    if (!isTapped) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const SignUp1()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    //set potrait
-    // SystemChrome.setPreferredOrientations(
-    //     [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-
     return Scaffold(
       body: Center(
-        child: Stack(
-          children: [
-            Stack(
-              fit: StackFit.expand,
-              children: const [
-                Image(
-                  image: AssetImage('assets/images/Sign up 1.png'),
+        child: InkWell(
+          onTap: () {
+            isTapped = true;
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const SignUp1()),
+            );
+          },
+          child: Stack(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: const Image(
+                  image: AssetImage('assets/images/front.png'),
                   fit: BoxFit.fill,
                 ),
-              ],
-            ),
-            Btn(
-              text: 'Sign Up',
-              onPress: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Signup2()),
-                );
-              },
-              alignment: const Alignment(0, 0.2),
-            ),
-          ],
+              ),
+              const Align(
+                alignment: Alignment(0, -0.15),
+                child: Text(
+                  "Monster\nMind",
+                  style: TextStyle(
+                    fontSize: 60,
+                    fontFamily: 'AlloyInk',
+                    color:
+                        Color(0xff12777D), //Color.fromARGB(255, 214, 252, 255),
+                    shadows: [
+                      Shadow(
+                        // bottomLeft
+                        offset: Offset(-1.5, -1.5),
+                        color: Color(0xffabfbff),
+                        blurRadius: 5,
+                      ),
+                      Shadow(
+                        // bottomRight
+                        offset: Offset(1, -1),
+                        color: Color(0xff000000),
+                        blurRadius: 0,
+                      ),
+                      Shadow(
+                        // bottomRight
+                        offset: Offset(1.5, -1.5),
+                        color: Color(0xffabfbff),
+                        blurRadius: 10,
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
