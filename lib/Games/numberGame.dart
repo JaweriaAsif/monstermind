@@ -2,13 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/Flashcards/cardContent.dart';
-import 'package:monstermind/Games/colourGame.dart';
 import 'package:monstermind/Games/gameOptionTile.dart';
+import 'package:monstermind/Games/picgame.dart';
 import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:provider/provider.dart';
 
 import '../tts.dart';
-import 'picgame.dart';
 
 class NumberGame extends StatefulWidget {
   const NumberGame({Key? key}) : super(key: key);
@@ -49,7 +48,7 @@ class _NumberGameState extends State<NumberGame> {
             context.read<PointsProvider>().addPoints(10);
           } else {
             flutterTts
-                .speak("${numbers[0].bottomtext} ... How many are these?");
+                .speak("${numbers[0].bottomText} ... How many are these?");
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
@@ -66,7 +65,7 @@ class _NumberGameState extends State<NumberGame> {
             context.read<PointsProvider>().addPoints(10);
           } else {
             flutterTts
-                .speak("${numbers[1].bottomtext} ... How many are these?");
+                .speak("${numbers[1].bottomText} ... How many are these?");
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
@@ -83,7 +82,7 @@ class _NumberGameState extends State<NumberGame> {
             context.read<PointsProvider>().addPoints(10);
           } else {
             flutterTts
-                .speak("${numbers[2].bottomtext} ... How many are these?");
+                .speak("${numbers[2].bottomText} ... How many are these?");
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],
@@ -100,7 +99,7 @@ class _NumberGameState extends State<NumberGame> {
             context.read<PointsProvider>().addPoints(10);
           } else {
             flutterTts
-                .speak("${numbers[3].bottomtext} ... How many are these?");
+                .speak("${numbers[3].bottomText} ... How many are these?");
           }
         },
         textcolor: colors[Random().nextInt(colors.length)],

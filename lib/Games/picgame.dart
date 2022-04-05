@@ -32,7 +32,7 @@ class PicGame extends StatelessWidget {
                   alignment: const Alignment(0.8, -0.7),
                   child: IconButton(
                     onPressed: () {
-                      //add audio
+                      onPressed();
                     },
                     icon: const Icon(Icons.volume_up_rounded),
                     color: Colors.white,
