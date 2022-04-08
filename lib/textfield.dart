@@ -24,6 +24,9 @@ class Textfield extends StatelessWidget {
         ),
         decoration: InputDecoration(
           hintText: label,
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xff2EADB5), width: 2),
+          ),
         ),
         validator: (text) {
           if (text == null || text.isEmpty) {
@@ -62,6 +65,9 @@ class DateTextfield extends StatelessWidget {
         ),
         decoration: const InputDecoration(
           hintText: 'Date of Birth',
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xff2EADB5), width: 2),
+          ),
         ),
         onTap: () async {
           selected = await _selectDate(context);
@@ -155,6 +161,9 @@ class _DropdownState extends State<Dropdown> {
           hintText: "Gender",
           hintStyle: TextStyle(
             fontSize: 18,
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xff2EADB5), width: 2),
           ),
         ),
       ),

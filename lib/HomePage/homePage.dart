@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/HomePage/option.dart';
+import 'package:monstermind/LetsMain/drawMain.dart';
 import 'package:monstermind/LetsMain/learnMain.dart';
 import 'package:monstermind/LetsMain/playMain.dart';
 import 'package:monstermind/Rhymes/rhymesMain.dart';
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 150),
+                const SizedBox(height: 190),
                 Option(
                   path: 'assets/images/remi.png',
                   color: const Color(0xff8D64BF),
@@ -67,6 +68,16 @@ class _HomePageState extends State<HomePage> {
                   ontap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const PlayMain()),
+                    );
+                  },
+                ),
+                Option(
+                  path: 'assets/images/brocolli.png',
+                  color: const Color(0xff8CAD25),
+                  text: "Draw",
+                  ontap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const DrawMain()),
                     );
                   },
                 ),

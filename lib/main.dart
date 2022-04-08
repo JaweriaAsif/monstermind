@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +6,6 @@ import 'package:monstermind/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/Rhymes/ryhmesProvider.dart';
 import 'package:monstermind/button.dart';
 import 'package:monstermind/signup1.dart';
-
 import 'package:monstermind/signup2.dart';
 import 'package:provider/provider.dart';
 
@@ -33,14 +31,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Monster Mind',
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
         textTheme: GoogleFonts.robotoTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: SignUp1(),
     );
   }
 }
