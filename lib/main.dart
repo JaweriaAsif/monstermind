@@ -59,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late AudioPlayer player;
   final SpringController springController =
       SpringController(initialAnim: Motion.play);
+  bool reverse = true;
 
   @override
   void initState() {
@@ -94,8 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // AnimStatus stat = AnimStatus.forward;
-
     return Scaffold(
       body: Center(
         child: InkWell(
@@ -107,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           child: Stack(
             children: [
+              //image
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
@@ -115,9 +115,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   fit: BoxFit.fill,
                 ),
               ),
+              //text
+              const Align(
+                alignment: Alignment(0, 0),
+                child: Image(
+                  height: 170,
+                  image: AssetImage('assets/images/mm white.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+
+              //jumping monster
               Spring.translate(
-                beginOffset: Offset(0, 0),
-                endOffset: Offset(0, -40),
+                beginOffset: const Offset(0, 0),
+                endOffset: const Offset(0, -30),
                 child: const Align(
                   alignment: Alignment(0.94, 0.55),
                   child: Image(
@@ -127,13 +138,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 // curve: Curves.bounceInOut,
-                delay: Duration(milliseconds: 1000),
-                animDuration: Duration(milliseconds: 1000),
+                delay: const Duration(milliseconds: 1500),
+                animDuration: const Duration(milliseconds: 800),
                 animStatus: (AnimStatus status) {
-                  if (status == AnimStatus.completed)
+                  if (status == AnimStatus.completed) {
                     setState(() {
-                      springController.play(motion: Motion.reverse);
+                      springController.play(
+                        motion: Motion.reverse,
+                        curve: Curves.bounceInOut,
+                      );
+                      Timer(const Duration(milliseconds: 800),
+                          () => Motion.pause);
                     });
+                  }
 
                   print("Status: $status");
                 },

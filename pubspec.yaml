@@ -87,9 +87,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: AlloyInk
+    - family: Heading
       fonts:
-        - asset: assets/font/AlloyInk-lgdWw.otf
+        - asset: assets/font/PlasticLoveRegular-MVO9v.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
