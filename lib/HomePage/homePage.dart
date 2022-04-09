@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const LearnMain()),
                     );
                   },
+                  audioPath: "assets/audios/m1.mp3",
                 ),
                 Option(
                   path: 'assets/images/crab.png',
@@ -60,6 +61,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const RhymesMain()),
                     );
                   },
+                  audioPath: "assets/audios/m4.mp3",
                 ),
                 Option(
                   path: 'assets/images/aloo.png',
@@ -70,6 +72,7 @@ class _HomePageState extends State<HomePage> {
                       MaterialPageRoute(builder: (context) => const PlayMain()),
                     );
                   },
+                  audioPath: "assets/audios/m3.mp3",
                 ),
                 Option(
                   path: 'assets/images/brocolli.png',
@@ -80,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                       MaterialPageRoute(builder: (context) => const DrawMain()),
                     );
                   },
+                  audioPath: "assets/audios/m2.mp3",
                 ),
               ],
             ),

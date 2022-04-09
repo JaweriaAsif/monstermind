@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:spring/spring.dart';
 
-class Option extends StatelessWidget {
-  Option({
+class Option extends StatefulWidget {
+  const Option({
     Key? key,
     required this.path,
     required this.color,
     required this.text,
     required this.ontap,
-    this.audioPath = "",
+    required this.audioPath,
   }) : super(key: key);
 
   final String path;
@@ -16,6 +17,31 @@ class Option extends StatelessWidget {
   final Color color;
   final Function() ontap;
   final String audioPath;
+
+  @override
+  State<Option> createState() => _OptionState();
+}
+
+class _OptionState extends State<Option> {
+  late AudioPlayer player;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    player = AudioPlayer();
+  }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
+  }
+
+  playSound() async {
+    await player.setAsset(widget.audioPath);
+    player.play();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +56,14 @@ class Option extends StatelessWidget {
               height: 130,
               width: 130,
               child: Image(
-                image: AssetImage(path),
+                image: AssetImage(widget.path),
                 fit: BoxFit.fill,
               ),
             ),
-            onTap: () {},
-            animDuration: Duration(seconds: 1), //def=500m mil
+            onTap: () {
+              playSound();
+            },
+            animDuration: Duration(milliseconds: 1500), //def=500m mil
             bubbleStart: .8, //def=0.0
             bubbleEnd: .9, //def=1.1
             animStatus: (AnimStatus status) {
@@ -58,9 +86,9 @@ class Option extends StatelessWidget {
                 color: Colors.white,
                 child: Align(
                   child: Text(
-                    "Let's $text!",
+                    "Let's ${widget.text}!",
                     style: TextStyle(
-                        color: color,
+                        color: widget.color,
                         fontSize: 25,
                         fontWeight: FontWeight.w700),
                     textAlign: TextAlign.center,
@@ -72,7 +100,7 @@ class Option extends StatelessWidget {
             ),
 
             //todo
-            onTap: ontap,
+            onTap: widget.ontap,
           ),
         ],
       ),
