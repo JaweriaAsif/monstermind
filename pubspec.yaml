@@ -35,6 +35,8 @@ dependencies:
   video_player: ^2.2.18
   scribble: ^0.3.1
   font_awesome_flutter: ^10.1.0
+  just_audio: ^0.9.20
+  spring: ^2.0.2
   flutter:
     sdk: flutter
 
@@ -71,6 +73,7 @@ flutter:
   assets:
     - assets/images/
     - assets/videos/
+    - assets/audios/
    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

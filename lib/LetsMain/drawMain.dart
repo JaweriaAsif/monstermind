@@ -29,30 +29,28 @@ class _DrawMainState extends State<DrawMain> {
       body: Stack(
         children: [
           //canvas
-          SingleChildScrollView(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 2,
-              child: Stack(
-                children: [
-                  Scribble(
-                    notifier: notifier,
-                    drawPen: true,
+          SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              children: [
+                Scribble(
+                  notifier: notifier,
+                  drawPen: true,
+                ),
+                Positioned(
+                  top: 16,
+                  right: 16,
+                  child: Column(
+                    children: [
+                      _buildColorToolbar(context),
+                      const Divider(
+                        height: 32,
+                      ),
+                      _buildStrokeToolbar(context),
+                    ],
                   ),
-                  Positioned(
-                    top: 16,
-                    right: 16,
-                    child: Column(
-                      children: [
-                        _buildColorToolbar(context),
-                        const Divider(
-                          height: 32,
-                        ),
-                        _buildStrokeToolbar(context),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           ),
 
@@ -60,7 +58,8 @@ class _DrawMainState extends State<DrawMain> {
           const Align(
             alignment: Alignment.bottomLeft,
             child: Image(
-              image: AssetImage('assets/images/brocolli.png'),
+              height: 180,
+              image: AssetImage('assets/images/brocolli crop.png'),
               fit: BoxFit.fill,
             ),
           ),
@@ -161,20 +160,22 @@ class _DrawMainState extends State<DrawMain> {
             height: 4.0,
           ),
           _buildRedoButton(context),
+
           const Divider(
-            height: 4.0,
+            height: 20.0,
           ),
           _buildClearButton(context),
           const Divider(
-            height: 20.0,
+            height: 5.0,
           ),
-          _buildPointerModeSwitcher(context,
-              penMode:
-                  state.allowedPointersMode == ScribblePointerMode.penOnly),
+          // _buildPointerModeSwitcher(context,
+          //     penMode:
+          //         state.allowedPointersMode == ScribblePointerMode.penOnly),
+
+          _buildEraserButton(context, isSelected: state is Erasing),
           const Divider(
             height: 20.0,
           ),
-          _buildEraserButton(context, isSelected: state is Erasing),
           Column(
             children: [
               _buildColorButton(context, color: Colors.black, state: state),
@@ -186,6 +187,8 @@ class _DrawMainState extends State<DrawMain> {
               _buildColorButton(context, color: Colors.yellow, state: state),
               _buildColorButton(context,
                   color: const Color(0xff8808bf), state: state),
+              _buildColorButton(context,
+                  color: const Color(0xfff56e00), state: state),
             ],
           ),
         ],

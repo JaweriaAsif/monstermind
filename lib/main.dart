@@ -8,6 +8,8 @@ import 'package:monstermind/button.dart';
 import 'package:monstermind/signup1.dart';
 import 'package:monstermind/signup2.dart';
 import 'package:provider/provider.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:spring/spring.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: SignUp1(),
+      home: MyHomePage(title: "Monster Mind"),
     );
   }
 }
@@ -54,12 +56,23 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool isTapped = false;
+  late AudioPlayer player;
+  final SpringController springController =
+      SpringController(initialAnim: Motion.play);
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     startTime();
+    player = AudioPlayer();
+    playSound();
+  }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
   }
 
   startTime() async {
@@ -74,8 +87,15 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  playSound() async {
+    await player.setAsset('assets/audios/all.mp3');
+    player.play();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // AnimStatus stat = AnimStatus.forward;
+
     return Scaffold(
       body: Center(
         child: InkWell(
@@ -91,42 +111,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 child: const Image(
-                  image: AssetImage('assets/images/front.png'),
+                  image: AssetImage('assets/images/main page.png'),
                   fit: BoxFit.fill,
                 ),
               ),
-              const Align(
-                alignment: Alignment(0, -0.15),
-                child: Text(
-                  "Monster\nMind",
-                  style: TextStyle(
-                    fontSize: 60,
-                    fontFamily: 'AlloyInk',
-                    color:
-                        Color(0xff12777D), //Color.fromARGB(255, 214, 252, 255),
-                    shadows: [
-                      Shadow(
-                        // bottomLeft
-                        offset: Offset(-1.5, -1.5),
-                        color: Color(0xffabfbff),
-                        blurRadius: 5,
-                      ),
-                      Shadow(
-                        // bottomRight
-                        offset: Offset(1, -1),
-                        color: Color(0xff000000),
-                        blurRadius: 0,
-                      ),
-                      Shadow(
-                        // bottomRight
-                        offset: Offset(1.5, -1.5),
-                        color: Color(0xffabfbff),
-                        blurRadius: 10,
-                      ),
-                    ],
+              Spring.translate(
+                beginOffset: Offset(0, 0),
+                endOffset: Offset(0, -40),
+                child: const Align(
+                  alignment: Alignment(0.94, 0.55),
+                  child: Image(
+                    height: 90,
+                    image: AssetImage('assets/images/baby.png'),
+                    fit: BoxFit.fill,
                   ),
-                  textAlign: TextAlign.center,
                 ),
+                // curve: Curves.bounceInOut,
+                delay: Duration(milliseconds: 1000),
+                animDuration: Duration(milliseconds: 1000),
+                animStatus: (AnimStatus status) {
+                  if (status == AnimStatus.completed)
+                    setState(() {
+                      springController.play(motion: Motion.reverse);
+                    });
+
+                  print("Status: $status");
+                },
               ),
             ],
           ),
