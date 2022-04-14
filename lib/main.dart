@@ -10,9 +10,13 @@ import 'package:monstermind/signup2.dart';
 import 'package:provider/provider.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:spring/spring.dart';
+// import 'package:firebase/firebase.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "47206231726",
+    "project_id": "monstermind-d1783",
+    "storage_bucket": "monstermind-d1783.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47206231726:android:96f0843fadf892a18f073f",
+        "android_client_info": {
+          "package_name": "com.example.monstermind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47206231726-k3nd6fj807m6padovseqiiuegt8am12q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCilwNFI4HQLYgGaX9sjmURBHhtxO-4CTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47206231726-k3nd6fj807m6padovseqiiuegt8am12q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
