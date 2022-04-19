@@ -41,20 +41,10 @@ class _VideoState extends State<Video> {
   Future<void> dispose() async {
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     super.dispose();
-    // _interstitialAd.dispose();
   }
-
-  late VideoPlayerController controller;
 
   @override
   Widget build(BuildContext context) {
-    controller =
-        VideoPlayerController.asset('assets/videos/Eyes Cold Lemonade.mp4');
-
-    controller.initialize().then((value) {
-      setState(() {});
-    });
-
     //back button function
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -114,29 +104,6 @@ class _VideoState extends State<Video> {
               ),
             ],
           ),
-
-          // AvatarAppbar(),
-          // AspectRatio(
-          //   aspectRatio: controller.value.aspectRatio,
-          //   child: VideoPlayer(controller),
-          // ),
-
-          // SizedBox(
-          //   width: 400,
-          //   child: YoutubePlayer(
-          //     controller: YoutubePlayerController(
-          //       initialVideoId: 'BIvpZ4PPrx0', //Add videoID.
-          //       flags: YoutubePlayerFlags(
-          //         hideControls: false,
-          //         controlsVisibleAtStart: true,
-          //         autoPlay: false,
-          //         mute: false,
-          //       ),
-          //     ),
-          //     // showVideoProgressIndicator: true,
-          //     // progressIndicatorColor: AppColors.primary,
-          //   ),
-          // ),
         ],
       ),
     );
