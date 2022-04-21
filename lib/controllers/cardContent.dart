@@ -1,6 +1,9 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:monstermind/models/PicTextCard.dart';
+import 'package:monstermind/models/TextPicCard.dart';
 
 class CardContent {
   List _list = [];
@@ -29,6 +32,11 @@ class CardContent {
     return _list;
   }
 
+  //Get Collection Firebase
+  getCollection(String coll) async {
+    return await FirebaseFirestore.instance.collection(coll).get();
+  }
+
   //function: create alphabet list
   List alphabetList() {
     List l = [];
@@ -40,32 +48,60 @@ class CardContent {
   }
 
   //function: create numbers list
+
+  void getTasks() async {
+    // _tasks = [];
+    await FirebaseFirestore.instance
+        .collection('Tasks')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        _list.add(TextPicCard.fromJson(doc.data() as Map<String, dynamic>));
+      });
+    });
+    // notifyListeners();
+  }
+
   List<TextPicCard> numbersList() {
+    // _list = [];
+
+    // FirebaseFirestore.instance
+    //     .collection('FCNumbers')
+    //     .get()
+    //     .then((QuerySnapshot querySnapshot) {
+    //   querySnapshot.docs.forEach((doc) {
+    //     _list.add(TextPicCard.fromJson(doc.data() as Map<String, dynamic>));
+    //   });
+    // });
+
+    // return list as List<TextPicCard>;
+
+    // return _list ;
     return [
       TextPicCard(
         topText: "1",
         bottomText: "One",
-        imgPath: 'assets/images/apple.png',
+        imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/apple.png',
       ),
       TextPicCard(
         topText: "2",
         bottomText: "Two",
-        imgPath: 'assets/images/2 ducks.png',
+        imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/2ducks.png',
       ),
       TextPicCard(
         topText: "5",
         bottomText: "Five",
-        imgPath: 'assets/images/5 fish.png',
+        imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/5fish.png',
       ),
       TextPicCard(
         topText: "7",
         bottomText: "Seven",
-        imgPath: 'assets/images/7 trees.png',
+        imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/7trees.png',
       ),
       TextPicCard(
         topText: "9",
         bottomText: "Nine",
-        imgPath: 'assets/images/9 ants.png',
+        imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/9ants.png',
       ),
     ];
   }
@@ -294,28 +330,4 @@ class CardContent {
     l.shuffle();
     return l;
   }
-}
-
-class PicTextCard {
-  String imgPath;
-  String text;
-  Color color;
-
-  PicTextCard({
-    required this.text,
-    required this.imgPath,
-    this.color = Colors.black,
-  });
-}
-
-class TextPicCard {
-  String imgPath;
-  String topText;
-  String bottomText;
-
-  TextPicCard({
-    required this.topText,
-    required this.bottomText,
-    required this.imgPath,
-  });
 }

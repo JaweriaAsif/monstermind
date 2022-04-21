@@ -1,4 +1,6 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
+import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/views/button.dart';
 import 'package:monstermind/views/hello.dart';
 import 'package:monstermind/views/textfield.dart';
@@ -22,6 +24,15 @@ class _Signup2State extends State<Signup2> {
   final TextEditingController _controllerDOB = TextEditingController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseImage(
+            'gs://monstermind-d1783.appspot.com/assets/images/Signup2.png')
+        .preCache();
+  }
+
+  @override
   Widget build(BuildContext context) {
     DateTime selectedDate = DateTime.now();
     return WillPopScope(
@@ -35,8 +46,9 @@ class _Signup2State extends State<Signup2> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  child: const Image(
-                    image: AssetImage('assets/images/Sign up 2.png'),
+                  child: Image(
+                    image: FirebaseImage(
+                        'gs://monstermind-d1783.appspot.com/assets/images/Signup2.png'),
                     fit: BoxFit.fill,
                   ),
                 ),

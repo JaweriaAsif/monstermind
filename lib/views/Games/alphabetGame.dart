@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:monstermind/views/Flashcards/cardContent.dart';
+import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/views/Games/game.dart';
+import 'package:monstermind/views/Games/gameOptionTile.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../Games/gameoptionTile.dart';
 import '../Points&Profile/pointsProvider.dart';
 import '../tts.dart';
 

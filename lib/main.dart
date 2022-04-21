@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/views/Rhymes/ryhmesProvider.dart';
 import 'package:monstermind/views/button.dart';
@@ -71,6 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
     startTime();
     player = AudioPlayer();
     playSound();
+
+    //TO REMOVE: temp DB function
+    addToDB();
   }
 
   @override

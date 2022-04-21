@@ -1,9 +1,12 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:monstermind/controllers/colors.dart';
+import 'package:monstermind/models/PicTextCard.dart';
+import 'package:monstermind/models/TextPicCard.dart';
 
 import '../tts.dart';
-import 'cardContent.dart';
 
 class FlashCard extends StatefulWidget {
   FlashCard({Key? key, required this.content, required this.from})
@@ -25,16 +28,6 @@ class _FlashCardState extends State<FlashCard> {
   Widget build(BuildContext context) {
     setTtsConfig();
     speak();
-
-    List<Color> colors = const [
-      Color(0xff5CD978),
-      Color(0xffD9825C),
-      Color(0xff28AAF2),
-      Color(0xffE445B8),
-      Color(0xffF11162),
-      Color(0xffFF3C3C),
-      Color(0xffC915D8),
-    ];
 
     return SizedBox(
       width: MediaQuery.of(context).size.width - 80,
@@ -92,8 +85,8 @@ class _FlashCardState extends State<FlashCard> {
                     const SizedBox(height: 30),
                     Image(
                       height: 110,
-                      image:
-                          AssetImage((widget.content as TextPicCard).imgPath),
+                      image: FirebaseImage(
+                          (widget.content as TextPicCard).imgPath),
                       fit: BoxFit.fill,
                     ),
                   ],
@@ -107,7 +100,7 @@ class _FlashCardState extends State<FlashCard> {
                         constraints: const BoxConstraints(
                             maxWidth: 200, maxHeight: 200, minHeight: 120),
                         child: Image(
-                          image: AssetImage(
+                          image: FirebaseImage(
                               (widget.content as PicTextCard).imgPath),
                           fit: BoxFit.fill,
                         ),
@@ -131,8 +124,8 @@ class _FlashCardState extends State<FlashCard> {
         //cosmetics
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.0),
-          side: const BorderSide(
-            color: Color(0xff946DDF),
+          side: BorderSide(
+            color: purple,
             width: 2.0,
           ),
         ),

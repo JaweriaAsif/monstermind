@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:monstermind/views/Flashcards/cardContent.dart';
+import 'package:monstermind/controllers//cardContent.dart';
 import 'package:monstermind/views/Games/game.dart';
-import 'package:monstermind/Games/gameoptionTile.dart';
+import 'package:monstermind/views/Games/gameoptionTile.dart';
 import 'package:monstermind/views/tts.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
 import 'package:provider/provider.dart';

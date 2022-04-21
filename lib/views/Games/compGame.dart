@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:monstermind/Games/ComparisonGame.dart';
+import 'package:monstermind/views/Games/ComparisonGame.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
 // import 'package:monstermind/Games/comparisonGame.dart';
 import 'package:monstermind/views/avatar.dart';
