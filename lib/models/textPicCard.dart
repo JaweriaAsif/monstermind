@@ -1,6 +1,6 @@
 class TextPicCard {
   String imgPath;
-  String topText;
+  int topText;
   String bottomText;
 
   TextPicCard({

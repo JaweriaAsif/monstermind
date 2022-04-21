@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/views/Rhymes/ryhmesProvider.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider(create: (_) => PointsProvider()),
           ChangeNotifierProvider(create: (_) => RhymesProvider()),
+          ChangeNotifierProvider(create: (_) => CardContent()),
         ],
         child: const MyApp(),
       ),

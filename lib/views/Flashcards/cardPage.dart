@@ -6,6 +6,7 @@ import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/views/Flashcards/flashCard.dart';
 import 'package:monstermind/views/avatar.dart';
+import 'package:provider/provider.dart';
 
 class CardPage extends StatefulWidget {
   const CardPage({
@@ -33,6 +34,8 @@ class _CardPageState extends State<CardPage> {
   @override
   Widget build(BuildContext context) {
     // print(FirebaseFunctions.getImageUrl("remi"));
+    context.watch<CardContent>().list;
+    list = context.read<CardContent>().getList(widget.from);
 
     return Scaffold(
       backgroundColor: const Color(0xffD3BDF4),

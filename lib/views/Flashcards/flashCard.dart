@@ -68,7 +68,7 @@ class _FlashCardState extends State<FlashCard> {
                     Text(
                       widget.from == "alphabets"
                           ? widget.content
-                          : (widget.content as TextPicCard).topText,
+                          : (widget.content as TextPicCard).topText.toString(),
                       style: TextStyle(
                           fontSize: 110,
                           fontWeight: FontWeight.w900,

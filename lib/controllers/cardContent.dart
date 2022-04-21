@@ -5,17 +5,28 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/models/PicTextCard.dart';
 import 'package:monstermind/models/TextPicCard.dart';
 
-class CardContent {
+class CardContent extends ChangeNotifier {
   List _list = [];
   String? from = "";
 
-  CardContent({this.from});
+  // CardContent() {
+  //   // getTasks();
+  //   notifyListeners();
+  // }
 
-  List get list {
+  CardContent({this.from}) {
+    getLists();
+    notifyListeners();
+  }
+
+  List get list => _list;
+
+  List getList(String from) {
     if (from == "alphabets") {
       _list = alphabetList();
+      notifyListeners();
     } else if (from == "numbers") {
-      _list = numbersList();
+      _list = numbersList;
     } else if (from == "shapes") {
       _list = shapesList();
     } else if (from == "colours") {
@@ -30,6 +41,11 @@ class CardContent {
       _list = veggiesList();
     }
     return _list;
+  }
+
+  //get Lists from DB
+  void getLists() {
+    getNumbersList();
   }
 
   //Get Collection Firebase
@@ -48,36 +64,27 @@ class CardContent {
   }
 
   //function: create numbers list
+  List<TextPicCard> _numbersList = [];
+  List get numbersList => _numbersList;
+  void getNumbersList() async {
+    // _list = [];
 
-  void getTasks() async {
-    // _tasks = [];
     await FirebaseFirestore.instance
-        .collection('Tasks')
+        .collection('FCNumbers')
+        .orderBy('topText')
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        _list.add(TextPicCard.fromJson(doc.data() as Map<String, dynamic>));
+        numbersList
+            .add(TextPicCard.fromJson(doc.data() as Map<String, dynamic>));
       });
     });
-    // notifyListeners();
-  }
 
-  List<TextPicCard> numbersList() {
-    // _list = [];
-
-    // FirebaseFirestore.instance
-    //     .collection('FCNumbers')
-    //     .get()
-    //     .then((QuerySnapshot querySnapshot) {
-    //   querySnapshot.docs.forEach((doc) {
-    //     _list.add(TextPicCard.fromJson(doc.data() as Map<String, dynamic>));
-    //   });
-    // });
+    notifyListeners();
 
     // return list as List<TextPicCard>;
 
-    // return _list ;
-    return [
+    /*return [
       TextPicCard(
         topText: "1",
         bottomText: "One",
@@ -103,7 +110,7 @@ class CardContent {
         bottomText: "Nine",
         imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/9ants.png',
       ),
-    ];
+    ];*/
   }
 
   //function: create shapes list
