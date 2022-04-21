@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class PicTextCard {
   String imgPath;
   String text;
-  Color color;
+  // Color color;
+  String color;
 
   PicTextCard({
     required this.text,
     required this.imgPath,
-    this.color = Colors.black,
+    this.color = "0xff000000",
   });
 
   Map<String, dynamic> toJson() {

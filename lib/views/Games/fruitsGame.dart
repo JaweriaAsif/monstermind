@@ -15,10 +15,12 @@ class FruitsGame extends StatefulWidget {
 
 class _FruitsGameState extends State<FruitsGame> {
   List<GameOptionTile> options = [];
-  List list = CardContent(from: "fruits").list;
+  // List list = CardContent(from: "fruits").list;
 
   @override
   Widget build(BuildContext context) {
+    context.watch<CardContent>().list;
+    List list = context.read<CardContent>().getList("fruits");
     List fruits = CardContent().getlistof4(list);
     int answer = CardContent().getquest(fruits);
     setTtsConfig();

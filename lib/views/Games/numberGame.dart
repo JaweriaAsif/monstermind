@@ -18,7 +18,7 @@ class NumberGame extends StatefulWidget {
 
 class _NumberGameState extends State<NumberGame> {
   List<TextGameOptionTile> options = [];
-  List list = CardContent(from: "numbers").list;
+  // List list = CardContent(from: "numbers").list;
   List<Color> colors = const [
     Color(0xff5CD978),
     Color(0xffD9825C),
@@ -31,13 +31,15 @@ class _NumberGameState extends State<NumberGame> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<CardContent>().list;
+    List list = context.read<CardContent>().getList("numbers");
     List numbers = CardContent().getlistof4(list);
     int answer = CardContent().getquest(numbers);
     setTtsConfig();
     flutterTts.speak("How many are these?");
     options = [
       TextGameOptionTile(
-        text: numbers[0].topText,
+        text: numbers[0].topText.toString(),
         bottomtext: numbers[0].bottomText,
         ontap: () {
           if (0 == answer) {

@@ -19,7 +19,7 @@ class AlphabetGame extends StatefulWidget {
 
 class _AlphabetGameState extends State<AlphabetGame> {
   List<TextGameOptionTile> options = [];
-  List list = CardContent(from: "alphabets").list;
+  // List list = CardContent(from: "alphabets").list;
   List<Color> colors = const [
     Color(0xff5CD978),
     Color(0xffD9825C),
@@ -31,6 +31,8 @@ class _AlphabetGameState extends State<AlphabetGame> {
   ];
   @override
   Widget build(BuildContext context) {
+    context.watch<CardContent>().list;
+    List list = context.read<CardContent>().getList("alphabets");
     List alphabets = CardContent().getlistof4(list);
     int answer = CardContent().getquest(alphabets);
 

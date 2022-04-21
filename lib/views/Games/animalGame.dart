@@ -15,10 +15,11 @@ class AnimalGame extends StatefulWidget {
 
 class _AnimalGameState extends State<AnimalGame> {
   List<GameOptionTile> options = [];
-  List list = CardContent(from: "animals").list;
+  // List list = CardContent(from: "animals").list;
 
   @override
   Widget build(BuildContext context) {
+    List list = context.watch<CardContent>().getList("animals");
     List animals = CardContent().getlistof4(list);
     int answer = CardContent().getquest(animals);
 

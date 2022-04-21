@@ -15,10 +15,11 @@ class BodyPartGame extends StatefulWidget {
 
 class _BodyPartGameState extends State<BodyPartGame> {
   List<GameOptionTile> options = [];
-  List list = CardContent(from: "body").list;
+  // List list = CardContent(from: "body").list;
 
   @override
   Widget build(BuildContext context) {
+    List list = context.watch<CardContent>().getList("body");
     List bodyparts = CardContent().getlistof4(list);
     int answer = CardContent().getquest(bodyparts);
 

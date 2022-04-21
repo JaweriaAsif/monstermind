@@ -28,7 +28,7 @@ class _CardPageState extends State<CardPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    list = CardContent(from: widget.from).list;
+    // list = CardContent(from: widget.from).list;
   }
 
   @override

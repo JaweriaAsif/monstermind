@@ -7,6 +7,7 @@ import 'package:monstermind/models/PicTextCard.dart';
 import 'package:monstermind/models/TextPicCard.dart';
 
 import '../tts.dart';
+import 'dart:convert';
 
 class FlashCard extends StatefulWidget {
   FlashCard({Key? key, required this.content, required this.from})
@@ -111,7 +112,8 @@ class _FlashCardState extends State<FlashCard> {
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.w600,
-                        color: (widget.content as PicTextCard).color,
+                        color: Color(
+                            int.parse((widget.content as PicTextCard).color)),
                       ),
                     ),
                   ],

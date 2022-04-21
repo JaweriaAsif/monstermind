@@ -19,7 +19,7 @@ class ColourGame extends StatefulWidget {
 
 class _ColourGameState extends State<ColourGame> {
   List<GameOptionTile> options = [];
-  List list = CardContent(from: "colours").list;
+  // List list = CardContent(from: "colours").list;
   List<ObjectColor> ques = [
     // ObjectColor(
     //   imgPath: "assets/images/balloon.png",
@@ -69,6 +69,7 @@ class _ColourGameState extends State<ColourGame> {
 
   @override
   Widget build(BuildContext context) {
+    List list = context.watch<CardContent>().getList("colours");
     int answer = Random().nextInt(ques.length);
     List colours = CardContent().getlistof4colours(ques[answer].color, list);
     setTtsConfig();

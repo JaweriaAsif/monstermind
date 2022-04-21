@@ -3,18 +3,19 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:monstermind/models/PicTextCard.dart';
+
 import 'package:monstermind/models/TextPicCard.dart';
 
 class CardContent extends ChangeNotifier {
   List _list = [];
-  String? from = "";
+  // String? from = "";
 
   // CardContent() {
   //   // getTasks();
   //   notifyListeners();
   // }
 
-  CardContent({this.from}) {
+  CardContent() {
     getLists();
     notifyListeners();
   }
@@ -34,11 +35,11 @@ class CardContent extends ChangeNotifier {
     } else if (from == "body") {
       _list = bodyPartsList();
     } else if (from == "animals") {
-      _list = animalsList();
+      _list = animalsList;
     } else if (from == "fruits") {
-      _list = fruitsList();
+      _list = fruitsList;
     } else if (from == "veggies") {
-      _list = veggiesList();
+      _list = veggiesList;
     }
     return _list;
   }
@@ -46,6 +47,9 @@ class CardContent extends ChangeNotifier {
   //get Lists from DB
   void getLists() {
     getNumbersList();
+    getAnimalsList();
+    getFruitsList();
+    getVeggiesList();
   }
 
   //Get Collection Firebase
@@ -81,36 +85,6 @@ class CardContent extends ChangeNotifier {
     });
 
     notifyListeners();
-
-    // return list as List<TextPicCard>;
-
-    /*return [
-      TextPicCard(
-        topText: "1",
-        bottomText: "One",
-        imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/apple.png',
-      ),
-      TextPicCard(
-        topText: "2",
-        bottomText: "Two",
-        imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/2ducks.png',
-      ),
-      TextPicCard(
-        topText: "5",
-        bottomText: "Five",
-        imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/5fish.png',
-      ),
-      TextPicCard(
-        topText: "7",
-        bottomText: "Seven",
-        imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/7trees.png',
-      ),
-      TextPicCard(
-        topText: "9",
-        bottomText: "Nine",
-        imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/9ants.png',
-      ),
-    ];*/
   }
 
   //function: create shapes list
@@ -119,27 +93,27 @@ class CardContent extends ChangeNotifier {
       PicTextCard(
         text: "Circle",
         imgPath: "assets/images/circle.png",
-        color: const Color(0xffF11162),
+        color: "0xffF11162",
       ),
       PicTextCard(
         text: "Square",
         imgPath: "assets/images/square.png",
-        color: const Color(0xff5CD978),
+        color: "0xff5CD978",
       ),
       PicTextCard(
         text: "Triangle",
         imgPath: "assets/images/triangle.png",
-        color: const Color(0xff2EA3F8),
+        color: "0xff2EA3F8",
       ),
       PicTextCard(
         text: "Star",
         imgPath: "assets/images/star.png",
-        color: const Color(0xffD9825C),
+        color: "0xffD9825C",
       ),
       PicTextCard(
         text: "Rectangle",
         imgPath: "assets/images/rectangle.png",
-        color: const Color(0xffC915D8),
+        color: "0xffC915D8",
       ),
     ];
   }
@@ -150,64 +124,51 @@ class CardContent extends ChangeNotifier {
       PicTextCard(
         text: "Red",
         imgPath: "assets/images/red.png",
-        color: const Color(0xffF11162),
+        color: "0xffF11162",
       ),
       PicTextCard(
         text: "Green",
         imgPath: "assets/images/green.png",
-        color: const Color(0xff5CD978),
+        color: "0xff5CD978",
       ),
       PicTextCard(
         text: "Blue",
         imgPath: "assets/images/blue.png",
-        color: const Color(0xff2EA3F8),
+        color: "0xff2EA3F8",
       ),
       PicTextCard(
         text: "Yellow",
         imgPath: "assets/images/yellow.png",
-        color: const Color(0xffF9DF00),
+        color: "0xffF9DF00",
       ),
       PicTextCard(
         text: "Purple",
         imgPath: "assets/images/purple.png",
-        color: const Color(0xff8709D4),
+        color: "0xff8709D4",
       ),
       PicTextCard(
         text: "Orange",
         imgPath: "assets/images/orangee.png",
-        color: const Color(0xffFF8929),
+        color: "0xffFF8929",
       ),
     ];
   }
 
   //function: create animals list
-  List<PicTextCard> animalsList() {
-    return [
-      PicTextCard(
-        text: "Elephant",
-        imgPath: "assets/images/elephant.png",
-      ),
-      PicTextCard(
-        text: "Whale",
-        imgPath: "assets/images/whale.png",
-      ),
-      PicTextCard(
-        text: "Duck",
-        imgPath: "assets/images/duck.png",
-      ),
-      PicTextCard(
-        text: "Giraffe",
-        imgPath: "assets/images/giraffe.png",
-      ),
-      PicTextCard(
-        text: "Octopus",
-        imgPath: "assets/images/octopus.png",
-      ),
-      PicTextCard(
-        text: "Cow",
-        imgPath: "assets/images/cow.png",
-      ),
-    ];
+  List<PicTextCard> _animalsList = [];
+  List get animalsList => _animalsList;
+  Future<void> getAnimalsList() async {
+    await FirebaseFirestore.instance
+        .collection('FCAnimals')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        animalsList
+            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+      });
+    });
+
+    notifyListeners();
   }
 
   //function: create body parts list
@@ -236,56 +197,38 @@ class CardContent extends ChangeNotifier {
     ];
   }
 
-  //function: create body parts list
-  List<PicTextCard> fruitsList() {
-    return [
-      PicTextCard(
-        text: "Watermelon",
-        imgPath: "assets/images/watermelon.png",
-      ),
-      PicTextCard(
-        text: "Strawberry",
-        imgPath: "assets/images/strawberry.png",
-      ),
-      PicTextCard(
-        text: "Apple",
-        imgPath: "assets/images/apple.png",
-      ),
-      PicTextCard(
-        text: "Orange",
-        imgPath: "assets/images/orange.png",
-      ),
-      PicTextCard(
-        text: "Grapes",
-        imgPath: "assets/images/grapes.png",
-      ),
-    ];
+  //function: create fruits parts list
+  List<PicTextCard> _fruitsList = [];
+  List get fruitsList => _fruitsList;
+  void getFruitsList() async {
+    await FirebaseFirestore.instance
+        .collection('FCFruits')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        fruitsList
+            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+      });
+    });
+
+    notifyListeners();
   }
 
   //function: create vegetables list
-  List<PicTextCard> veggiesList() {
-    return [
-      PicTextCard(
-        text: "Potato",
-        imgPath: "assets/images/potato.png",
-      ),
-      PicTextCard(
-        text: "Carrot",
-        imgPath: "assets/images/carrot.png",
-      ),
-      PicTextCard(
-        text: "Eggplant",
-        imgPath: "assets/images/eggplant.png",
-      ),
-      PicTextCard(
-        text: "Broccoli",
-        imgPath: "assets/images/broccoli.png",
-      ),
-      PicTextCard(
-        text: "Radish",
-        imgPath: "assets/images/radish.png",
-      ),
-    ];
+  List<PicTextCard> _veggiesList = [];
+  List get veggiesList => _veggiesList;
+  Future<void> getVeggiesList() async {
+    await FirebaseFirestore.instance
+        .collection('FCVeggies')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        veggiesList
+            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+      });
+    });
+
+    notifyListeners();
   }
 
   int getquest(List list) {

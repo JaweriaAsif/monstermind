@@ -19,7 +19,7 @@ class ShapeGame extends StatefulWidget {
 
 class _ShapeGameState extends State<ShapeGame> {
   List<GameOptionTile> options = [];
-  List list = CardContent(from: "shapes").list;
+  // List list = CardContent(from: "shapes").list;
   List<ObjectShape> ques = [
     ObjectShape(
       shape: "Circle",
@@ -40,6 +40,8 @@ class _ShapeGameState extends State<ShapeGame> {
   ];
   @override
   Widget build(BuildContext context) {
+    context.watch<CardContent>().list;
+    List list = context.read<CardContent>().getList("shapes");
     int answer = Random().nextInt(ques.length);
     List shapes = CardContent().getlistof4shapes(ques[answer].shape, list);
     setTtsConfig();
