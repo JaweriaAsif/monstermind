@@ -41,6 +41,7 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   just_audio: ^0.9.20
   spring: ^2.0.2
+  curved_animation_controller: ^1.1.0+1
   flutter:
     sdk: flutter
 

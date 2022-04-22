@@ -14,6 +14,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:spring/spring.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:curved_animation_controller/curved_animation_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,7 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider(create: (_) => PointsProvider()),
           ChangeNotifierProvider(create: (_) => RhymesProvider()),
-          ChangeNotifierProvider(create: (_) => CardContent()),
+          // ChangeNotifierProvider(create: (_) => CardContent()),
         ],
         child: const MyApp(),
       ),
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: MyHomePage(title: "Monster Mind"),
+      home: const MyHomePage(title: "Monster Mind"),
     );
   }
 }
@@ -60,17 +61,36 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   bool isTapped = false;
   late AudioPlayer player;
-  final SpringController springController =
-      SpringController(initialAnim: Motion.play);
+  // final SpringController springController =
+  //   SpringController(initialAnim: Motion.play);
   bool reverse = true;
-
+  late AnimationController _controller;
+  late Animation<double> _animation;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+    final _curvedAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.fastOutSlowIn,
+    );
+    _animation =
+        Tween<double>(begin: 590.0, end: 480.0).animate(_curvedAnimation);
+    _animation.addListener(() {
+      setState(() {});
+    });
+
+    _controller.repeat(reverse: true);
+
     startTime();
     player = AudioPlayer();
     playSound();
@@ -134,36 +154,44 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
 
-              //jumping monster
-              Spring.translate(
-                beginOffset: const Offset(0, 0),
-                endOffset: const Offset(0, -30),
-                child: const Align(
-                  alignment: Alignment(0.94, 0.55),
-                  child: Image(
-                    height: 90,
-                    image: AssetImage('assets/images/baby.png'),
-                    fit: BoxFit.fill,
-                  ),
+              Transform.translate(
+                offset: Offset(280.0, _animation.value),
+                child: Image(
+                  height: 90,
+                  image: AssetImage('assets/images/baby.png'),
+                  fit: BoxFit.fill,
                 ),
-                // curve: Curves.bounceInOut,
-                delay: const Duration(milliseconds: 1500),
-                animDuration: const Duration(milliseconds: 800),
-                animStatus: (AnimStatus status) {
-                  if (status == AnimStatus.completed) {
-                    setState(() {
-                      springController.play(
-                        motion: Motion.reverse,
-                        curve: Curves.bounceInOut,
-                      );
-                      Timer(const Duration(milliseconds: 800),
-                          () => Motion.pause);
-                    });
-                  }
-
-                  print("Status: $status");
-                },
               ),
+              //jumping monster
+              // Spring.translate(
+              //   beginOffset: const Offset(0, 0),
+              //   endOffset: const Offset(0, -30),
+              //   child: const Align(
+              //     alignment: Alignment(0.94, 0.55),
+              //     child: Image(
+              //       height: 90,
+              //       image: AssetImage('assets/images/baby.png'),
+              //       fit: BoxFit.fill,
+              //     ),
+              //   ),
+              //   // curve: Curves.bounceInOut,
+              //   delay: const Duration(milliseconds: 1500),
+              //   animDuration: const Duration(milliseconds: 800),
+              //   animStatus: (AnimStatus status) {
+              //     if (status == AnimStatus.completed) {
+              //       setState(() {
+              //         springController.play(
+              //           motion: Motion.reverse,
+              //           curve: Curves.bounceInOut,
+              //         );
+              //         Timer(const Duration(milliseconds: 800),
+              //             () => Motion.pause);
+              //       });
+              //     }
+
+              //     print("Status: $status");
+              //  },
+              // ),
             ],
           ),
         ),
