@@ -10,11 +10,6 @@ class CardContent extends ChangeNotifier {
   List _list = [];
   // String? from = "";
 
-  // CardContent() {
-  //   // getTasks();
-  //   notifyListeners();
-  // }
-
   CardContent() {
     getLists();
     notifyListeners();
@@ -29,11 +24,11 @@ class CardContent extends ChangeNotifier {
     } else if (from == "numbers") {
       _list = numbersList;
     } else if (from == "shapes") {
-      _list = shapesList();
+      _list = shapesList;
     } else if (from == "colours") {
-      _list = coloursList();
+      _list = coloursList;
     } else if (from == "body") {
-      _list = bodyPartsList();
+      _list = bodyPartsList;
     } else if (from == "animals") {
       _list = animalsList;
     } else if (from == "fruits") {
@@ -50,6 +45,9 @@ class CardContent extends ChangeNotifier {
     getAnimalsList();
     getFruitsList();
     getVeggiesList();
+    getColoursList();
+    getShapesList();
+    getBodyPartsList();
   }
 
   //Get Collection Firebase
@@ -88,76 +86,43 @@ class CardContent extends ChangeNotifier {
   }
 
   //function: create shapes list
-  List<PicTextCard> shapesList() {
-    return [
-      PicTextCard(
-        text: "Circle",
-        imgPath: "assets/images/circle.png",
-        color: "0xffF11162",
-      ),
-      PicTextCard(
-        text: "Square",
-        imgPath: "assets/images/square.png",
-        color: "0xff5CD978",
-      ),
-      PicTextCard(
-        text: "Triangle",
-        imgPath: "assets/images/triangle.png",
-        color: "0xff2EA3F8",
-      ),
-      PicTextCard(
-        text: "Star",
-        imgPath: "assets/images/star.png",
-        color: "0xffD9825C",
-      ),
-      PicTextCard(
-        text: "Rectangle",
-        imgPath: "assets/images/rectangle.png",
-        color: "0xffC915D8",
-      ),
-    ];
+  List<PicTextCard> _shapesList = [];
+  List get shapesList => _shapesList;
+  Future<void> getShapesList() async {
+    await FirebaseFirestore.instance
+        .collection('FCShapes')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        shapesList
+            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+      });
+    });
+
+    notifyListeners();
   }
 
   //function: create colours list
-  List<PicTextCard> coloursList() {
-    return [
-      PicTextCard(
-        text: "Red",
-        imgPath: "assets/images/red.png",
-        color: "0xffF11162",
-      ),
-      PicTextCard(
-        text: "Green",
-        imgPath: "assets/images/green.png",
-        color: "0xff5CD978",
-      ),
-      PicTextCard(
-        text: "Blue",
-        imgPath: "assets/images/blue.png",
-        color: "0xff2EA3F8",
-      ),
-      PicTextCard(
-        text: "Yellow",
-        imgPath: "assets/images/yellow.png",
-        color: "0xffF9DF00",
-      ),
-      PicTextCard(
-        text: "Purple",
-        imgPath: "assets/images/purple.png",
-        color: "0xff8709D4",
-      ),
-      PicTextCard(
-        text: "Orange",
-        imgPath: "assets/images/orangee.png",
-        color: "0xffFF8929",
-      ),
-    ];
+  List<PicTextCard> _coloursList = [];
+  List get coloursList => _coloursList;
+  void getColoursList() async {
+    await FirebaseFirestore.instance
+        .collection('FCColours')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        coloursList
+            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+      });
+    });
+
+    notifyListeners();
   }
 
   //function: create animals list
   List<PicTextCard> _animalsList = [];
   List get animalsList => _animalsList;
-  Future<void> getAnimalsList() async {
+  void getAnimalsList() async {
     await FirebaseFirestore.instance
         .collection('FCAnimals')
         .get()
@@ -172,29 +137,20 @@ class CardContent extends ChangeNotifier {
   }
 
   //function: create body parts list
-  List<PicTextCard> bodyPartsList() {
-    return [
-      PicTextCard(
-        text: "Nose",
-        imgPath: "assets/images/nose.png",
-      ),
-      PicTextCard(
-        text: "Foot",
-        imgPath: "assets/images/foot.png",
-      ),
-      PicTextCard(
-        text: "Ear",
-        imgPath: "assets/images/ear.png",
-      ),
-      PicTextCard(
-        text: "Arm",
-        imgPath: "assets/images/arm.png",
-      ),
-      PicTextCard(
-        text: "Tongue",
-        imgPath: "assets/images/tongue.png",
-      ),
-    ];
+  List<PicTextCard> _bodyPartsList = [];
+  List get bodyPartsList => _bodyPartsList;
+  void getBodyPartsList() async {
+    await FirebaseFirestore.instance
+        .collection('FCBodyParts')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        bodyPartsList
+            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+      });
+    });
+
+    notifyListeners();
   }
 
   //function: create fruits parts list

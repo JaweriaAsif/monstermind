@@ -3,39 +3,26 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:monstermind/models/PicTextCard.dart';
 import 'package:monstermind/models/TextPicCard.dart';
 
-List<TextPicCard> list = [
-  TextPicCard(
-    topText: 3,
-    bottomText: "three",
-    imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/3slices.png',
-  ),
-  TextPicCard(
-    topText: 4,
-    bottomText: "Four",
-    imgPath:
-        'gs://monstermind-d1783.appspot.com/assets/images/4bellpeppers.png',
-  ),
-  TextPicCard(
-    topText: 6,
-    bottomText: "Six",
-    imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/6radish.png',
-  ),
-  TextPicCard(
-    topText: 8,
-    bottomText: "Eight",
-    imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/4chillies.png',
-  ),
-  TextPicCard(
-    topText: 10,
-    bottomText: "Ten",
-    imgPath: 'gs://monstermind-d1783.appspot.com/assets/images/10spiders.png',
-  ),
-];
+List<PicTextCard> list = [];
 
 void addToDB() {
-  // addFCNumbers();
+  // addFCBodyParts();
+  // addToCollection('FCBodyParts');
+  // addToCollection('Rhymes');
 }
 
+Future<void> addToCollection(String coll) async {
+  CollectionReference addList = FirebaseFirestore.instance.collection(coll);
+
+  list.forEach((element) async {
+    await addList
+        .add(element.toJson())
+        .then((value) => print("Added"))
+        .catchError((error) => print("Failed to add: $error"));
+  });
+}
+
+/*
 Future<void> addFCNumbers() async {
   CollectionReference numList =
       FirebaseFirestore.instance.collection('FCNumbers');
@@ -83,3 +70,52 @@ Future<void> addFCVeggies() async {
         .catchError((error) => print("Failed to add task: $error"));
   });
 }
+
+Future<void> addFCColours() async {
+  CollectionReference numList =
+      FirebaseFirestore.instance.collection('FCColours');
+
+  list.forEach((element) async {
+    await numList
+        .add(element.toJson())
+        .then((value) => print("Task Added"))
+        .catchError((error) => print("Failed to add task: $error"));
+  });
+}
+
+Future<void> addFCShapes() async {
+  CollectionReference numList =
+      FirebaseFirestore.instance.collection('FCShapes');
+
+  list.forEach((element) async {
+    await numList
+        .add(element.toJson())
+        .then((value) => print("Task Added"))
+        .catchError((error) => print("Failed to add task: $error"));
+  });
+}
+
+Future<void> addFCBodyParts() async {
+  CollectionReference numList =
+      FirebaseFirestore.instance.collection('FCBodyParts');
+
+  list.forEach((element) async {
+    await numList
+        .add(element.toJson())
+        .then((value) => print("Task Added"))
+        .catchError((error) => print("Failed to add task: $error"));
+  });
+}
+
+Future<void> addRhymes() async {
+  CollectionReference rhymesList =
+      FirebaseFirestore.instance.collection('Rhymes');
+
+  list.forEach((element) async {
+    await rhymesList
+        .add(element.toJson())
+        .then((value) => print("Task Added"))
+        .catchError((error) => print("Failed to add task: $error"));
+  });
+}
+*/
