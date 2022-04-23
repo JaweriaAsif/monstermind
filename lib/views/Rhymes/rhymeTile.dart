@@ -1,6 +1,8 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
-import 'package:monstermind/views/Rhymes/rhymes.dart';
-import 'package:monstermind/views/Rhymes/ryhmesProvider.dart';
+import 'package:monstermind/controllers/ryhmesProvider.dart';
+import 'package:monstermind/models/rhymes.dart';
+
 import 'package:monstermind/views/Rhymes/video.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +32,7 @@ class _RhymeTileState extends State<RhymeTile> {
             leading: Image(
               width: 50,
               height: 40,
-              image: AssetImage(widget.rhyme.icon),
+              image: FirebaseImage(widget.rhyme.icon),
               fit: BoxFit.fill,
             ),
             title: Text(

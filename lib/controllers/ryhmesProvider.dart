@@ -1,39 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:monstermind/views/Rhymes/rhymes.dart';
+import 'package:monstermind/models/rhymes.dart';
 
 class RhymesProvider extends ChangeNotifier {
-  final List<Rhymes> _rhymes = [
-    Rhymes(
-      name: "Itsy Bitsy Spider",
-      icon: "assets/images/spider.png",
-      vidID: 'w_lCi8U49mY',
-    ),
-    Rhymes(
-      name: "Slippery Fish",
-      icon: "assets/images/fish.png",
-      vidID: 'BIvpZ4PPrx0',
-    ),
-    Rhymes(
-      name: "Eyes Cold Lemonade",
-      icon: "assets/images/lemon.png",
-      vidID: '165VjNKRNdw',
-    ),
-    Rhymes(
-      name: "Five Little Monkeys",
-      icon: "assets/images/monkey.png",
-      vidID: 'b0NHrFNZWh0',
-    ),
-    Rhymes(
-      name: "Wheels on the Bus",
-      icon: "assets/images/bus.png",
-      vidID: 'e_04ZrNroTo',
-    ),
-    Rhymes(
-      name: "Twinkle Twinkle",
-      icon: "assets/images/tiltedstar.png",
-      vidID: 'yCjJyiqpAuU',
-    ),
-  ];
+  RhymesProvider() {
+    getRhymes();
+    notifyListeners();
+  }
+
+  List<Rhymes> _rhymes = [];
 
   List<Rhymes> get rhymes => _rhymes;
 
@@ -57,5 +32,41 @@ class RhymesProvider extends ChangeNotifier {
     rhymes.remove(r);
     addInOrder(r);
     notifyListeners();
+    changeFavDB(r, r.isFav); //change in DB
+  }
+
+  //DB Functions
+
+  CollectionReference rhymesList =
+      FirebaseFirestore.instance.collection('Rhymes');
+
+  void getRhymes() async {
+    await rhymesList
+        .orderBy('isFav', descending: true)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        rhymes.add(Rhymes.fromJson(doc.data() as Map<String, dynamic>));
+      });
+    });
+
+    notifyListeners();
+  }
+
+  void changeFavDB(Rhymes rhyme, bool setFav) async {
+    await rhymesList
+        .where('name', isEqualTo: rhyme.name)
+        .where('vidID', isEqualTo: rhyme.vidID)
+        .get()
+        .then((value) {
+      rhymesList.doc(value.docs[0].id).update({'isFav': setFav}).then((value) {
+        setFav
+            ? print("${rhyme.name} set as Fav!")
+            : print("${rhyme.name} unset as Fav!");
+      });
+    }).onError((error, stackTrace) {
+      rhyme.isFav = !rhyme.isFav;
+      notifyListeners();
+    });
   }
 }

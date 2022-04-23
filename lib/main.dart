@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/ryhmesProvider.dart';
 import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
-import 'package:monstermind/views/Rhymes/ryhmesProvider.dart';
+
 import 'package:monstermind/views/button.dart';
 import 'package:monstermind/views/signup1.dart';
 import 'package:monstermind/views/signup2.dart';
@@ -26,7 +27,7 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider(create: (_) => PointsProvider()),
           ChangeNotifierProvider(create: (_) => RhymesProvider()),
-          // ChangeNotifierProvider(create: (_) => CardContent()),
+          ChangeNotifierProvider(create: (_) => CardContent()),
         ],
         child: const MyApp(),
       ),
@@ -84,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage>
       curve: Curves.fastOutSlowIn,
     );
     _animation =
-        Tween<double>(begin: 590.0, end: 480.0).animate(_curvedAnimation);
+        Tween<double>(begin: 565.0, end: 500.0).animate(_curvedAnimation);
     _animation.addListener(() {
       setState(() {});
     });
@@ -155,13 +156,18 @@ class _MyHomePageState extends State<MyHomePage>
               ),
 
               Transform.translate(
-                offset: Offset(280.0, _animation.value),
-                child: Image(
-                  height: 90,
+                offset: Offset(
+                    0.76 * MediaQuery.of(context).size.width, _animation.value),
+
+                // alignment: Alignment(0.94, 0.5),
+                child: const Image(
+                  height: 85,
+                  width: 90,
                   image: AssetImage('assets/images/baby.png'),
                   fit: BoxFit.fill,
                 ),
               ),
+
               //jumping monster
               // Spring.translate(
               //   beginOffset: const Offset(0, 0),

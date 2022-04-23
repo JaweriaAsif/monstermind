@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:monstermind/controllers/ryhmesProvider.dart';
+import 'package:monstermind/models/rhymes.dart';
 import 'package:monstermind/views/LetsMain/letsPageMain.dart';
 import 'package:monstermind/views/Rhymes/rhymeTile.dart';
-import 'package:monstermind/views/Rhymes/rhymes.dart';
-import 'package:monstermind/views/Rhymes/ryhmesProvider.dart';
 
 import 'package:provider/provider.dart';
 
