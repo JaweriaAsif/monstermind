@@ -63,7 +63,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   bool isTapped = false;
   late AudioPlayer player;
   // final SpringController springController =
@@ -90,7 +90,17 @@ class _MyHomePageState extends State<MyHomePage>
       setState(() {});
     });
 
-    _controller.repeat(reverse: true);
+    _animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        // _controller.repeat(reverse: true);
+        _controller.reverse();
+      }
+      if (status == AnimationStatus.dismissed) {
+        _controller.forward();
+      }
+    });
+
+    _controller.forward();
 
     startTime();
     player = AudioPlayer();
@@ -102,12 +112,14 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   void dispose() {
+    player.stop();
     player.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   startTime() async {
-    var duration = const Duration(seconds: 6);
+    var duration = const Duration(seconds: 10);
     return Timer(duration, route);
   }
 
@@ -120,88 +132,86 @@ class _MyHomePageState extends State<MyHomePage>
 
   playSound() async {
     await player.setAsset('assets/audios/all.mp3');
+    player.setLoopMode(LoopMode.all);
     player.play();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: Center(
-        child: InkWell(
-          onTap: () {
-            isTapped = true;
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const SignUp1()),
-            );
-          },
-          child: Stack(
-            children: [
-              //image
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: const Image(
-                  image: AssetImage('assets/images/main page.png'),
-                  fit: BoxFit.fill,
-                ),
+        child: Stack(
+          children: [
+            //image
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: const Image(
+                image: AssetImage('assets/images/main page.png'),
+                fit: BoxFit.fill,
               ),
-              //text
-              const Align(
-                alignment: Alignment(0, 0),
-                child: Image(
-                  height: 170,
-                  image: AssetImage('assets/images/mm white.png'),
-                  fit: BoxFit.fill,
-                ),
+            ),
+            //text
+            const Align(
+              alignment: Alignment(0, 0),
+              child: Image(
+                height: 170,
+                image: AssetImage('assets/images/mm white.png'),
+                fit: BoxFit.fill,
               ),
+            ),
 
-              Transform.translate(
-                offset: Offset(
-                    0.76 * MediaQuery.of(context).size.width, _animation.value),
+            Transform.translate(
+              offset: Offset(
+                  0.76 * MediaQuery.of(context).size.width, _animation.value),
 
-                // alignment: Alignment(0.94, 0.5),
-                child: const Image(
-                  height: 85,
-                  width: 90,
-                  image: AssetImage('assets/images/baby.png'),
-                  fit: BoxFit.fill,
-                ),
+              // alignment: Alignment(0.94, 0.5),
+              child: const Image(
+                height: 85,
+                width: 90,
+                image: AssetImage('assets/images/baby.png'),
+                fit: BoxFit.fill,
               ),
+            ),
 
-              //jumping monster
-              // Spring.translate(
-              //   beginOffset: const Offset(0, 0),
-              //   endOffset: const Offset(0, -30),
-              //   child: const Align(
-              //     alignment: Alignment(0.94, 0.55),
-              //     child: Image(
-              //       height: 90,
-              //       image: AssetImage('assets/images/baby.png'),
-              //       fit: BoxFit.fill,
-              //     ),
-              //   ),
-              //   // curve: Curves.bounceInOut,
-              //   delay: const Duration(milliseconds: 1500),
-              //   animDuration: const Duration(milliseconds: 800),
-              //   animStatus: (AnimStatus status) {
-              //     if (status == AnimStatus.completed) {
-              //       setState(() {
-              //         springController.play(
-              //           motion: Motion.reverse,
-              //           curve: Curves.bounceInOut,
-              //         );
-              //         Timer(const Duration(milliseconds: 800),
-              //             () => Motion.pause);
-              //       });
-              //     }
+            //jumping monster
+            // Spring.translate(
+            //   beginOffset: const Offset(0, 0),
+            //   endOffset: const Offset(0, -30),
+            //   child: const Align(
+            //     alignment: Alignment(0.94, 0.55),
+            //     child: Image(
+            //       height: 90,
+            //       image: AssetImage('assets/images/baby.png'),
+            //       fit: BoxFit.fill,
+            //     ),
+            //   ),
+            //   // curve: Curves.bounceInOut,
+            //   delay: const Duration(milliseconds: 1500),
+            //   animDuration: const Duration(milliseconds: 800),
+            //   animStatus: (AnimStatus status) {
+            //     if (status == AnimStatus.completed) {
+            //       setState(() {
+            //         springController.play(
+            //           motion: Motion.reverse,
+            //           curve: Curves.bounceInOut,
+            //         );
+            //         Timer(const Duration(milliseconds: 800),
+            //             () => Motion.pause);
+            //       });
+            //     }
 
-              //     print("Status: $status");
-              //  },
-              // ),
-            ],
-          ),
+            //     print("Status: $status");
+            //  },
+            // ),
+          ],
         ),
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

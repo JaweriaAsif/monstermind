@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 
@@ -20,15 +21,7 @@ class AlphabetGame extends StatefulWidget {
 class _AlphabetGameState extends State<AlphabetGame> {
   List<TextGameOptionTile> options = [];
   // List list = CardContent(from: "alphabets").list;
-  List<Color> colors = const [
-    Color(0xff5CD978),
-    Color(0xffD9825C),
-    Color(0xff28AAF2),
-    Color(0xffE445B8),
-    Color(0xffF11162),
-    Color(0xffFF3C3C),
-    Color(0xffC915D8),
-  ];
+
   @override
   Widget build(BuildContext context) {
     context.watch<CardContent>().list;

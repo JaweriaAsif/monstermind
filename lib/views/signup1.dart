@@ -34,11 +34,6 @@ class _SignUp1State extends State<SignUp1> {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const Signup2()),
                   );
-                  // addTask(Task(
-                  //   title: "hello",
-                  //   description: "snkz",
-                  //   dueDate: DateTime.now(),
-                  // ));
                 },
                 alignment: const Alignment(0, 0.2),
               ),
