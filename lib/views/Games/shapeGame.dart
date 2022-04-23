@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/gameController.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameoptionTile.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
@@ -40,10 +41,12 @@ class _ShapeGameState extends State<ShapeGame> {
   ];
   @override
   Widget build(BuildContext context) {
-    context.watch<CardContent>().list;
+    //
+    context.watch<CardContent>().shapesList;
     List list = context.read<CardContent>().getList("shapes");
     int answer = Random().nextInt(ques.length);
-    List shapes = CardContent().getlistof4shapes(ques[answer].shape, list);
+    List shapes = GameController().getlistof4shapes(ques[answer].shape, list);
+
     setTtsConfig();
     flutterTts.speak("What shape is this?");
 

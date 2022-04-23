@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/gameController.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
@@ -71,7 +72,7 @@ class _ColourGameState extends State<ColourGame> {
   Widget build(BuildContext context) {
     List list = context.watch<CardContent>().getList("colours");
     int answer = Random().nextInt(ques.length);
-    List colours = CardContent().getlistof4colours(ques[answer].color, list);
+    List colours = GameController().getlistof4colours(ques[answer].color, list);
     setTtsConfig();
     flutterTts.speak("What color is this?");
     options = [

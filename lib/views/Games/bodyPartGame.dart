@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/gameController.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameoptionTile.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
@@ -20,8 +21,8 @@ class _BodyPartGameState extends State<BodyPartGame> {
   @override
   Widget build(BuildContext context) {
     List list = context.watch<CardContent>().getList("body");
-    List bodyparts = CardContent().getlistof4(list);
-    int answer = CardContent().getquest(bodyparts);
+    List bodyparts = GameController().getlistof4(list);
+    int answer = GameController().getquest(bodyparts);
 
     setTtsConfig();
     flutterTts.speak("Select the ${bodyparts[answer].text}");

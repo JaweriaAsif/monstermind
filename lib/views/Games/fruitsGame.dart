@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/gameController.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameoptionTile.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
@@ -21,8 +22,8 @@ class _FruitsGameState extends State<FruitsGame> {
   Widget build(BuildContext context) {
     context.watch<CardContent>().list;
     List list = context.read<CardContent>().getList("fruits");
-    List fruits = CardContent().getlistof4(list);
-    int answer = CardContent().getquest(fruits);
+    List fruits = GameController().getlistof4(list);
+    int answer = GameController().getquest(fruits);
     setTtsConfig();
     flutterTts.speak("Select the ${fruits[answer].text}");
     options = [

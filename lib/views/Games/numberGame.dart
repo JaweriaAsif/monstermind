@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/colors.dart';
+import 'package:monstermind/controllers/gameController.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 import 'package:monstermind/views/Games/picgame.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
@@ -19,22 +21,13 @@ class NumberGame extends StatefulWidget {
 class _NumberGameState extends State<NumberGame> {
   List<TextGameOptionTile> options = [];
   // List list = CardContent(from: "numbers").list;
-  List<Color> colors = const [
-    Color(0xff5CD978),
-    Color(0xffD9825C),
-    Color(0xff28AAF2),
-    Color(0xffE445B8),
-    Color(0xffF11162),
-    Color(0xffFF3C3C),
-    Color(0xffC915D8),
-  ];
 
   @override
   Widget build(BuildContext context) {
     context.watch<CardContent>().list;
     List list = context.read<CardContent>().getList("numbers");
-    List numbers = CardContent().getlistof4(list);
-    int answer = CardContent().getquest(numbers);
+    List numbers = GameController().getlistof4(list);
+    int answer = GameController().getquest(numbers);
     setTtsConfig();
     flutterTts.speak("How many are these?");
     options = [
@@ -56,7 +49,7 @@ class _NumberGameState extends State<NumberGame> {
         textcolor: colors[Random().nextInt(colors.length)],
       ),
       TextGameOptionTile(
-        text: numbers[1].topText,
+        text: numbers[1].topText.toString(),
         bottomtext: numbers[1].bottomText,
         ontap: () {
           if (1 == answer) {
@@ -73,7 +66,7 @@ class _NumberGameState extends State<NumberGame> {
         textcolor: colors[Random().nextInt(colors.length)],
       ),
       TextGameOptionTile(
-        text: numbers[2].topText,
+        text: numbers[2].topText.toString(),
         bottomtext: numbers[2].bottomText,
         ontap: () {
           if (2 == answer) {
@@ -90,7 +83,7 @@ class _NumberGameState extends State<NumberGame> {
         textcolor: colors[Random().nextInt(colors.length)],
       ),
       TextGameOptionTile(
-        text: numbers[3].topText,
+        text: numbers[3].topText.toString(),
         bottomtext: numbers[3].bottomText,
         ontap: () {
           if (3 == answer) {

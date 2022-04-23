@@ -1,3 +1,4 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 
 class GameOptionTile extends StatelessWidget {
@@ -13,7 +14,7 @@ class GameOptionTile extends StatelessWidget {
   final String imgPath;
   final double height;
   final String text;
-  final Color? textcolor;
+  final String? textcolor;
   final Function() ontap;
 
   @override
@@ -37,7 +38,7 @@ class GameOptionTile extends StatelessWidget {
                   SizedBox(
                     height: height,
                     child: Image(
-                      image: AssetImage(imgPath),
+                      image: FirebaseImage(imgPath),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -46,7 +47,7 @@ class GameOptionTile extends StatelessWidget {
                     style: TextStyle(
                       color: textcolor == null
                           ? const Color(0xffF000000)
-                          : textcolor,
+                          : Color(int.parse(textcolor!)),
                       fontSize: 20,
                     ),
                   ),

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
+import 'package:monstermind/controllers/gameController.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 
@@ -26,8 +27,8 @@ class _AlphabetGameState extends State<AlphabetGame> {
   Widget build(BuildContext context) {
     context.watch<CardContent>().list;
     List list = context.read<CardContent>().getList("alphabets");
-    List alphabets = CardContent().getlistof4(list);
-    int answer = CardContent().getquest(alphabets);
+    List alphabets = GameController().getlistof4(list);
+    int answer = GameController().getquest(alphabets);
 
     setTtsConfig();
     flutterTts.speak(

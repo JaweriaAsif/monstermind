@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers//cardContent.dart';
+import 'package:monstermind/controllers/gameController.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameoptionTile.dart';
 import 'package:monstermind/views/tts.dart';
@@ -20,8 +21,8 @@ class _AnimalGameState extends State<AnimalGame> {
   @override
   Widget build(BuildContext context) {
     List list = context.watch<CardContent>().getList("animals");
-    List animals = CardContent().getlistof4(list);
-    int answer = CardContent().getquest(animals);
+    List animals = GameController().getlistof4(list);
+    int answer = GameController().getquest(animals);
 
     setTtsConfig();
     flutterTts.speak("Select the animal ${animals[answer].text}");
