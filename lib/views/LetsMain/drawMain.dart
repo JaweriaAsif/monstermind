@@ -119,7 +119,8 @@ class _DrawMainState extends State<DrawMain> {
     required double strokeWidth,
     required ScribbleState state,
   }) {
-    final selected = state.selectedWidth == strokeWidth;
+    final selected = state.selectedWidth == strokeWidth / 2;
+
     return Padding(
       padding: const EdgeInsets.all(4),
       child: Material(
@@ -130,15 +131,17 @@ class _DrawMainState extends State<DrawMain> {
           customBorder: const CircleBorder(),
           child: AnimatedContainer(
             duration: kThemeAnimationDuration,
-            width: strokeWidth * 2,
-            height: strokeWidth * 2,
+            width: strokeWidth * 2.7,
+            height: strokeWidth * 2.7,
             decoration: BoxDecoration(
                 color: state.map(
                   drawing: (s) => Color(s.selectedColor),
                   erasing: (_) => Colors.transparent,
                 ),
                 border: state.map(
-                  drawing: (_) => null,
+                  drawing: (_) => selected
+                      ? Border.all(width: 3, color: Colors.white)
+                      : null,
                   erasing: (_) => Border.all(width: 1),
                 ),
                 borderRadius: BorderRadius.circular(50.0)),

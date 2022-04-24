@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/views/Flashcards/flashCard.dart';
 import 'package:monstermind/views/avatar.dart';
+import 'package:monstermind/views/loadingCircle.dart';
 import 'package:provider/provider.dart';
 
 class CardPage extends StatefulWidget {
@@ -44,24 +46,32 @@ class _CardPageState extends State<CardPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             AvatarAppbar(),
+            //loading if list is empty
+            if (list.isEmpty) ...[
+              Center(
+                child: Padding(
+                    padding: const EdgeInsets.only(top: 75),
+                    child: LoadingCircle(color: purple)),
+              ),
+            ],
             ColumnSuper(
               children: [
-                //card
-                FlashCard(
-                  content: list[index],
-                  from: widget.from,
-                ),
+                if (list.isNotEmpty) ...[
+                  FlashCard(
+                    content: list[index],
+                    from: widget.from,
+                  ),
+                ],
 
                 //monster + arrow buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //remi
-                    Align(
+                    const Align(
                       alignment: Alignment.bottomLeft,
                       child: Image(
-                        image: FirebaseImage(
-                            'gs://monstermind-d1783.appspot.com/assets/images/remi.png'),
+                        image: AssetImage('assets/images/remi.png'),
                         height: 200,
                         fit: BoxFit.fill,
                       ),
@@ -74,7 +84,7 @@ class _CardPageState extends State<CardPage> {
                         children: [
                           //back arrow
                           Visibility(
-                            visible: index != 0,
+                            visible: index != 0 && list.isNotEmpty,
                             child: IconButton(
                               onPressed: () {
                                 index--;
@@ -92,15 +102,18 @@ class _CardPageState extends State<CardPage> {
                           const SizedBox(width: 20),
 
                           //front arrow
-                          IconButton(
-                            onPressed: () {
-                              index == list.length - 1 ? index = 0 : index++;
-                              setState(() {});
-                            },
-                            icon: const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Color(0xff946DDF),
-                              size: 50,
+                          Visibility(
+                            visible: list.isNotEmpty,
+                            child: IconButton(
+                              onPressed: () {
+                                index == list.length - 1 ? index = 0 : index++;
+                                setState(() {});
+                              },
+                              icon: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: Color(0xff946DDF),
+                                size: 50,
+                              ),
                             ),
                           ),
                         ],

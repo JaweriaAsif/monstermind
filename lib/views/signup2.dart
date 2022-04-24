@@ -38,17 +38,17 @@ class _Signup2State extends State<Signup2> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: Colors.white,
         // resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Center(
-            child: Stack(
+            child: Column(
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: Image(
-                    image: FirebaseImage(
-                        'gs://monstermind-d1783.appspot.com/assets/images/Signup2.png'),
+                  // height: MediaQuery.of(context).size.height,
+                  child: const Image(
+                    image: AssetImage('assets/images/Signup2.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -56,9 +56,7 @@ class _Signup2State extends State<Signup2> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      const SizedBox(
-                        height: 500,
-                      ),
+                      const SizedBox(height: 7),
                       Textfield(
                         controller: _controllerUsername,
                         label: 'Username',
@@ -69,7 +67,7 @@ class _Signup2State extends State<Signup2> {
                         selectedDate: selectedDate,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 25, bottom: 20),
                         child: Btn(
                           text: 'Next',
                           onPress: () {
