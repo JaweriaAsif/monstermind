@@ -52,7 +52,7 @@ class _OptionState extends State<Option>
       }
     });
 
-    _controller.forward();
+    //_controller.forward();
   }
 
   @override

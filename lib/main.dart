@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage>
       curve: Curves.fastOutSlowIn,
     );
     _animation =
-        Tween<double>(begin: 565.0, end: 500.0).animate(_curvedAnimation);
+        Tween<double>(begin: 0.55, end: 0.45).animate(_curvedAnimation);
     _animation.addListener(() {
       setState(() {});
     });
@@ -161,9 +161,11 @@ class _MyHomePageState extends State<MyHomePage>
               ),
             ),
 
-            Transform.translate(
-              offset: Offset(
-                  0.76 * MediaQuery.of(context).size.width, _animation.value),
+            // Transform.translate(
+            //offset: Offset(
+            // 0.76 * MediaQuery.of(context).size.width, _animation.value),
+            Align(
+              alignment: Alignment(0.94, _animation.value),
               child: const Image(
                 height: 85,
                 width: 90,
