@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/gameController.dart';
+import 'package:monstermind/controllers/games/alphabet.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 
@@ -11,6 +12,11 @@ import 'package:provider/provider.dart';
 
 import '../Points&Profile/pointsProvider.dart';
 import '../tts.dart';
+
+late List list;
+late List alphabets;
+late List c;
+late int ques;
 
 class AlphabetGame extends StatefulWidget {
   const AlphabetGame({Key? key}) : super(key: key);
@@ -20,92 +26,40 @@ class AlphabetGame extends StatefulWidget {
 }
 
 class _AlphabetGameState extends State<AlphabetGame> {
-  List<TextGameOptionTile> options = [];
+  List<alphabetOptions> options = [];
   // List list = CardContent(from: "alphabets").list;
-
   @override
   Widget build(BuildContext context) {
-    context.watch<CardContent>().list;
-    List list = context.read<CardContent>().getList("alphabets");
-    List alphabets = GameController().getlistof4(list);
-    int answer = GameController().getquest(alphabets);
+    c = get4colors();
+    // context.watch<CardContent>().list;
+    list = context.read<CardContent>().getList("alphabets");
+    alphabets = GameController().getlistof4(list);
+    ques = GameController().getquest(alphabets);
 
     setTtsConfig();
     flutterTts.speak(
-        "Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");
+        "Select the alphabet ${alphabets[ques].toString().substring(0, 1)}");
 
     // List color = CardContent().getlistof4(colors);
     options = [
-      TextGameOptionTile(
-        textcolor: colors[Random().nextInt(colors.length)],
-        text: alphabets[0],
-        ontap: () {
-          if (0 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const AlphabetGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts.speak(
-                "${alphabets[0].toString().substring(0, 1)} ... Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");
-          }
-        },
+      alphabetOptions(
+        index: 0,
       ),
-      TextGameOptionTile(
-        textcolor: colors[Random().nextInt(colors.length)],
-        text: alphabets[1],
-        ontap: () {
-          if (1 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const AlphabetGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts.speak(
-                "${alphabets[1].toString().substring(0, 1)} ... Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");
-          }
-        },
+      alphabetOptions(
+        index: 1,
       ),
-      TextGameOptionTile(
-        textcolor: colors[Random().nextInt(colors.length)],
-        text: alphabets[2],
-        ontap: () {
-          if (2 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const AlphabetGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts.speak(
-                "${alphabets[2].toString().substring(0, 1)} ... Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");
-          }
-        },
+      alphabetOptions(
+        index: 2,
       ),
-      TextGameOptionTile(
-        textcolor: colors[Random().nextInt(colors.length)],
-        text: alphabets[3],
-        ontap: () {
-          if (3 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const AlphabetGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts.speak(
-                "${alphabets[3].toString().substring(0, 1)} ... Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");
-          }
-        },
+      alphabetOptions(
+        index: 3,
       ),
     ];
     return Game(
       question: "Select the alphabet from the audio",
       onPressed: () {
         flutterTts.speak(
-            "Select the alphabet ${alphabets[answer].toString().substring(0, 1)}");
+            "Select the alphabet ${alphabets[ques].toString().substring(0, 1)}");
       },
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
@@ -115,6 +69,29 @@ class _AlphabetGameState extends State<AlphabetGame> {
         ),
         itemCount: 2,
       ),
+    );
+  }
+}
+
+class alphabetOptions extends StatelessWidget {
+  alphabetOptions({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
+  int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextGameOptionTile(
+      textcolor: c[index],
+      text: alphabets[index],
+      ontap: () {
+        Alphabet().actionOnAns(
+          ques: alphabets[ques].toString().substring(0, 1),
+          ans: alphabets[index].toString().substring(0, 1),
+          context: context,
+        );
+      },
     );
   }
 }

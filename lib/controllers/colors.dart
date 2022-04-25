@@ -1,6 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-List<Color> colors = const [
+List<Color> colors = [
   Color(0xff5CD978),
   Color(0xffD9825C),
   Color(0xff28AAF2),
@@ -35,3 +37,14 @@ List<Color> colors = const [
 
 Color purple = const Color(0xff946DDF);
 Color red = const Color(0xffEE412A);
+
+List get4colors() {
+  List l = [];
+  List c = colors;
+  for (int i = 1; i <= 4; i++) {
+    int j = Random().nextInt(c.length);
+    l.add(c[j]);
+    c.removeAt(j);
+  }
+  return l;
+}

@@ -148,8 +148,8 @@ class TextGameOptionRow extends StatelessWidget {
     required this.tile2,
   }) : super(key: key);
 
-  final TextGameOptionTile tile1;
-  final TextGameOptionTile tile2;
+  final Widget tile1;
+  final Widget tile2;
 
   @override
   Widget build(BuildContext context) {
