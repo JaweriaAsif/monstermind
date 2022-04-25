@@ -26,7 +26,8 @@ class _RhymesMainState extends State<RhymesMain> {
 
     if (!isLandscape) {
       return LetsPageMain(
-        imgPath: 'assets/images/crab bg.jpg',
+        bgImgPath: 'assets/images/crabbg color.png',
+        monsterImgPath: 'assets/images/crabhq.png',
         title: 'Rhymes',
         titleColour: red,
         list: rhymes.isEmpty

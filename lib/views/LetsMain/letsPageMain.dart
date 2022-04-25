@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/colors.dart';
+import 'package:monstermind/views/LetsMain/monsterBg.dart';
 import 'package:monstermind/views/avatar.dart';
 import 'package:monstermind/views/loadingCircle.dart';
 
 class LetsPageMain extends StatelessWidget {
   const LetsPageMain({
     Key? key,
-    required this.imgPath,
+    required this.bgImgPath,
+    required this.monsterImgPath,
     required this.title,
     required this.titleColour,
     required this.list,
   }) : super(key: key);
 
-  final String imgPath;
+  final String bgImgPath;
+  final String monsterImgPath;
   final String title;
   final Color titleColour;
   final Widget list;
@@ -24,13 +27,7 @@ class LetsPageMain extends StatelessWidget {
       body: Column(
         children: [
           AvatarAppbar(),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: Image(
-              image: AssetImage(imgPath),
-              fit: BoxFit.fill,
-            ),
-          ),
+          MonsterBg(bgImgPath: bgImgPath, monsterImgPath: monsterImgPath),
           Text(
             title,
             style: TextStyle(

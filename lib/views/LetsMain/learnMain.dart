@@ -80,7 +80,8 @@ class _LearnMainState extends State<LearnMain> {
     ];
 
     return LetsPageMain(
-      imgPath: 'assets/images/remi bg.jpg',
+      bgImgPath: 'assets/images/remibg color.png',
+      monsterImgPath: 'assets/images/remihq.png',
       title: 'Flash Cards',
       titleColour: const Color(0xff8D64BF),
       list: ListView.builder(

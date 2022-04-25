@@ -118,7 +118,8 @@ class _PlayMainState extends State<PlayMain> {
     ];
 
     return LetsPageMain(
-      imgPath: 'assets/images/aloo bg.jpg',
+      bgImgPath: 'assets/images/aloobg color.jpg',
+      monsterImgPath: 'assets/images/aloohq.png',
       title: 'Games',
       titleColour: const Color(0xffF1B111),
       list: ListView.builder(
