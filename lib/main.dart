@@ -66,7 +66,8 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   bool isTapped = false;
   late AudioPlayer player;
-
+  // final SpringController springController =
+  //   SpringController(initialAnim: Motion.play);
   bool reverse = true;
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -161,11 +162,19 @@ class _MyHomePageState extends State<MyHomePage>
               ),
             ),
 
+<<<<<<< HEAD
             // Transform.translate(
             //offset: Offset(
             // 0.76 * MediaQuery.of(context).size.width, _animation.value),
             Align(
               alignment: Alignment(0.94, _animation.value),
+=======
+            Transform.translate(
+              offset: Offset(
+                  0.76 * MediaQuery.of(context).size.width, _animation.value),
+
+              // alignment: Alignment(0.94, 0.5),
+>>>>>>> parent of 1e158b8 (homepage enlarge animation)
               child: const Image(
                 height: 85,
                 width: 90,
@@ -173,6 +182,37 @@ class _MyHomePageState extends State<MyHomePage>
                 fit: BoxFit.fill,
               ),
             ),
+
+            //jumping monster
+            // Spring.translate(
+            //   beginOffset: const Offset(0, 0),
+            //   endOffset: const Offset(0, -30),
+            //   child: const Align(
+            //     alignment: Alignment(0.94, 0.55),
+            //     child: Image(
+            //       height: 90,
+            //       image: AssetImage('assets/images/baby.png'),
+            //       fit: BoxFit.fill,
+            //     ),
+            //   ),
+            //   // curve: Curves.bounceInOut,
+            //   delay: const Duration(milliseconds: 1500),
+            //   animDuration: const Duration(milliseconds: 800),
+            //   animStatus: (AnimStatus status) {
+            //     if (status == AnimStatus.completed) {
+            //       setState(() {
+            //         springController.play(
+            //           motion: Motion.reverse,
+            //           curve: Curves.bounceInOut,
+            //         );
+            //         Timer(const Duration(milliseconds: 800),
+            //             () => Motion.pause);
+            //       });
+            //     }
+
+            //     print("Status: $status");
+            //  },
+            // ),
           ],
         ),
       ),
