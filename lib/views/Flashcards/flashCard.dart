@@ -2,9 +2,12 @@ import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/models/PicTextCard.dart';
 import 'package:monstermind/models/TextPicCard.dart';
+import 'package:monstermind/views/loadingCircle.dart';
+import 'package:provider/provider.dart';
 
 import '../tts.dart';
 import 'dart:convert';
@@ -28,7 +31,9 @@ class _FlashCardState extends State<FlashCard> {
   @override
   Widget build(BuildContext context) {
     setTtsConfig();
-    speak();
+    context
+        .read<CardContent>()
+        .speak(from: widget.from, content: widget.content); //speak
 
     return SizedBox(
       width: MediaQuery.of(context).size.width - 80,
@@ -42,7 +47,9 @@ class _FlashCardState extends State<FlashCard> {
                 padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
                 child: IconButton(
                   onPressed: () {
-                    speak();
+                    context
+                        .read<CardContent>()
+                        .speak(from: widget.from, content: widget.content);
                   },
                   icon: const Icon(
                     Icons.volume_up_rounded,
@@ -89,6 +96,13 @@ class _FlashCardState extends State<FlashCard> {
                       image: FirebaseImage(
                           (widget.content as TextPicCard).imgPath),
                       fit: BoxFit.fill,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return LoadingCircle(color: purple);
+                      },
                     ),
                   ],
 
@@ -104,6 +118,13 @@ class _FlashCardState extends State<FlashCard> {
                           image: FirebaseImage(
                               (widget.content as PicTextCard).imgPath),
                           fit: BoxFit.fill,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+                            return Align(child: LoadingCircle(color: purple));
+                          },
                         ),
                       ),
                     ),
@@ -133,18 +154,5 @@ class _FlashCardState extends State<FlashCard> {
         ),
       ),
     );
-  }
-
-  void speak() {
-    String toSpeak = "";
-    if (widget.from == "numbers") {
-      toSpeak = (widget.content as TextPicCard).bottomText;
-    } else if (widget.from == "alphabets") {
-      toSpeak = (widget.content as String).substring(0, 1);
-    } else {
-      toSpeak = (widget.content as PicTextCard).text;
-    }
-
-    flutterTts.speak(toSpeak);
   }
 }

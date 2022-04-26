@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/models/rhymes.dart';
 
 class RhymesProvider extends ChangeNotifier {
@@ -46,7 +47,9 @@ class RhymesProvider extends ChangeNotifier {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        rhymes.add(Rhymes.fromJson(doc.data() as Map<String, dynamic>));
+        Rhymes toAdd = Rhymes.fromJson(doc.data() as Map<String, dynamic>);
+        rhymes.add(toAdd);
+        cacheFBImage(toAdd.icon);
       });
     });
 

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/models/PicTextCard.dart';
 
 import 'package:monstermind/models/TextPicCard.dart';
+import 'package:monstermind/models/firebaseFunctions.dart';
+import 'package:monstermind/views/tts.dart';
 
 class CardContent extends ChangeNotifier {
   List _list = [];
@@ -77,8 +79,10 @@ class CardContent extends ChangeNotifier {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        numbersList
-            .add(TextPicCard.fromJson(doc.data() as Map<String, dynamic>));
+        TextPicCard toAdd =
+            TextPicCard.fromJson(doc.data() as Map<String, dynamic>);
+        numbersList.add(toAdd);
+        cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -94,8 +98,10 @@ class CardContent extends ChangeNotifier {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        shapesList
-            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+        PicTextCard toAdd =
+            PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
+        shapesList.add(toAdd);
+        cacheFBImage(toAdd.imgPath);
       });
     });
     notifyListeners();
@@ -110,8 +116,10 @@ class CardContent extends ChangeNotifier {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        coloursList
-            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+        PicTextCard toAdd =
+            PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
+        coloursList.add(toAdd);
+        cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -127,8 +135,10 @@ class CardContent extends ChangeNotifier {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        animalsList
-            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+        PicTextCard toAdd =
+            PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
+        animalsList.add(toAdd);
+        cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -144,8 +154,10 @@ class CardContent extends ChangeNotifier {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        bodyPartsList
-            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+        PicTextCard toAdd =
+            PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
+        bodyPartsList.add(toAdd);
+        cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -161,8 +173,10 @@ class CardContent extends ChangeNotifier {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        fruitsList
-            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+        PicTextCard toAdd =
+            PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
+        fruitsList.add(toAdd);
+        cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -178,11 +192,27 @@ class CardContent extends ChangeNotifier {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        veggiesList
-            .add(PicTextCard.fromJson(doc.data() as Map<String, dynamic>));
+        PicTextCard toAdd =
+            PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
+        veggiesList.add(toAdd);
+        cacheFBImage(toAdd.imgPath);
       });
     });
 
     notifyListeners();
+  }
+
+  //tts function
+  void speak({required String from, required content}) {
+    String toSpeak = "";
+    if (from == "numbers") {
+      toSpeak = (content as TextPicCard).bottomText;
+    } else if (from == "alphabets") {
+      toSpeak = (content as String).substring(0, 1);
+    } else {
+      toSpeak = (content as PicTextCard).text;
+    }
+
+    flutterTts.speak(toSpeak);
   }
 }

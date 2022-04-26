@@ -40,7 +40,7 @@ class _MonsterBgState extends State<MonsterBg>
       parent: _controller,
       curve: Curves.fastOutSlowIn,
     );
-    _animation = Tween<double>(begin: 1, end: 0.85).animate(_curvedAnimation);
+    _animation = Tween<double>(begin: 1, end: 0.9).animate(_curvedAnimation);
     _animation.addListener(() {
       setState(() {});
     });

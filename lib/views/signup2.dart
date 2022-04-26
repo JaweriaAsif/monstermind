@@ -27,9 +27,6 @@ class _Signup2State extends State<Signup2> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    FirebaseImage(
-            'gs://monstermind-d1783.appspot.com/assets/images/Signup2.png')
-        .preCache();
   }
 
   @override
