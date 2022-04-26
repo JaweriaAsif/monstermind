@@ -4,12 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/gameController.dart';
+import 'package:monstermind/controllers/games/number.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 import 'package:monstermind/views/Games/picgame.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
 import 'package:provider/provider.dart';
 
 import '../tts.dart';
+
+late List list;
+late List c;
+late List numbers;
+late int quest;
+late bool isCorrect;
 
 class NumberGame extends StatefulWidget {
   const NumberGame({Key? key}) : super(key: key);
@@ -19,93 +26,32 @@ class NumberGame extends StatefulWidget {
 }
 
 class _NumberGameState extends State<NumberGame> {
-  List<TextGameOptionTile> options = [];
-  // List list = CardContent(from: "numbers").list;
+  List<numberOptions> options = [];
 
   @override
   Widget build(BuildContext context) {
     context.watch<CardContent>().list;
-    List list = context.read<CardContent>().getList("numbers");
-    List numbers = GameController().getlistof4(list);
-    int answer = GameController().getquest(numbers);
+    list = context.read<CardContent>().getList("numbers");
+    numbers = GameController().getlistof4(list);
+    quest = GameController().getquest(numbers);
+    c = get4colors();
+
     setTtsConfig();
     flutterTts.speak("How many are these?");
+
     options = [
-      TextGameOptionTile(
-        text: numbers[0].topText.toString(),
-        bottomtext: numbers[0].bottomText,
-        ontap: () {
-          if (0 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const NumberGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts
-                .speak("${numbers[0].bottomText} ... How many are these?");
-          }
-        },
-        textcolor: colors[Random().nextInt(colors.length)],
-      ),
-      TextGameOptionTile(
-        text: numbers[1].topText.toString(),
-        bottomtext: numbers[1].bottomText,
-        ontap: () {
-          if (1 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const NumberGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts
-                .speak("${numbers[1].bottomText} ... How many are these?");
-          }
-        },
-        textcolor: colors[Random().nextInt(colors.length)],
-      ),
-      TextGameOptionTile(
-        text: numbers[2].topText.toString(),
-        bottomtext: numbers[2].bottomText,
-        ontap: () {
-          if (2 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const NumberGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts
-                .speak("${numbers[2].bottomText} ... How many are these?");
-          }
-        },
-        textcolor: colors[Random().nextInt(colors.length)],
-      ),
-      TextGameOptionTile(
-        text: numbers[3].topText.toString(),
-        bottomtext: numbers[3].bottomText,
-        ontap: () {
-          if (3 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const NumberGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts
-                .speak("${numbers[3].bottomText} ... How many are these?");
-          }
-        },
-        textcolor: colors[Random().nextInt(colors.length)],
-      ),
+      numberOptions(index: 0),
+      numberOptions(index: 1),
+      numberOptions(index: 2),
+      numberOptions(index: 3),
     ];
+
     return PicGame(
       question: "How many are these?",
       onPressed: () {
         flutterTts.speak("How many are these?");
       },
-      questionimagepath: numbers[answer].imgPath,
+      questionimagepath: numbers[quest].imgPath,
       questionimagewidth: 200,
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
@@ -119,12 +65,28 @@ class _NumberGameState extends State<NumberGame> {
   }
 }
 
-class ObjectNumber {
-  String imgPath;
-  String number;
-
-  ObjectNumber({
-    required this.number,
-    required this.imgPath,
-  });
+class numberOptions extends StatelessWidget {
+  numberOptions({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
+  int index;
+  @override
+  Widget build(BuildContext context) {
+    return TextGameOptionTile(
+      text: numbers[index].topText.toString(),
+      bottomtext: numbers[index].bottomText,
+      ontap: () {
+        isCorrect = Number().actionOnAns(
+          ans: numbers[index].topText.toString(),
+          ques: numbers[quest].topText.toString(),
+          context: context,
+        );
+        if (isCorrect) {
+          context.read<PointsProvider>().addPoints(10);
+        }
+      },
+      textcolor: c[index],
+    );
+  }
 }
