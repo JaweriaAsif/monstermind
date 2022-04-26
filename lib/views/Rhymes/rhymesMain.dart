@@ -26,6 +26,7 @@ class _RhymesMainState extends State<RhymesMain> {
 
     if (!isLandscape) {
       return LetsPageMain(
+        audioPath: "assets/audios/m4.mp3",
         bgImgPath: 'assets/images/crabbg color.png',
         monsterImgPath: 'assets/images/crabhq.png',
         title: 'Rhymes',

@@ -40,11 +40,19 @@ Color red = const Color(0xffEE412A);
 
 List get4colors() {
   List l = [];
-  List c = colors;
-  for (int i = 1; i <= 4; i++) {
-    int j = Random().nextInt(c.length);
-    l.add(c[j]);
-    c.removeAt(j);
+  int i = 0;
+  int j;
+  while (i != 4) {
+    j = Random().nextInt(colors.length);
+    if (!l.contains(colors[j])) {
+      l.add(colors[j]);
+      i++;
+    }
   }
+  // for (int i = 0; i < 4; i++) {
+  //   j = Random().nextInt(colors.length);
+
+  //   l.add(colors[j]);
+  // }
   return l;
 }

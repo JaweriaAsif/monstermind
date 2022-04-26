@@ -8,6 +8,7 @@ class LetsPageMain extends StatelessWidget {
   const LetsPageMain({
     Key? key,
     required this.bgImgPath,
+    required this.audioPath,
     required this.monsterImgPath,
     required this.title,
     required this.titleColour,
@@ -15,6 +16,7 @@ class LetsPageMain extends StatelessWidget {
   }) : super(key: key);
 
   final String bgImgPath;
+  final String audioPath;
   final String monsterImgPath;
   final String title;
   final Color titleColour;
@@ -27,7 +29,11 @@ class LetsPageMain extends StatelessWidget {
       body: Column(
         children: [
           AvatarAppbar(),
-          MonsterBg(bgImgPath: bgImgPath, monsterImgPath: monsterImgPath),
+          MonsterBg(
+            bgImgPath: bgImgPath,
+            monsterImgPath: monsterImgPath,
+            audioPath: audioPath,
+          ),
           Text(
             title,
             style: TextStyle(

@@ -1,3 +1,4 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:monstermind/views/avatar.dart';
 
@@ -86,7 +87,7 @@ class PicGame extends StatelessWidget {
                         const BoxConstraints(maxHeight: 160, minHeight: 120),
                     width: questionimagewidth,
                     child: Image(
-                      image: AssetImage(questionimagepath),
+                      image: FirebaseImage(questionimagepath),
                       fit: BoxFit.fill,
                     ),
                   ),

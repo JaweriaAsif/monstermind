@@ -80,6 +80,7 @@ class _LearnMainState extends State<LearnMain> {
     ];
 
     return LetsPageMain(
+      audioPath: "assets/audios/m1.mp3",
       bgImgPath: 'assets/images/remibg color.png',
       monsterImgPath: 'assets/images/remihq.png',
       title: 'Flash Cards',

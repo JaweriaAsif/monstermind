@@ -6,7 +6,7 @@ import 'package:monstermind/views/tts.dart';
 class Alphabet {
   bool questioncheck(String ques, String ans) => ques == ans;
 
-  actionOnAns({
+  bool actionOnAns({
     required String ques,
     required String ans,
     required context,
@@ -16,9 +16,10 @@ class Alphabet {
       Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => const AlphabetGame()),
       );
-      context.read<PointsProvider>().addPoints(10);
+      return true;
     } else {
       flutterTts.speak("${ans} ... Select the alphabet ${ques}");
+      return false;
     }
   }
 }

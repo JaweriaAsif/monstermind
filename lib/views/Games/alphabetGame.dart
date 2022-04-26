@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
@@ -7,10 +5,10 @@ import 'package:monstermind/controllers/gameController.dart';
 import 'package:monstermind/controllers/games/alphabet.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
+import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
 
 import 'package:provider/provider.dart';
 
-import '../Points&Profile/pointsProvider.dart';
 import '../tts.dart';
 
 late List list;
@@ -27,11 +25,11 @@ class AlphabetGame extends StatefulWidget {
 
 class _AlphabetGameState extends State<AlphabetGame> {
   List<alphabetOptions> options = [];
-  // List list = CardContent(from: "alphabets").list;
+
   @override
   Widget build(BuildContext context) {
     c = get4colors();
-    // context.watch<CardContent>().list;
+
     list = context.read<CardContent>().getList("alphabets");
     alphabets = GameController().getlistof4(list);
     ques = GameController().getquest(alphabets);
@@ -40,7 +38,6 @@ class _AlphabetGameState extends State<AlphabetGame> {
     flutterTts.speak(
         "Select the alphabet ${alphabets[ques].toString().substring(0, 1)}");
 
-    // List color = CardContent().getlistof4(colors);
     options = [
       alphabetOptions(
         index: 0,
@@ -82,15 +79,19 @@ class alphabetOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isCorrect;
     return TextGameOptionTile(
       textcolor: c[index],
       text: alphabets[index],
       ontap: () {
-        Alphabet().actionOnAns(
+        isCorrect = Alphabet().actionOnAns(
           ques: alphabets[ques].toString().substring(0, 1),
           ans: alphabets[index].toString().substring(0, 1),
           context: context,
         );
+        if (isCorrect) {
+          context.read<PointsProvider>().addPoints(10);
+        }
       },
     );
   }

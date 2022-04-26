@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/cardContent.dart';
 
 class GameController {
   int getquest(List list) {
@@ -9,10 +10,14 @@ class GameController {
 
   List getlistof4(List list) {
     List l = [];
-    for (var i = 0; i < 4; i++) {
-      int ran = Random().nextInt(list.length);
-      l.add(list[ran]);
-      list.removeAt(ran);
+    int i = 0;
+    int j;
+    while (i != 4) {
+      j = Random().nextInt(list.length);
+      if (!l.contains(list[j])) {
+        l.add(list[j]);
+        i++;
+      }
     }
     return l;
   }
