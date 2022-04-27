@@ -6,50 +6,108 @@ import 'package:monstermind/models/objectShape.dart';
 import 'package:monstermind/models/picTextCard.dart';
 import 'package:monstermind/models/rhymes.dart';
 
-List<ObjectShape> list = [
-  ObjectShape(
-    shape: "Circle",
-    imgPath: "assets/images/ball.png",
+List<TextPicCard> list = [
+  /*TextPicCard(
+    bottomText: "Two",
+    topText: 2,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/2octopus.png",
   ),
-  ObjectShape(
-    shape: "Circle",
-    imgPath: "assets/images/orange.png",
+  TextPicCard(
+    bottomText: "Three",
+    topText: 3,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/3rabbits.png",
   ),
-  ObjectShape(
-    shape: "Star",
-    imgPath: "assets/images/starfish.png",
+  TextPicCard(
+    bottomText: "Three",
+    topText: 3,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/3watermelon.png",
   ),
-  ObjectShape(
-    shape: "Triangle",
-    imgPath: "assets/images/pizza.png",
+  TextPicCard(
+    bottomText: "Four",
+    topText: 4,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/4squirrels.png",
   ),
+  TextPicCard(
+    bottomText: "Five",
+    topText: 5,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/5muffins.png",
+  ),
+  TextPicCard(
+    bottomText: "Six",
+    topText: 6,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/6carrots.png",
+  ),
+  TextPicCard(
+    bottomText: "Seven",
+    topText: 7,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/7watermelon.png",
+  ),
+  TextPicCard(
+    bottomText: "Nine",
+    topText: 9,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/9balloons.png",
+  ),
+  TextPicCard(
+    bottomText: "Ten",
+    topText: 10,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/10spiders.png",
+  ),
+  TextPicCard(
+    bottomText: "Two",
+    topText: 2,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/2ducks.png",
+  ),
+  TextPicCard(
+    bottomText: "Three",
+    topText: 3,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/3slices.png",
+  ),
+  TextPicCard(
+    bottomText: "Five",
+    topText: 5,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/5fish.png",
+  ),
+  TextPicCard(
+    bottomText: "Six",
+    topText: 6,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/6radish.png",
+  ),
+  TextPicCard(
+    bottomText: "Eight",
+    topText: 8,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/8chillies.png",
+  ),
+  TextPicCard(
+    bottomText: "Nine",
+    topText: 9,
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/9ants.png",
+  ),*/
 ];
-// List<Rhymes> list = [
-//   Rhymes(
-//       name: "Jack and Jill",
-//       icon: "gs://monstermind-d1783.appspot.com/assets/images/Rhymes/jandj.png",
-//       vidID: "XzhesUdAPNo"),
-//   Rhymes(
-//       name: "I'm a Little Teapot",
-//       icon:
-//           "gs://monstermind-d1783.appspot.com/assets/images/Rhymes/teapot.png",
-//       vidID: "jtZYTzzdHa8"),
-//   Rhymes(
-//       name: "Muffin Man",
-//       icon:
-//           "gs://monstermind-d1783.appspot.com/assets/images/Rhymes/muffin.png",
-//       vidID: "fXFg5QsTcLQ"),
-//   Rhymes(
-//       name: "Old McDonald",
-//       icon: "gs://monstermind-d1783.appspot.com/assets/images/Rhymes/barn.png",
-//       vidID: "M3WvViAUgyg"),
+
+// List<ObjectShape> list = [
+//   ObjectShape(
+//     shape: "Circle",
+//     imgPath: "assets/images/ball.png",
+//   ),
+//   ObjectShape(
+//     shape: "Circle",
+//     imgPath: "assets/images/orange.png",
+//   ),
+//   ObjectShape(
+//     shape: "Star",
+//     imgPath: "assets/images/starfish.png",
+//   ),
+//   ObjectShape(
+//     shape: "Triangle",
+//     imgPath: "assets/images/pizza.png",
+//   ),
 // ];
 
 void addToDB() {
   // addFCBodyParts();
   // addToCollection('FCBodyParts');
   // addToCollection('Rhymes');
-  //addToCollection('GShapesQuest');
+  // addToCollection('GNumbersQuest');
 }
 
 Future<void> addToCollection(String coll) async {
@@ -63,6 +121,6 @@ Future<void> addToCollection(String coll) async {
   });
 }
 
-void cacheFBImage(String imgPath) {
-  FirebaseImage(imgPath).preCache();
+void cacheFBImage(String imgPath) async {
+  await FirebaseImage(imgPath).preCache();
 }

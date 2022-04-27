@@ -37,6 +37,9 @@ List<Color> colors = [
 
 Color purple = const Color(0xff946DDF);
 Color red = const Color(0xffEE412A);
+Color darkYellow = const Color(0xffF1B111);
+
+Color bgYellow = const Color(0xffFCE79A);
 
 List get4colors() {
   List l = [];

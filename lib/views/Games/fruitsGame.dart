@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/controllers/games/fruits.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
+import 'package:monstermind/views/loadingCircle.dart';
 import 'package:monstermind/views/tts.dart';
 import 'package:provider/provider.dart';
 
 late int quest;
 late List fruits;
-late List list;
+List list = [];
 late bool isCorrect;
+bool isLoading = false;
 
 class FruitsGame extends StatefulWidget {
   const FruitsGame({Key? key}) : super(key: key);
@@ -26,7 +29,9 @@ class _FruitsGameState extends State<FruitsGame> {
   @override
   Widget build(BuildContext context) {
     context.watch<CardContent>().list;
+
     list = context.read<CardContent>().getList("fruits");
+
     fruits = GameController().getlistof4(list);
     quest = GameController().getquest(fruits);
 

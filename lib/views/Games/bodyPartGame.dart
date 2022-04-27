@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/controllers/games/bodypart.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameoptionTile.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
+import 'package:monstermind/views/loadingCircle.dart';
 import 'package:monstermind/views/tts.dart';
 import 'package:provider/provider.dart';
 
-late List list;
+List list = [];
 late List bodyparts;
 late int quest;
 late bool isCorrect;
@@ -21,12 +23,13 @@ class BodyPartGame extends StatefulWidget {
 }
 
 class _BodyPartGameState extends State<BodyPartGame> {
-  List<bodyPartOptions> options = [];
+  late List<bodyPartOptions> options;
 
   @override
   Widget build(BuildContext context) {
     context.watch<CardContent>().list;
     list = context.read<CardContent>().getList("body");
+
     bodyparts = GameController().getlistof4(list);
     quest = GameController().getquest(bodyparts);
 
@@ -39,7 +42,7 @@ class _BodyPartGameState extends State<BodyPartGame> {
 
     setTtsConfig();
     flutterTts.speak("Select the ${bodyparts[quest].text}");
-    options = [];
+
     return Game(
       question: "Select the body part from the audio",
       onPressed: () {
@@ -48,8 +51,8 @@ class _BodyPartGameState extends State<BodyPartGame> {
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => GameOptionRow(
-          tile1: options[index * 2],
-          tile2: options[index * 2 + 1],
+          tile1: options[2 * index],
+          tile2: options[2 * index + 1],
         ),
         itemCount: 2,
       ),

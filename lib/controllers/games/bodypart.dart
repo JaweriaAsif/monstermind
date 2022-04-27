@@ -19,7 +19,7 @@ class bodyPart {
 
       return true;
     } else {
-      flutterTts.speak("${ans} ... Select the ${ques}");
+      flutterTts.speak("$ans ... Select the $ques");
       return false;
     }
   }

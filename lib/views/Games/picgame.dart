@@ -1,16 +1,18 @@
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/views/avatar.dart';
+import 'package:monstermind/views/loadingCircle.dart';
 
 class PicGame extends StatelessWidget {
-  const PicGame(
-      {Key? key,
-      required this.question,
-      required this.questionimagepath,
-      required this.questionimagewidth,
-      required this.list,
-      required this.onPressed})
-      : super(key: key);
+  const PicGame({
+    Key? key,
+    required this.question,
+    required this.questionimagepath,
+    required this.questionimagewidth,
+    required this.list,
+    required this.onPressed,
+  }) : super(key: key);
   final String questionimagepath;
   final double questionimagewidth;
   final String question;
@@ -20,10 +22,11 @@ class PicGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffFCE79A),
+      backgroundColor: bgYellow,
       body: Column(
         children: [
           AvatarAppbar(),
+
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: (MediaQuery.of(context).size.height / 3) * 1.45,
@@ -58,8 +61,8 @@ class PicGame extends StatelessWidget {
                               child: Text(
                                 question,
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: const Color(0xffF1B111),
+                                style: TextStyle(
+                                  color: darkYellow,
                                   fontSize: 25,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -96,6 +99,7 @@ class PicGame extends StatelessWidget {
             ),
           ),
           // const SizedBox(height: 30),
+
           Expanded(child: list),
         ],
       ),

@@ -8,11 +8,12 @@ import 'package:monstermind/controllers/games/number.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 import 'package:monstermind/views/Games/picgame.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
+import 'package:monstermind/views/loadingCircle.dart';
 import 'package:provider/provider.dart';
 
 import '../tts.dart';
 
-late List list;
+List list = [];
 late List c;
 late List numbers;
 late int quest;
@@ -30,8 +31,20 @@ class _NumberGameState extends State<NumberGame> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading =
+        list.isEmpty; //once questions from DB, add: || ques.isEmpty
+
     context.watch<CardContent>().list;
     list = context.read<CardContent>().getList("numbers");
+
+    if (isLoading) {
+      return Scaffold(
+        backgroundColor: bgYellow,
+        body: Center(
+          child: LoadingCircle(color: darkYellow),
+        ),
+      );
+    }
     numbers = GameController().getlistof4(list);
     quest = GameController().getquest(numbers);
     c = get4colors();

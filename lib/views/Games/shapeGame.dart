@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/controllers/games/questions.dart';
 import 'package:monstermind/controllers/games/shape.dart';
@@ -9,14 +10,15 @@ import 'package:monstermind/models/objectShape.dart';
 import 'package:monstermind/views/Games/gameoptionTile.dart';
 import 'package:monstermind/views/Games/picgame.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
+import 'package:monstermind/views/loadingCircle.dart';
 import 'package:monstermind/views/tts.dart';
 import 'package:provider/provider.dart';
 
 late bool isCorrect;
 late int quest;
 late List shapes;
-late List list;
-late List ques;
+List list = [];
+List ques = [];
 
 class ShapeGame extends StatefulWidget {
   const ShapeGame({Key? key}) : super(key: key);
@@ -48,9 +50,21 @@ class _ShapeGameState extends State<ShapeGame> {
   // ];
   @override
   Widget build(BuildContext context) {
+    bool isLoading = list.isEmpty || ques.isEmpty;
     context.watch<CardContent>().shapesList;
     ques = context.watch<Questions>().shapesQuest;
     list = context.read<CardContent>().getList("shapes");
+
+    //if loading, show circular loading thing
+    if (isLoading) {
+      return Scaffold(
+        backgroundColor: bgYellow,
+        body: Center(
+          child: LoadingCircle(color: darkYellow),
+        ),
+      );
+    }
+
     quest = Random().nextInt(ques.length);
     shapes = GameController().getlistof4shapes(ques[quest].shape, list);
 

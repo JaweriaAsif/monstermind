@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:monstermind/controllers//cardContent.dart';
+import 'package:monstermind/controllers/cardContent.dart';
+
 import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameoptionTile.dart';

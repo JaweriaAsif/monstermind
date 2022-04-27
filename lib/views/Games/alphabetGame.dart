@@ -6,12 +6,13 @@ import 'package:monstermind/controllers/games/alphabet.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
+import 'package:monstermind/views/loadingCircle.dart';
 
 import 'package:provider/provider.dart';
 
 import '../tts.dart';
 
-late List list;
+List list = [];
 late List alphabets;
 late List c;
 late int ques;
@@ -29,7 +30,7 @@ class _AlphabetGameState extends State<AlphabetGame> {
   @override
   Widget build(BuildContext context) {
     c = get4colors();
-
+    context.watch<CardContent>().list;
     list = context.read<CardContent>().getList("alphabets");
     alphabets = GameController().getlistof4(list);
     ques = GameController().getquest(alphabets);
