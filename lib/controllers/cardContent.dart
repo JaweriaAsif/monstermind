@@ -10,7 +10,6 @@ import 'package:monstermind/views/tts.dart';
 
 class CardContent extends ChangeNotifier {
   List _list = [];
-  // String? from = "";
 
   CardContent() {
     getLists();
@@ -52,10 +51,10 @@ class CardContent extends ChangeNotifier {
     getBodyPartsList();
   }
 
-  //Get Collection Firebase
-  getCollection(String coll) async {
-    return await FirebaseFirestore.instance.collection(coll).get();
-  }
+  // //Get Collection Firebase
+  // getCollection(String coll) async {
+  //   return await FirebaseFirestore.instance.collection(coll).get();
+  // }
 
   //function: create alphabet list
   List alphabetList() {

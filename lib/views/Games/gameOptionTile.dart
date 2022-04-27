@@ -48,7 +48,7 @@ class GameOptionTile extends StatelessWidget {
                       color: textcolor == null
                           ? const Color(0xffF000000)
                           : Color(int.parse(textcolor!)),
-                      fontSize: 20,
+                      fontSize: 18,
                     ),
                   ),
                 ],
@@ -90,25 +90,29 @@ class TextGameOptionTile extends StatelessWidget {
     this.bottomtext,
     required this.textcolor,
     required this.ontap,
+    this.isAlphabet = false,
   }) : super(key: key);
   final Color textcolor;
   final String? bottomtext;
   final String text;
   final Function() ontap;
+  final bool isAlphabet;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
         onTap: ontap,
+        // child: SizedBox(
+        //height: isAlphabet ? 100 : MediaQuery.of(context).size.height * 0.17,
         child: Card(
           color: const Color(0xffffffff),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
           child: Align(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 20,
+              padding: EdgeInsets.symmetric(
+                vertical: isAlphabet ? 40 : 20,
                 horizontal: 20,
               ),
               child: Column(
@@ -118,7 +122,7 @@ class TextGameOptionTile extends StatelessWidget {
                     text,
                     style: TextStyle(
                       color: textcolor,
-                      fontSize: 55,
+                      fontSize: 60,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

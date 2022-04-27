@@ -83,7 +83,7 @@ class _PlayMainState extends State<PlayMain> {
       //body parts
       OptionTile(
         imgPath: 'assets/images/body.png',
-        text: 'BodyParts',
+        text: 'Body Parts',
         color: const Color(0xffF8DA6B),
         ontap: () {
           Navigator.of(context).push(

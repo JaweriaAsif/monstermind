@@ -45,14 +45,17 @@ class GameController {
     for (var i = 0; i < list.length; i++) {
       if (list[i].text == shape) {
         l.add(list[i]);
-        list.removeAt(i);
+
         break;
       }
     }
-    for (var i = 0; i < 3; i++) {
+    int i = 0;
+    while (i != 3) {
       int ran = Random().nextInt(list.length);
-      l.add(list[ran]);
-      list.removeAt(ran);
+      if (!l.contains(list[ran]) && list[ran].text != shape) {
+        l.add(list[ran]);
+        i++;
+      }
     }
     l.shuffle();
     return l;

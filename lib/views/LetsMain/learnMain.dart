@@ -58,7 +58,7 @@ class _LearnMainState extends State<LearnMain> {
       //body parts
       OptionTile(
         imgPath: 'assets/images/body.png',
-        text: 'BodyParts',
+        text: 'Body Parts',
         color: const Color(0xffD3BDF4),
         ontap: () => toCardMain(context, "body"),
       ),

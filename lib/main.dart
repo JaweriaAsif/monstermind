@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/games/questions.dart';
 import 'package:monstermind/controllers/ryhmesProvider.dart';
 import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
@@ -28,6 +29,7 @@ Future<void> main() async {
           ChangeNotifierProvider(create: (_) => PointsProvider()),
           ChangeNotifierProvider(create: (_) => RhymesProvider()),
           ChangeNotifierProvider(create: (_) => CardContent()),
+          ChangeNotifierProvider(create: (_) => Questions()),
         ],
         child: const MyApp(),
       ),
