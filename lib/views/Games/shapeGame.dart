@@ -30,24 +30,6 @@ class ShapeGame extends StatefulWidget {
 class _ShapeGameState extends State<ShapeGame> {
   List<shapeOptions> options = [];
 
-  // = [
-  //   ObjectShape(
-  //     shape: "Circle",
-  //     imgPath: "assets/images/ball.png",
-  //   ),
-  //   ObjectShape(
-  //     shape: "Circle",
-  //     imgPath: "assets/images/orange.png",
-  //   ),
-  //   ObjectShape(
-  //     shape: "Star",
-  //     imgPath: "assets/images/starfish.png",
-  //   ),
-  //   ObjectShape(
-  //     shape: "Triangle",
-  //     imgPath: "assets/images/pizza.png",
-  //   ),
-  // ];
   @override
   Widget build(BuildContext context) {
     bool isLoading = list.isEmpty || ques.isEmpty;
@@ -65,7 +47,7 @@ class _ShapeGameState extends State<ShapeGame> {
       );
     }
 
-    quest = Random().nextInt(ques.length);
+    quest = GameController().getquest(ques);
     shapes = GameController().getlistof4shapes(ques[quest].shape, list);
 
     setTtsConfig();

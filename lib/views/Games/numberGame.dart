@@ -5,6 +5,7 @@ import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/controllers/games/number.dart';
+import 'package:monstermind/controllers/games/questions.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 import 'package:monstermind/views/Games/picgame.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
@@ -15,6 +16,7 @@ import '../tts.dart';
 
 List list = [];
 late List c;
+late List ques;
 late List numbers;
 late int quest;
 late bool isCorrect;
@@ -45,8 +47,11 @@ class _NumberGameState extends State<NumberGame> {
         ),
       );
     }
-    numbers = GameController().getlistof4(list);
-    quest = GameController().getquest(numbers);
+    ques = context.watch<Questions>().numbersQuest;
+    quest = GameController().getquest(ques);
+    numbers = GameController()
+        .getlistof4numbers(ques[quest].topText.toString(), list);
+
     c = get4colors();
 
     setTtsConfig();
@@ -92,7 +97,7 @@ class numberOptions extends StatelessWidget {
       ontap: () {
         isCorrect = Number().actionOnAns(
           ans: numbers[index].topText.toString(),
-          ques: numbers[quest].topText.toString(),
+          ques: ques[quest].topText.toString(),
           context: context,
         );
         if (isCorrect) {

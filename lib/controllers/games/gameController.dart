@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:monstermind/controllers/cardContent.dart';
 
 class GameController {
   int getquest(List list) {
@@ -53,6 +52,27 @@ class GameController {
     while (i != 3) {
       int ran = Random().nextInt(list.length);
       if (!l.contains(list[ran]) && list[ran].text != shape) {
+        l.add(list[ran]);
+        i++;
+      }
+    }
+    l.shuffle();
+    return l;
+  }
+
+  List getlistof4numbers(String number, List list) {
+    List l = [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].topText.toString() == number) {
+        l.add(list[i]);
+
+        break;
+      }
+    }
+    int i = 0;
+    while (i != 3) {
+      int ran = Random().nextInt(list.length);
+      if (!l.contains(list[ran]) && list[ran].topText.toString() != number) {
         l.add(list[ran]);
         i++;
       }

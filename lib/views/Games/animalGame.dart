@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/games/animal.dart';
 
 import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/views/Games/game.dart';
@@ -7,6 +8,11 @@ import 'package:monstermind/views/Games/gameoptionTile.dart';
 import 'package:monstermind/views/tts.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
 import 'package:provider/provider.dart';
+
+late List list;
+late List animals;
+late int quest;
+late bool isCorrect;
 
 class AnimalGame extends StatefulWidget {
   const AnimalGame({Key? key}) : super(key: key);
@@ -16,91 +22,26 @@ class AnimalGame extends StatefulWidget {
 }
 
 class _AnimalGameState extends State<AnimalGame> {
-  List<GameOptionTile> options = [];
-  // List list = CardContent(from: "animals").list;
+  List<animalOptions> options = [];
 
   @override
   Widget build(BuildContext context) {
-    List list = context.watch<CardContent>().getList("animals");
-    List animals = GameController().getlistof4(list);
-    int answer = GameController().getquest(animals);
+    list = context.watch<CardContent>().getList("animals");
+    animals = GameController().getlistof4(list);
+    quest = GameController().getquest(animals);
 
     setTtsConfig();
-    flutterTts.speak("Select the animal ${animals[answer].text}");
+    flutterTts.speak("Select the animal ${animals[quest].text}");
     options = [
-      GameOptionTile(
-        height: 110,
-        imgPath: animals[0].imgPath,
-        text: animals[0].text,
-        ontap: () {
-          if (0 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const AnimalGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts.speak(
-                "${animals[0].text} ... Select the animal ${animals[answer].text}");
-          }
-        },
-      ),
-      GameOptionTile(
-        height: 110,
-        imgPath: animals[1].imgPath,
-        text: animals[1].text,
-        ontap: () {
-          if (1 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const AnimalGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts.speak(
-                "${animals[1].text} ... Select the animal ${animals[answer].text}");
-          }
-        },
-      ),
-      GameOptionTile(
-        height: 110,
-        imgPath: animals[2].imgPath,
-        text: animals[2].text,
-        ontap: () {
-          if (2 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const AnimalGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts.speak(
-                "${animals[2].text} ... Select the animal ${animals[answer].text}");
-          }
-        },
-      ),
-      GameOptionTile(
-        height: 110,
-        imgPath: animals[3].imgPath,
-        text: animals[3].text,
-        ontap: () {
-          if (3 == answer) {
-            Navigator.pop(context);
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const AnimalGame()),
-            );
-            context.read<PointsProvider>().addPoints(10);
-          } else {
-            flutterTts.speak(
-                "${animals[3].text} ... Select the animal ${animals[answer].text}");
-          }
-        },
-      ),
+      animalOptions(index: 0),
+      animalOptions(index: 1),
+      animalOptions(index: 2),
+      animalOptions(index: 3),
     ];
     return Game(
       question: "Select the animal from the audio",
       onPressed: () {
-        flutterTts.speak("Select the animal ${animals[answer].text}");
+        flutterTts.speak("Select the animal ${animals[quest].text}");
       },
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
@@ -110,6 +51,33 @@ class _AnimalGameState extends State<AnimalGame> {
         ),
         itemCount: 2,
       ),
+    );
+  }
+}
+
+class animalOptions extends StatelessWidget {
+  animalOptions({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
+  int index;
+  @override
+  Widget build(BuildContext context) {
+    return GameOptionTile(
+      height: 110,
+      imgPath: animals[index].imgPath,
+      text: animals[index].text,
+      ontap: () {
+        isCorrect = Animal().actionOnAns(
+          ans: animals[index].text,
+          ques: animals[quest].text,
+          context: context,
+        );
+
+        if (isCorrect) {
+          context.read<PointsProvider>().addPoints(10);
+        }
+      },
     );
   }
 }
