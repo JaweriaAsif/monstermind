@@ -21,19 +21,22 @@ class GameController {
     return l;
   }
 
-  List getlistof4colours(Color color, List list) {
+  List getlistof4colours(String color, List list) {
     List l = [];
     for (var i = 0; i < list.length; i++) {
       if (list[i].color == color) {
         l.add(list[i]);
-        list.removeAt(i);
+
         break;
       }
     }
-    for (var i = 0; i < 3; i++) {
+    int i = 0;
+    while (i != 3) {
       int ran = Random().nextInt(list.length);
-      l.add(list[ran]);
-      list.removeAt(ran);
+      if (!l.contains(list[ran]) && list[ran].text != color) {
+        l.add(list[ran]);
+        i++;
+      }
     }
     l.shuffle();
     return l;

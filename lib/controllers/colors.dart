@@ -41,6 +41,23 @@ Color darkYellow = const Color(0xffF1B111);
 
 Color bgYellow = const Color(0xffFCE79A);
 
+//String colors
+String Turquoise = "0xff30D5C8";
+String Red = "0xffF11162";
+String Maroon = "0xff800000";
+String Grey = "0xff808080";
+String Orange = "0xffFF8929";
+String Black = "0xff000000";
+String Olive = "0xff808000";
+String Yellow = "0xffF9DF00";
+String Purple = "0xff8709D4";
+String Blue = "0xff0585E1";
+String Peach = "0xffF6C569";
+String White = "0xff000000";
+String Pink = "0xffFF32AD";
+String Brown = "0xff9D5D09";
+String Green = "0xff5CD978";
+
 List get4colors() {
   List l = [];
   int i = 0;

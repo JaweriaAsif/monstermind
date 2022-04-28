@@ -1,19 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:monstermind/models/firebaseFunctions.dart';
+import 'package:monstermind/models/objectColor.dart';
 import 'package:monstermind/models/objectShape.dart';
 import 'package:monstermind/models/textPicCard.dart';
 
 class Questions extends ChangeNotifier {
   List _shapesQuest = [];
   List _numbersQuest = [];
+  List _colorsQuest = [];
 
   List get shapesQuest => _shapesQuest;
   List get numbersQuest => _numbersQuest;
+  List get colorsQuest => _colorsQuest;
 
   Questions() {
     getShapesList();
     getNumbersList();
+    getColorsList();
   }
 
   void getShapesList() async {
@@ -25,6 +29,22 @@ class Questions extends ChangeNotifier {
         ObjectShape toAdd =
             ObjectShape.fromJson(doc.data() as Map<String, dynamic>);
         shapesQuest.add(toAdd);
+        cacheFBImage(toAdd.imgPath);
+      });
+    });
+
+    notifyListeners();
+  }
+
+  void getColorsList() async {
+    await FirebaseFirestore.instance
+        .collection('GColorsQuest')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        ObjectColor toAdd =
+            ObjectColor.fromJson(doc.data() as Map<String, dynamic>);
+        colorsQuest.add(toAdd);
         cacheFBImage(toAdd.imgPath);
       });
     });

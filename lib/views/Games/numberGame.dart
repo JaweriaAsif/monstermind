@@ -33,20 +33,20 @@ class _NumberGameState extends State<NumberGame> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoading =
-        list.isEmpty; //once questions from DB, add: || ques.isEmpty
+    // bool isLoading =
+    //     list.isEmpty; //once questions from DB, add: || ques.isEmpty
 
     context.watch<CardContent>().list;
     list = context.read<CardContent>().getList("numbers");
 
-    if (isLoading) {
-      return Scaffold(
-        backgroundColor: bgYellow,
-        body: Center(
-          child: LoadingCircle(color: darkYellow),
-        ),
-      );
-    }
+    // if (isLoading) {
+    //   return Scaffold(
+    //     backgroundColor: bgYellow,
+    //     body: Center(
+    //       child: LoadingCircle(color: darkYellow),
+    //     ),
+    //   );
+    // }
     ques = context.watch<Questions>().numbersQuest;
     quest = GameController().getquest(ques);
     numbers = GameController()
@@ -69,7 +69,7 @@ class _NumberGameState extends State<NumberGame> {
       onPressed: () {
         flutterTts.speak("How many are these?");
       },
-      questionimagepath: numbers[quest].imgPath,
+      questionimagepath: ques[quest].imgPath,
       questionimagewidth: 200,
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
