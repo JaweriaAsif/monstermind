@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:monstermind/controllers/googleSIgnIn.dart';
 import 'package:monstermind/views/button.dart';
 import 'package:monstermind/views/signup2.dart';
 import 'package:monstermind/views/task.dart';
@@ -11,6 +13,9 @@ class SignUp1 extends StatefulWidget {
 }
 
 class _SignUp1State extends State<SignUp1> {
+  GoogleSignInAccount? _currentUser;
+  GoogleSignIn googleSignIn = GoogleSign().googleSignIn;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -31,6 +36,7 @@ class _SignUp1State extends State<SignUp1> {
               Btn(
                 text: 'Sign Up',
                 onPress: () {
+                  GoogleSign().handleSignIn();
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const Signup2()),
                   );

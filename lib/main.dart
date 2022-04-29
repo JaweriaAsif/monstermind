@@ -2,21 +2,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/games/questions.dart';
+import 'package:monstermind/controllers/googleSIgnIn.dart';
 import 'package:monstermind/controllers/ryhmesProvider.dart';
 import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
-
-import 'package:monstermind/views/button.dart';
 import 'package:monstermind/views/signup1.dart';
-import 'package:monstermind/views/signup2.dart';
 import 'package:provider/provider.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:spring/spring.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:curved_animation_controller/curved_animation_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,10 +68,26 @@ class _MyHomePageState extends State<MyHomePage>
   bool reverse = true;
   late AnimationController _controller;
   late Animation<double> _animation;
+
+  GoogleSignInAccount? _currentUser;
+  GoogleSignIn googleSignIn = GoogleSign().googleSignIn;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    //google sign in
+
+    googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
+      setState(() {
+        _currentUser = account;
+        print("$_currentUser Signed In!");
+      });
+    });
+    googleSignIn.signInSilently();
+
+    //animation and sound
 
     _controller = AnimationController(
       duration: const Duration(milliseconds: 500),
