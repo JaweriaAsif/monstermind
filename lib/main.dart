@@ -7,7 +7,9 @@ import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/games/questions.dart';
 import 'package:monstermind/controllers/googleSIgnIn.dart';
 import 'package:monstermind/controllers/ryhmesProvider.dart';
+import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/models/firebaseFunctions.dart';
+import 'package:monstermind/models/user.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/views/signup1.dart';
 import 'package:provider/provider.dart';
@@ -51,6 +53,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  // clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ],
+);
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -70,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage>
   late Animation<double> _animation;
 
   GoogleSignInAccount? _currentUser;
-  GoogleSignIn googleSignIn = GoogleSign().googleSignIn;
+  // GoogleSignIn googleSignIn = GoogleSign().googleSignIn;
 
   @override
   void initState() {
@@ -79,13 +90,16 @@ class _MyHomePageState extends State<MyHomePage>
 
     //google sign in
 
-    googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
       setState(() {
         _currentUser = account;
         print("$_currentUser Signed In!");
       });
     });
-    googleSignIn.signInSilently();
+    _googleSignIn.signInSilently();
+
+    // UserController().getFromDB(_googleSignIn.currentUser!.email);
+    // print(_googleSignIn.currentUser!.email);
 
     //animation and sound
 
@@ -121,6 +135,17 @@ class _MyHomePageState extends State<MyHomePage>
 
     //TO REMOVE: temp DB function
     addToDB();
+  }
+
+  Future<void> _handleSignIn() async {
+    try {
+      await _googleSignIn.signIn();
+      print("signed in!");
+      print(_googleSignIn.currentUser!.email);
+    } catch (error) {
+      print(error);
+      print("Can't sign in :(");
+    }
   }
 
   @override

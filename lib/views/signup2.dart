@@ -4,7 +4,7 @@ import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/views/button.dart';
 import 'package:monstermind/views/hello.dart';
 import 'package:monstermind/views/textfield.dart';
-import 'package:monstermind/views/user.dart';
+import 'package:monstermind/models/user.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 

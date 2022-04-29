@@ -10,7 +10,7 @@ import '../tts.dart';
 late bool isCorrect;
 
 class CompGame extends StatefulWidget {
-  CompGame({
+  const CompGame({
     Key? key,
     required this.question,
     required this.questionimagepath,
@@ -25,6 +25,8 @@ class CompGame extends StatefulWidget {
 class _CompGameState extends State<CompGame> {
   @override
   Widget build(BuildContext context) {
+    List<double> heights = Comparison().shuffleHeights();
+
     setTtsConfig();
     flutterTts.speak("Select the ${widget.question}.");
 
@@ -100,16 +102,19 @@ class _CompGameState extends State<CompGame> {
                   question: widget.question,
                   questionimagepath: widget.questionimagepath,
                   xAlign: 0.61,
+                  height: heights[0],
                 ),
                 CompOption(
                   question: widget.question,
                   questionimagepath: widget.questionimagepath,
                   xAlign: -0.8,
+                  height: heights[1],
                 ),
                 CompOption(
                   question: widget.question,
                   questionimagepath: widget.questionimagepath,
                   xAlign: 0.8,
+                  height: heights[2],
                 ),
               ],
             ),
@@ -127,18 +132,20 @@ class CompOption extends StatelessWidget {
     required this.question,
     required this.questionimagepath,
     required this.xAlign,
+    required this.height,
   }) : super(key: key);
 
   final double xAlign;
   final String question;
   final String questionimagepath;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
-    double height = Comparison().randomheight();
+    // double height;
 
     return Align(
-      alignment: const Alignment(0.61, 0),
+      alignment: Alignment(xAlign, 0),
       child: InkWell(
         child: SizedBox(
           height: height,

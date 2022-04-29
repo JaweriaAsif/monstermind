@@ -1,10 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/games/questions.dart';
-import 'package:monstermind/models/objectComp.dart';
 import 'package:monstermind/views/Games/compGame.dart';
 import 'package:monstermind/views/loadingCircle.dart';
 import 'package:provider/provider.dart';
