@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:monstermind/views/Games/ComparisonGame.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
@@ -129,7 +130,7 @@ class _CompGameState extends State<CompGame> {
                       height: true ? height1 = randomheight() : null,
                       //width: questionimagewidth,
                       child: Image(
-                        image: AssetImage(widget.questionimagepath),
+                        image: FirebaseImage(widget.questionimagepath),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -154,7 +155,7 @@ class _CompGameState extends State<CompGame> {
                       height: true ? height2 = randomheight() : null,
                       //width: questionimagewidth,
                       child: Image(
-                        image: AssetImage(widget.questionimagepath),
+                        image: FirebaseImage(widget.questionimagepath),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -179,7 +180,7 @@ class _CompGameState extends State<CompGame> {
                       height: true ? height3 = randomheight() : null,
                       //width: questionimagewidth,
                       child: Image(
-                        image: AssetImage(widget.questionimagepath),
+                        image: FirebaseImage(widget.questionimagepath),
                         fit: BoxFit.fill,
                       ),
                     ),

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/models/objectColor.dart';
+import 'package:monstermind/models/objectComp.dart';
 import 'package:monstermind/models/objectShape.dart';
 import 'package:monstermind/models/textPicCard.dart';
 
@@ -9,15 +10,18 @@ class Questions extends ChangeNotifier {
   List _shapesQuest = [];
   List _numbersQuest = [];
   List _colorsQuest = [];
+  List _compQuest = [];
 
   List get shapesQuest => _shapesQuest;
   List get numbersQuest => _numbersQuest;
   List get colorsQuest => _colorsQuest;
+  List get compQuest => _compQuest;
 
   Questions() {
     getShapesList();
     getNumbersList();
     getColorsList();
+    getCompList();
   }
 
   void getShapesList() async {
@@ -61,6 +65,22 @@ class Questions extends ChangeNotifier {
         TextPicCard toAdd =
             TextPicCard.fromJson(doc.data() as Map<String, dynamic>);
         numbersQuest.add(toAdd);
+        cacheFBImage(toAdd.imgPath);
+      });
+    });
+
+    notifyListeners();
+  }
+
+  void getCompList() async {
+    await FirebaseFirestore.instance
+        .collection('GCompQuest')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        ObjectComp toAdd =
+            ObjectComp.fromJson(doc.data() as Map<String, dynamic>);
+        compQuest.add(toAdd);
         cacheFBImage(toAdd.imgPath);
       });
     });

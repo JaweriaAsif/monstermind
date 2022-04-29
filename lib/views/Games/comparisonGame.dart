@@ -1,18 +1,17 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/colors.dart';
+import 'package:monstermind/controllers/games/questions.dart';
+import 'package:monstermind/models/objectComp.dart';
 import 'package:monstermind/views/Games/compGame.dart';
+import 'package:monstermind/views/loadingCircle.dart';
+import 'package:provider/provider.dart';
 
-List<String> objectspath = [
-  'assets/images/elephant.png',
-  'assets/images/whale.png',
-  'assets/images/balloon.png',
-  'assets/images/ball.png',
-  'assets/images/cow.png',
-  'assets/images/cow.png',
-  'assets/images/strawberry.png',
-  'assets/images/orange.png',
-];
+List ques = [];
+bool isLoading = false;
+
 List<String> size = ["largest", "smallest"];
 
 class ComparisonGame extends StatefulWidget {
@@ -25,9 +24,25 @@ class ComparisonGame extends StatefulWidget {
 class _ComparisonGameState extends State<ComparisonGame> {
   @override
   Widget build(BuildContext context) {
+    isLoading = true;
+    ques = context.watch<Questions>().compQuest;
+
+    if (ques.isNotEmpty) {
+      isLoading = false;
+    }
+
+    if (isLoading) {
+      return Scaffold(
+        backgroundColor: bgYellow,
+        body: Center(
+          child: LoadingCircle(color: darkYellow),
+        ),
+      );
+    }
+
     return CompGame(
       question: size[Random().nextInt(size.length)],
-      questionimagepath: objectspath[Random().nextInt(objectspath.length)],
+      questionimagepath: ques[Random().nextInt(ques.length)].imgPath,
     );
   }
 }
