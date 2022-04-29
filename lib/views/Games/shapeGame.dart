@@ -1,12 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/controllers/games/questions.dart';
 import 'package:monstermind/controllers/games/shape.dart';
-import 'package:monstermind/models/objectShape.dart';
 import 'package:monstermind/views/Games/gameoptionTile.dart';
 import 'package:monstermind/views/Games/picgame.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
@@ -16,7 +13,7 @@ import 'package:provider/provider.dart';
 
 late bool isCorrect;
 late int quest;
-late List shapes;
+List shapes = [];
 List list = [];
 List ques = [];
 
@@ -28,16 +25,20 @@ class ShapeGame extends StatefulWidget {
 }
 
 class _ShapeGameState extends State<ShapeGame> {
-  List<shapeOptions> options = [];
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    bool isLoading = list.isEmpty || ques.isEmpty;
+    isLoading = true;
+
     context.watch<CardContent>().shapesList;
     ques = context.watch<Questions>().shapesQuest;
     list = context.read<CardContent>().getList("shapes");
 
-    //if loading, show circular loading thing
+    if (list.isNotEmpty && ques.isNotEmpty) {
+      isLoading = false;
+    }
+
     if (isLoading) {
       return Scaffold(
         backgroundColor: bgYellow,
@@ -53,13 +54,6 @@ class _ShapeGameState extends State<ShapeGame> {
     setTtsConfig();
     flutterTts.speak("What shape is this?");
 
-    options = [
-      shapeOptions(index: 0),
-      shapeOptions(index: 1),
-      shapeOptions(index: 2),
-      shapeOptions(index: 3),
-    ];
-
     return PicGame(
       question: "What shape is this?",
       onPressed: () {
@@ -70,8 +64,8 @@ class _ShapeGameState extends State<ShapeGame> {
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => GameOptionRow(
-          tile1: options[index * 2],
-          tile2: options[index * 2 + 1],
+          tile1: shapeOptions(index: index * 2),
+          tile2: shapeOptions(index: index * 2 + 1),
         ),
         itemCount: 2,
       ),

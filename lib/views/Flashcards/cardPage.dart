@@ -1,10 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_image/firebase_image.dart';
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
-import 'package:monstermind/models/firebaseFunctions.dart';
 import 'package:monstermind/views/Flashcards/flashCard.dart';
 import 'package:monstermind/views/avatar.dart';
 import 'package:monstermind/views/loadingCircle.dart';

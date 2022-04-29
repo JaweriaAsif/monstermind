@@ -9,19 +9,23 @@ import 'package:monstermind/models/objectShape.dart';
 import 'package:monstermind/models/picTextCard.dart';
 import 'package:monstermind/models/rhymes.dart';
 
-List<ObjectColor> list = [
-  // ObjectColor(
-  //   imgPath:
-  //       "gs://monstermind-d1783.appspot.com/assets/images/peachfruit.png", //
-  //   color: Peach,
-  // ),
+List<ObjectShape> list = [
+  ObjectShape(
+    shape: "Crescent",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/bananashape.png",
+  ),
+  ObjectShape(
+    shape: "Crescent",
+    imgPath:
+        "gs://monstermind-d1783.appspot.com/assets/images/crescentmoon.png",
+  ),
 ];
 
 void addToDB() {
   // addFCBodyParts();
   // addToCollection('FCBodyParts');
   // addToCollection('Rhymes');
-  // addToCollection('GColorsQuest');
+  // addToCollection('GShapesQuest');
 }
 
 Future<void> addToCollection(String coll) async {

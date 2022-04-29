@@ -2,12 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/games/colour.dart';
 import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/controllers/games/questions.dart';
 
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
+import 'package:monstermind/views/loadingCircle.dart';
 import 'package:provider/provider.dart';
 
 import '../tts.dart';
@@ -28,19 +30,35 @@ class ColourGame extends StatefulWidget {
 
 class _ColourGameState extends State<ColourGame> {
   // List<GameOptionTile> options = [];
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    isLoading = true;
+
+    context.watch<CardContent>().coloursList;
     list = context.watch<CardContent>().getList("colours");
     ques = context.read<Questions>().colorsQuest;
+
+    if (list.isNotEmpty && ques.isNotEmpty) {
+      isLoading = false;
+    }
+
+    if (isLoading) {
+      return Scaffold(
+        backgroundColor: bgYellow,
+        body: Center(
+          child: LoadingCircle(color: darkYellow),
+        ),
+      );
+    }
+
     quest = Random().nextInt(ques.length);
     colours = GameController().getlistof4colours(ques[quest].color, list);
 
     setTtsConfig();
     flutterTts.speak("What color is this?");
-    // options = [
 
-    // ];
     return PicGame(
       question: "What color is this?",
       onPressed: () {
