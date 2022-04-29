@@ -11,10 +11,9 @@ import 'package:monstermind/views/tts.dart';
 import 'package:provider/provider.dart';
 
 late int quest;
-late List fruits;
+List fruits = [];
 List list = [];
 late bool isCorrect;
-bool isLoading = false;
 
 class FruitsGame extends StatefulWidget {
   const FruitsGame({Key? key}) : super(key: key);
@@ -24,26 +23,33 @@ class FruitsGame extends StatefulWidget {
 }
 
 class _FruitsGameState extends State<FruitsGame> {
-  List<fruitOptions> options = [];
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    context.watch<CardContent>().list;
+    isLoading = true;
 
-    list = context.read<CardContent>().getList("fruits");
+    context.read<CardContent>().list;
+    list = context.watch<CardContent>().getList("fruits");
+
+    if (list.isNotEmpty) {
+      isLoading = false;
+    }
+
+    if (isLoading) {
+      return Scaffold(
+        backgroundColor: bgYellow,
+        body: Center(
+          child: LoadingCircle(color: darkYellow),
+        ),
+      );
+    }
 
     fruits = GameController().getlistof4(list);
     quest = GameController().getquest(fruits);
 
     setTtsConfig();
     flutterTts.speak("Select the ${fruits[quest].text}");
-
-    options = [
-      fruitOptions(index: 0),
-      fruitOptions(index: 1),
-      fruitOptions(index: 2),
-      fruitOptions(index: 3),
-    ];
 
     return Game(
       question: "Select the fruit from the audio",
@@ -53,8 +59,8 @@ class _FruitsGameState extends State<FruitsGame> {
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => GameOptionRow(
-          tile1: options[index * 2],
-          tile2: options[index * 2 + 1],
+          tile1: fruitOptions(index: index * 2),
+          tile2: fruitOptions(index: index * 2 + 1),
         ),
         itemCount: 2,
       ),

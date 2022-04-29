@@ -15,9 +15,9 @@ import 'package:provider/provider.dart';
 import '../tts.dart';
 
 List list = [];
-late List c;
-late List ques;
-late List numbers;
+List c = [];
+List ques = [];
+List numbers = [];
 late int quest;
 late bool isCorrect;
 
@@ -29,25 +29,28 @@ class NumberGame extends StatefulWidget {
 }
 
 class _NumberGameState extends State<NumberGame> {
-  List<numberOptions> options = [];
-
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    // bool isLoading =
-    //     list.isEmpty; //once questions from DB, add: || ques.isEmpty
+    isLoading = true;
 
     context.watch<CardContent>().list;
     list = context.read<CardContent>().getList("numbers");
-
-    // if (isLoading) {
-    //   return Scaffold(
-    //     backgroundColor: bgYellow,
-    //     body: Center(
-    //       child: LoadingCircle(color: darkYellow),
-    //     ),
-    //   );
-    // }
     ques = context.watch<Questions>().numbersQuest;
+
+    if (list.isNotEmpty && ques.isNotEmpty) {
+      isLoading = false;
+    }
+
+    if (isLoading) {
+      return Scaffold(
+        backgroundColor: bgYellow,
+        body: Center(
+          child: LoadingCircle(color: darkYellow),
+        ),
+      );
+    }
+
     quest = GameController().getquest(ques);
     numbers = GameController()
         .getlistof4numbers(ques[quest].topText.toString(), list);
@@ -56,13 +59,6 @@ class _NumberGameState extends State<NumberGame> {
 
     setTtsConfig();
     flutterTts.speak("How many are these?");
-
-    options = [
-      numberOptions(index: 0),
-      numberOptions(index: 1),
-      numberOptions(index: 2),
-      numberOptions(index: 3),
-    ];
 
     return PicGame(
       question: "How many are these?",
@@ -74,8 +70,8 @@ class _NumberGameState extends State<NumberGame> {
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => TextGameOptionRow(
-          tile1: options[index * 2],
-          tile2: options[index * 2 + 1],
+          tile1: numberOptions(index: index * 2),
+          tile2: numberOptions(index: index * 2 + 1),
         ),
         itemCount: 2,
       ),

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/games/animal.dart';
 
 import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameoptionTile.dart';
+import 'package:monstermind/views/loadingCircle.dart';
 import 'package:monstermind/views/tts.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
 import 'package:provider/provider.dart';
 
-late List list;
-late List animals;
+List list = [];
+List animals = [];
 late int quest;
 late bool isCorrect;
 
@@ -22,22 +24,34 @@ class AnimalGame extends StatefulWidget {
 }
 
 class _AnimalGameState extends State<AnimalGame> {
-  List<animalOptions> options = [];
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    list = context.watch<CardContent>().getList("animals");
+    isLoading = true;
+
+    context.watch<CardContent>().animalsList;
+    list = context.read<CardContent>().getList("animals");
+
+    if (list.isNotEmpty) {
+      isLoading = false;
+    }
+
+    if (isLoading) {
+      return Scaffold(
+        backgroundColor: bgYellow,
+        body: Center(
+          child: LoadingCircle(color: darkYellow),
+        ),
+      );
+    }
+
     animals = GameController().getlistof4(list);
     quest = GameController().getquest(animals);
 
     setTtsConfig();
     flutterTts.speak("Select the animal ${animals[quest].text}");
-    options = [
-      animalOptions(index: 0),
-      animalOptions(index: 1),
-      animalOptions(index: 2),
-      animalOptions(index: 3),
-    ];
+
     return Game(
       question: "Select the animal from the audio",
       onPressed: () {
@@ -46,8 +60,8 @@ class _AnimalGameState extends State<AnimalGame> {
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => GameOptionRow(
-          tile1: options[index * 2],
-          tile2: options[index * 2 + 1],
+          tile1: animalOptions(index: index * 2),
+          tile2: animalOptions(index: index * 2 + 1),
         ),
         itemCount: 2,
       ),

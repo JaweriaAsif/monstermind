@@ -11,7 +11,7 @@ import 'package:monstermind/views/tts.dart';
 import 'package:provider/provider.dart';
 
 List list = [];
-late List bodyparts;
+List bodyparts = [];
 late int quest;
 late bool isCorrect;
 
@@ -23,22 +23,28 @@ class BodyPartGame extends StatefulWidget {
 }
 
 class _BodyPartGameState extends State<BodyPartGame> {
-  late List<bodyPartOptions> options;
-
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    context.watch<CardContent>().list;
-    list = context.read<CardContent>().getList("body");
+    isLoading = true;
+    context.read<CardContent>().list;
+    list = context.watch<CardContent>().getList("body");
+
+    if (list.isNotEmpty) {
+      isLoading = false;
+    }
+
+    if (isLoading) {
+      return Scaffold(
+        backgroundColor: bgYellow,
+        body: Center(
+          child: LoadingCircle(color: darkYellow),
+        ),
+      );
+    }
 
     bodyparts = GameController().getlistof4(list);
     quest = GameController().getquest(bodyparts);
-
-    options = [
-      bodyPartOptions(index: 0),
-      bodyPartOptions(index: 1),
-      bodyPartOptions(index: 2),
-      bodyPartOptions(index: 3),
-    ];
 
     setTtsConfig();
     flutterTts.speak("Select the ${bodyparts[quest].text}");
@@ -51,8 +57,8 @@ class _BodyPartGameState extends State<BodyPartGame> {
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => GameOptionRow(
-          tile1: options[2 * index],
-          tile2: options[2 * index + 1],
+          tile1: bodyPartOptions(index: 2 * index),
+          tile2: bodyPartOptions(index: 2 * index + 1),
         ),
         itemCount: 2,
       ),

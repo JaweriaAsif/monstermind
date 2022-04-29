@@ -37,8 +37,8 @@ class _ColourGameState extends State<ColourGame> {
     isLoading = true;
 
     context.watch<CardContent>().coloursList;
-    list = context.watch<CardContent>().getList("colours");
-    ques = context.read<Questions>().colorsQuest;
+    list = context.read<CardContent>().getList("colours");
+    ques = context.watch<Questions>().colorsQuest;
 
     if (list.isNotEmpty && ques.isNotEmpty) {
       isLoading = false;
