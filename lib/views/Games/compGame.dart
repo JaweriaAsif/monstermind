@@ -1,25 +1,21 @@
-import 'dart:math';
-
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
-import 'package:monstermind/views/Games/ComparisonGame.dart';
+import 'package:monstermind/controllers/games/comparison.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
-// import 'package:monstermind/Games/comparisonGame.dart';
 import 'package:monstermind/views/avatar.dart';
 import 'package:provider/provider.dart';
 
 import '../tts.dart';
+
+late bool isCorrect;
 
 class CompGame extends StatefulWidget {
   CompGame({
     Key? key,
     required this.question,
     required this.questionimagepath,
-    // required this.questionimagewidth,
-    //required this.list,
   }) : super(key: key);
   final String questionimagepath;
-  //final double questionimagewidth;
   final String question;
 
   @override
@@ -27,38 +23,16 @@ class CompGame extends StatefulWidget {
 }
 
 class _CompGameState extends State<CompGame> {
-  final List<double> heights = [110, 60, 220];
-
-  late double? height1;
-
-  late double? height2;
-
-  late double? height3;
-
   @override
   Widget build(BuildContext context) {
     setTtsConfig();
     flutterTts.speak("Select the ${widget.question}.");
-    double randomheight() {
-      int ran = Random().nextInt(heights.length);
-      double h = heights[ran];
-      heights.removeAt(ran);
-      return h;
-    }
-
-    double quest(String question) {
-      if (question == "largest") {
-        return 220;
-      }
-      return 60;
-    }
 
     return Scaffold(
       backgroundColor: const Color(0xffFCE79A),
       body: Column(
         children: [
           AvatarAppbar(),
-
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: (MediaQuery.of(context).size.height / 3) * 1,
@@ -77,7 +51,6 @@ class _CompGameState extends State<CompGame> {
                 ),
                 SizedBox(
                   width: (MediaQuery.of(context).size.width / 3) * 2.28,
-                  // height: (MediaQuery.of(context).size.height / 3) * 0.8,
                   child: Stack(children: [
                     const Image(
                       image: AssetImage('assets/images/speechbubble.png'),
@@ -123,87 +96,64 @@ class _CompGameState extends State<CompGame> {
             alignment: Alignment.bottomCenter,
             child: Column(
               children: [
-                Align(
-                  alignment: const Alignment(0.61, 0),
-                  child: InkWell(
-                    child: SizedBox(
-                      height: true ? height1 = randomheight() : null,
-                      //width: questionimagewidth,
-                      child: Image(
-                        image: FirebaseImage(widget.questionimagepath),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    onTap: () {
-                      if (quest(widget.question) == height1) {
-                        Navigator.pop(context);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const ComparisonGame()),
-                        );
-                        context.read<PointsProvider>().addPoints(10);
-                      } else {
-                        flutterTts.speak("Select the ${widget.question}.");
-                      }
-                    },
-                  ),
+                CompOption(
+                  question: widget.question,
+                  questionimagepath: widget.questionimagepath,
+                  xAlign: 0.61,
                 ),
-                Align(
-                  alignment: const Alignment(-0.8, 0),
-                  child: InkWell(
-                    child: SizedBox(
-                      height: true ? height2 = randomheight() : null,
-                      //width: questionimagewidth,
-                      child: Image(
-                        image: FirebaseImage(widget.questionimagepath),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    onTap: () {
-                      if (quest(widget.question) == height2) {
-                        Navigator.pop(context);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const ComparisonGame()),
-                        );
-                        context.read<PointsProvider>().addPoints(10);
-                      } else {
-                        flutterTts.speak("Select the ${widget.question}.");
-                      }
-                    },
-                  ),
+                CompOption(
+                  question: widget.question,
+                  questionimagepath: widget.questionimagepath,
+                  xAlign: -0.8,
                 ),
-                Align(
-                  alignment: const Alignment(0.8, 0),
-                  child: InkWell(
-                    child: SizedBox(
-                      height: true ? height3 = randomheight() : null,
-                      //width: questionimagewidth,
-                      child: Image(
-                        image: FirebaseImage(widget.questionimagepath),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    onTap: () {
-                      if (quest(widget.question) == height3) {
-                        Navigator.pop(context);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const ComparisonGame()),
-                        );
-                        context.read<PointsProvider>().addPoints(10);
-                      } else {
-                        flutterTts.speak("Select the ${widget.question}.");
-                      }
-                    },
-                  ),
+                CompOption(
+                  question: widget.question,
+                  questionimagepath: widget.questionimagepath,
+                  xAlign: 0.8,
                 ),
               ],
             ),
           ),
           const SizedBox(height: 10),
-          // Expanded(child: list),
         ],
+      ),
+    );
+  }
+}
+
+class CompOption extends StatelessWidget {
+  CompOption({
+    Key? key,
+    required this.question,
+    required this.questionimagepath,
+    required this.xAlign,
+  }) : super(key: key);
+
+  final double xAlign;
+  final String question;
+  final String questionimagepath;
+
+  @override
+  Widget build(BuildContext context) {
+    double height = Comparison().randomheight();
+
+    return Align(
+      alignment: const Alignment(0.61, 0),
+      child: InkWell(
+        child: SizedBox(
+          height: height,
+          child: Image(
+            image: FirebaseImage(questionimagepath),
+            fit: BoxFit.fill,
+          ),
+        ),
+        onTap: () {
+          isCorrect = Comparison().actionOnAns(
+              question: question, height: height, context: context);
+          if (isCorrect) {
+            context.read<PointsProvider>().addPoints(10);
+          }
+        },
       ),
     );
   }
