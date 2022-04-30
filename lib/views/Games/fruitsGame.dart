@@ -78,10 +78,13 @@ class fruitOptions extends StatelessWidget {
       imgPath: fruits[index].imgPath,
       text: fruits[index].text,
       ontap: () {
-        isCorrect = Fruit().actionOnAns(
+        isCorrect = GameController().actionOnAns(
           ques: fruits[quest].text,
           ans: fruits[index].text,
           context: context,
+          navTo: const FruitsGame(),
+          speak:
+              "${fruits[index].text} ... Select the fruit ${fruits[quest].text}",
         );
         if (isCorrect) {
           context.read<PointsProvider>().addPoints(10);

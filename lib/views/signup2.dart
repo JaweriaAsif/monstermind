@@ -1,6 +1,6 @@
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
-import 'package:monstermind/models/firebaseFunctions.dart';
+import 'package:monstermind/controllers/firebaseFunctions.dart';
 import 'package:monstermind/views/button.dart';
 import 'package:monstermind/views/hello.dart';
 import 'package:monstermind/views/textfield.dart';

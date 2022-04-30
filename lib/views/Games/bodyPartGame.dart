@@ -76,10 +76,14 @@ class bodyPartOptions extends StatelessWidget {
       imgPath: bodyparts[index].imgPath,
       text: bodyparts[index].text,
       ontap: () {
-        isCorrect = bodyPart().actionOnAns(
-            ans: bodyparts[index].text,
-            ques: bodyparts[quest].text,
-            context: context);
+        isCorrect = GameController().actionOnAns(
+          ans: bodyparts[index].text,
+          ques: bodyparts[quest].text,
+          context: context,
+          navTo: const BodyPartGame(),
+          speak:
+              "${bodyparts[index].text} ... Select the ${bodyparts[quest].text}",
+        );
         if (isCorrect) {
           context.read<PointsProvider>().addPoints(10);
         }

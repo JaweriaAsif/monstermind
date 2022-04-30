@@ -1,6 +1,8 @@
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/games/comparison.dart';
+import 'package:monstermind/controllers/games/gameController.dart';
+import 'package:monstermind/views/Games/comparisonGame.dart';
 import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
 import 'package:monstermind/views/avatar.dart';
 import 'package:provider/provider.dart';
@@ -155,8 +157,13 @@ class CompOption extends StatelessWidget {
           ),
         ),
         onTap: () {
-          isCorrect = Comparison().actionOnAns(
-              question: question, height: height, context: context);
+          isCorrect = GameController().actionOnAns(
+            ques: Comparison().quest(question).toString(),
+            ans: height.toString(),
+            context: context,
+            navTo: const ComparisonGame(),
+            speak: "Select the $question",
+          );
           if (isCorrect) {
             context.read<PointsProvider>().addPoints(10);
           }

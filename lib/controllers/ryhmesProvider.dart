@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:monstermind/models/firebaseFunctions.dart';
+import 'package:monstermind/controllers/firebaseFunctions.dart';
 import 'package:monstermind/models/rhymes.dart';
 
 class RhymesProvider extends ChangeNotifier {

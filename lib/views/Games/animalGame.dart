@@ -82,10 +82,13 @@ class animalOptions extends StatelessWidget {
       imgPath: animals[index].imgPath,
       text: animals[index].text,
       ontap: () {
-        isCorrect = Animal().actionOnAns(
+        isCorrect = GameController().actionOnAns(
           ans: animals[index].text,
           ques: animals[quest].text,
           context: context,
+          navTo: const AnimalGame(),
+          speak:
+              "${animals[index].text} ... Select the animal ${animals[quest].text}",
         );
 
         if (isCorrect) {

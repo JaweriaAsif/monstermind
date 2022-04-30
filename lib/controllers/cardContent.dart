@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/models/PicTextCard.dart';
 
 import 'package:monstermind/models/TextPicCard.dart';
-import 'package:monstermind/models/firebaseFunctions.dart';
+import 'package:monstermind/controllers/firebaseFunctions.dart';
 import 'package:monstermind/views/tts.dart';
 
 class CardContent extends ChangeNotifier {

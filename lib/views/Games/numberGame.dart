@@ -91,10 +91,12 @@ class numberOptions extends StatelessWidget {
       text: numbers[index].topText.toString(),
       bottomtext: numbers[index].bottomText,
       ontap: () {
-        isCorrect = Number().actionOnAns(
+        isCorrect = GameController().actionOnAns(
           ans: numbers[index].topText.toString(),
           ques: ques[quest].topText.toString(),
           context: context,
+          navTo: const NumberGame(),
+          speak: "${numbers[index].topText.toString()} ... How many are these?",
         );
         if (isCorrect) {
           context.read<PointsProvider>().addPoints(10);

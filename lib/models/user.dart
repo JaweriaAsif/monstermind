@@ -5,6 +5,7 @@ class User {
     this.DOB,
     this.points = 0,
     this.email = "",
+    this.isLoggedIn = true,
   });
 
   String name;
@@ -12,6 +13,7 @@ class User {
   DateTime? DOB;
   int points;
   String email;
+  bool isLoggedIn;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
@@ -20,7 +22,7 @@ class User {
     data['DOB'] = DOB;
     data['points'] = points;
     data['email'] = email;
-
+    data['isLoggedIn'] = isLoggedIn;
     return data;
   }
 
@@ -31,6 +33,7 @@ class User {
       DOB: json['DOB'].toDate(),
       points: json['points'],
       email: json['email'],
+      isLoggedIn: json['isLoggedIn'],
     );
   }
 }

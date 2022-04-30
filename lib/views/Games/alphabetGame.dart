@@ -86,10 +86,13 @@ class alphabetOptions extends StatelessWidget {
       textcolor: c[index],
       text: alphabets[index],
       ontap: () {
-        isCorrect = Alphabet().actionOnAns(
+        isCorrect = GameController().actionOnAns(
           ques: alphabets[ques].toString().substring(0, 1),
           ans: alphabets[index].toString().substring(0, 1),
           context: context,
+          navTo: const AlphabetGame(),
+          speak:
+              "${alphabets[index].toString().substring(0, 1)} ... Select the alphabet ${alphabets[ques].toString().substring(0, 1)}",
         );
         if (isCorrect) {
           context.read<PointsProvider>().addPoints(10);

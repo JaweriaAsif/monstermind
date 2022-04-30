@@ -9,7 +9,7 @@ class Colour {
   bool actionOnAns({
     required String ques,
     required String ans,
-    required String color,
+    // required String color,
     required context,
   }) {
     if (questioncheck(ques, ans)) {
@@ -20,7 +20,7 @@ class Colour {
 
       return true;
     } else {
-      flutterTts.speak("$color ... What color is this?");
+      flutterTts.speak("$ans ... What color is this?");
       return false;
     }
   }

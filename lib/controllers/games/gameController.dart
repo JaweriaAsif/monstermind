@@ -1,8 +1,30 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:monstermind/views/tts.dart';
 
 class GameController {
+  bool questioncheck(String ques, String ans) => ques == ans;
+
+  bool actionOnAns({
+    required String ques,
+    required String ans,
+    required String speak,
+    required Widget navTo,
+    required context,
+  }) {
+    if (questioncheck(ques, ans)) {
+      Navigator.pop(context);
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => navTo),
+      );
+      return true;
+    } else {
+      flutterTts.speak(speak);
+      return false;
+    }
+  }
+
   int getquest(List list) {
     return Random().nextInt(list.length);
   }
@@ -24,7 +46,7 @@ class GameController {
   List getlistof4colours(String color, List list) {
     List l = [];
     for (var i = 0; i < list.length; i++) {
-      if (list[i].color == color) {
+      if (list[i].text == color) {
         l.add(list[i]);
 
         break;

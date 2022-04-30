@@ -1,18 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:monstermind/models/user.dart';
 
-late User user;
+User user = User();
+
+CollectionReference userlist = FirebaseFirestore.instance.collection('Users');
 
 class UserController {
-  addToDB(User user) {}
+  Future<void> addToDB(User user) async {
+    await userlist
+        .add(user.toJson())
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add: $error"));
+  }
 
-  void getFromDB(String email) async {
-    CollectionReference userList =
-        FirebaseFirestore.instance.collection('Users');
-
-    userList.where('email', isEqualTo: email).get().then((querySnapshot) {
-      user =
-          User.fromJson(querySnapshot.docs[0].data() as Map<String, dynamic>);
+  Future<void> getFromDB(String email) async {
+    await userlist
+        .where('email', isEqualTo: email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        user = (User.fromJson(doc.data() as Map<String, dynamic>));
+      });
     });
   }
 }

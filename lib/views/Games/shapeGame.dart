@@ -84,8 +84,13 @@ class shapeOptions extends StatelessWidget {
       text: shapes[index].text,
       textcolor: shapes[index].color,
       ontap: () {
-        isCorrect = Shape().actionOnAns(
-            ques: ques[quest].shape, ans: shapes[index].text, context: context);
+        isCorrect = GameController().actionOnAns(
+          ques: ques[quest].shape,
+          ans: shapes[index].text,
+          context: context,
+          navTo: const ShapeGame(),
+          speak: "${shapes[index].text} ... What shape is this?",
+        );
         if (isCorrect) {
           context.read<PointsProvider>().addPoints(10);
         }

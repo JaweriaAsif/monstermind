@@ -89,11 +89,14 @@ class colourOptions extends StatelessWidget {
       text: colours[index].text,
       textcolor: colours[index].color,
       ontap: () {
-        isCorrect = Colour().actionOnAns(
-            ques: ques[quest].color,
-            ans: colours[index].color,
-            color: colours[index].text,
-            context: context);
+        isCorrect = GameController().actionOnAns(
+          ques: ques[quest].color,
+          ans: colours[index].text,
+          // color: colours[index].text,
+          context: context,
+          navTo: const ColourGame(),
+          speak: "${colours[index].text} ... What color is this?",
+        );
         if (isCorrect) {
           context.read<PointsProvider>().addPoints(10);
         }
