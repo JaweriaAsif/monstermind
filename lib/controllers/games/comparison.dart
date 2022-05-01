@@ -11,23 +11,6 @@ class Comparison {
 
   late List<double> heights = [medium, small, large];
 
-  bool actionOnAns({
-    required String question,
-    required double height,
-    required context,
-  }) {
-    if (quest(question) == height) {
-      Navigator.pop(context);
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const ComparisonGame()),
-      );
-      return true;
-    } else {
-      flutterTts.speak("Select the $question.");
-      return false;
-    }
-  }
-
   // double randomheight() {
   //   int ran = Random().nextInt(heights.length);
   //   double h = heights[ran];

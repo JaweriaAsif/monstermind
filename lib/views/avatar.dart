@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
-import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
+import 'package:monstermind/controllers/pointsProvider.dart';
+import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/Points&Profile/profile.dart';
-import 'package:monstermind/views/signup2.dart';
+
 import 'package:provider/provider.dart';
 
 class Avatar extends StatefulWidget {

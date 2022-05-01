@@ -1,6 +1,7 @@
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/firebaseFunctions.dart';
+import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/button.dart';
 import 'package:monstermind/views/hello.dart';
 import 'package:monstermind/views/textfield.dart';
@@ -8,9 +9,9 @@ import 'package:monstermind/models/user.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-String gender = ""; // kachra DB
-late DateTime DOB; // kachra DB
-User user = User();
+// String gender = ""; // kachra DB
+// late DateTime DOB; // kachra DB
+// User user = User();
 
 class Signup2 extends StatefulWidget {
   const Signup2({Key? key}) : super(key: key);
@@ -73,8 +74,8 @@ class _Signup2State extends State<Signup2> {
                             if (form.validate()) {
                               user = User(
                                 name: _controllerUsername.text,
-                                gender: gender,
-                                DOB: DOB,
+                                gender: user.gender,
+                                DOB: user.DOB,
                               );
                               Navigator.of(context).push(
                                 MaterialPageRoute(

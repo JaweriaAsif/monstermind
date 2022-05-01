@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:monstermind/views/signup2.dart';
+import 'package:monstermind/controllers/userController.dart';
+
 // import 'package:monstermind/main.dart';
 
 class Textfield extends StatelessWidget {
@@ -72,7 +73,7 @@ class DateTextfield extends StatelessWidget {
         onTap: () async {
           selected = await _selectDate(context);
           if (selected) {
-            DOB = selectedDate;
+            user.DOB = selectedDate;
             controller.text = selectedDate.day.toString() +
                 "/" +
                 selectedDate.month.toString() +
@@ -120,7 +121,7 @@ class _DropdownState extends State<Dropdown> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    gender = "";
+    user.gender = "";
   }
 
   @override
@@ -144,14 +145,14 @@ class _DropdownState extends State<Dropdown> {
           );
         }).toList(),
         onChanged: (newValue) {
-          gender = newValue.toString();
+          user.gender = newValue.toString();
           setState(() {
             _category = newValue;
           });
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (text) {
-          if (gender.isEmpty) {
+          if (user.gender.isEmpty) {
             return 'Please select a Gender';
           }
           return null;

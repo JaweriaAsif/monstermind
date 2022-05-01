@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
-import 'package:monstermind/views/signup2.dart';
+import 'package:monstermind/controllers/pointsProvider.dart';
+import 'package:monstermind/controllers/userController.dart';
+// import 'package:monstermind/views/signup2.dart';
 
 import 'package:provider/provider.dart';
 

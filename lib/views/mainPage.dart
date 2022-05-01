@@ -6,6 +6,8 @@ import 'package:just_audio/just_audio.dart';
 
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/controllers/firebaseFunctions.dart';
+import 'package:monstermind/models/user.dart';
+import 'package:monstermind/views/hello.dart';
 import 'package:monstermind/views/signup1.dart';
 
 GoogleSignIn googleSignIn = GoogleSignIn(
@@ -46,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage>
 
     //google sign in
 
-    signIn();
+    signIn(context);
     googleSignIn.signInSilently();
     // print("Signed in: ${user.email}");
 
@@ -113,9 +115,23 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   route() {
-    if (!isTapped) {
+    if (UserController().userNotFound()) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const SignUp1()));
+          context,
+          MaterialPageRoute(
+              builder: (context) => const SignUp1(
+                    btnText: "Sign Up",
+                  )));
+    } else if (!user.isLoggedIn) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const SignUp1(
+                    btnText: "Sign In",
+                  )));
+    } else {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const Hello()));
     }
   }
 
@@ -175,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage>
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
-  signIn() async {
+  signIn(context) async {
     await googleSignIn.onCurrentUserChanged
         .listen((GoogleSignInAccount? account) {
       setState(() async {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/games/comparison.dart';
 import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/views/Games/comparisonGame.dart';
-import 'package:monstermind/views/Points&Profile/pointsProvider.dart';
+import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/views/avatar.dart';
 import 'package:provider/provider.dart';
 
