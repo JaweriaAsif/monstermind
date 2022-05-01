@@ -41,6 +41,8 @@ class _MyHomePageState extends State<MyHomePage>
 
   GoogleSignInAccount? currentUser;
 
+ 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -50,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage>
 
     signIn(context);
     googleSignIn.signInSilently();
+    
     // print("Signed in: ${user.email}");
 
     // UserController().getFromDB(_googleSignIn.currentUser!.email);

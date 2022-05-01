@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:monstermind/controllers/userController.dart';
 
 import 'package:monstermind/views/button.dart';
+import 'package:monstermind/views/hello.dart';
+import 'package:monstermind/views/mainPage.dart';
 import 'package:monstermind/views/signup2.dart';
 import 'package:http/http.dart' as http;
 
@@ -38,16 +41,17 @@ class _SignUp1State extends State<SignUp1> {
     // _googleSignIn.signInSilently();
   }
 
-  // Future<void> _handleSignIn() async {
-  //   try {
-  //     await _googleSignIn.signIn();
-  //     print("signed in!");
-  //     print(_googleSignIn.currentUser!.email);
-  //   } catch (error) {
-  //     print(error);
-  //     print("Can't sign in :(");
-  //   }
-  // }
+  Future<void> _handleSignIn() async {
+    try {
+      await googleSignIn.signIn();
+      print("signed in!");
+      user.email = googleSignIn.currentUser!.email;
+      print(user.email);
+    } catch (error) {
+      print(error);
+      print("Can't sign in :(");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +72,19 @@ class _SignUp1State extends State<SignUp1> {
               ),
               Btn(
                 text: widget.btnText,
-                onPress: () {
-                  // _handleSignIn();
+                onPress: () async {
+                   await _handleSignIn();
+                   if(user.email != "" && widget.btnText == "Sign Up"){
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const Signup2()),
                   );
+                  }
+                  else if(!UserController().userNotFound() && widget.btnText == "Sign In"){
+                    Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Hello()),
+                  );
+                  }
+            
                 },
                 alignment: const Alignment(0, 0.2),
               ),
