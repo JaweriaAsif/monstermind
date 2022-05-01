@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/userController.dart';
-
 import 'package:monstermind/views/Points&Profile/infoWidgets.dart';
 import 'package:provider/provider.dart';
 

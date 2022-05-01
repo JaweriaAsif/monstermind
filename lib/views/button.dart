@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:monstermind/controllers/colors.dart';
 
 //2EADB5
 
@@ -8,25 +10,58 @@ class Btn extends StatelessWidget {
     required this.text,
     required this.onPress,
     required this.alignment,
+    this.icon = false,
   }) : super(key: key);
 
   final String text;
   final Alignment alignment;
   final Function onPress;
+  final bool icon;
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: alignment,
-      child: SizedBox(
-        width: 150,
+      child: Container(
+        constraints: const BoxConstraints(minWidth: 150),
+        // width: 150,
         height: 50,
         child: ElevatedButton(
-          child: Text(
-            text,
-            style: const TextStyle(
-              fontSize: 27,
-            ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (icon) ...[
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 20.0,
+                    child: CircleAvatar(
+                        child: const Icon(
+                          FontAwesomeIcons.google, //put in coloured icon
+                          color: Colors.white,
+                        ),
+                        radius: 17.0,
+                        backgroundColor: btnBlue),
+                  ),
+                ),
+
+                // const Padding(
+                //   padding: EdgeInsets.only(right: 12),
+                //   child: CircleAvatar(
+                //     child: Icon(FontAwesomeIcons.google),
+
+                //   ),
+                // ),
+              ],
+              Text(
+                text,
+                style: const TextStyle(
+                  fontSize: 27,
+                ),
+              ),
+            ],
           ),
           onPressed: () {
             onPress();
@@ -35,12 +70,11 @@ class Btn extends StatelessWidget {
           //button style
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            backgroundColor:
-                MaterialStateProperty.all<Color>(const Color(0xff2EADB5)),
+            backgroundColor: MaterialStateProperty.all<Color>(btnBlue),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
-                side: const BorderSide(color: Color(0xff2EADB5)),
+                side: BorderSide(color: btnBlue),
               ),
             ),
           ),

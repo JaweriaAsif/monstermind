@@ -41,8 +41,6 @@ class _MyHomePageState extends State<MyHomePage>
 
   GoogleSignInAccount? currentUser;
 
- 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -52,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage>
 
     signIn(context);
     googleSignIn.signInSilently();
-    
+
     // print("Signed in: ${user.email}");
 
     // UserController().getFromDB(_googleSignIn.currentUser!.email);
@@ -120,18 +118,22 @@ class _MyHomePageState extends State<MyHomePage>
   route() {
     if (UserController().userNotFound()) {
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const SignUp1(
-                    btnText: "Sign Up",
-                  )));
+        context,
+        MaterialPageRoute(
+          builder: (context) => const SignUp1(
+            signUp: true,
+          ),
+        ),
+      );
     } else if (!user.isLoggedIn) {
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const SignUp1(
-                    btnText: "Sign In",
-                  )));
+        context,
+        MaterialPageRoute(
+          builder: (context) => const SignUp1(
+            signUp: false,
+          ),
+        ),
+      );
     } else {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const Hello()));
@@ -162,6 +164,7 @@ class _MyHomePageState extends State<MyHomePage>
                 fit: BoxFit.fill,
               ),
             ),
+
             //text
             const Align(
               alignment: Alignment(0, 0),

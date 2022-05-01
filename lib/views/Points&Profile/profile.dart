@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/views/Points&Profile/userInfo.dart';
-
-import 'package:monstermind/views/avatar.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -24,9 +23,9 @@ class _ProfileState extends State<Profile> {
           padding: const EdgeInsets.only(left: 10),
           child: IconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_ios,
-              color: Color(0xff1D9EA6),
+              color: halkaBlue,
             ),
           ),
         ),

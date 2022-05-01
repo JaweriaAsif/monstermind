@@ -27,6 +27,17 @@ class UserController {
     // notifyListeners();
   }
 
+  Future<void> setLoggedIn(bool login) async {
+    await userlist.where('email', isEqualTo: user.email).get().then((value) {
+      userlist
+          .doc(value.docs[0].id)
+          .update({'isLoggedIn': login}).then((value) {
+        print("Logged in/out!");
+        user.isLoggedIn = login; // DB? or fine. Check
+      });
+    });
+  }
+
   bool userNotFound() {
     return user.email == "";
   }

@@ -68,7 +68,7 @@ class _Signup2State extends State<Signup2> {
                         padding: const EdgeInsets.only(top: 25, bottom: 20),
                         child: Btn(
                           text: 'Next',
-                          onPress: () {
+                          onPress: () async {
                             final FormState form =
                                 _formKey.currentState as FormState;
                             if (form.validate()) {
@@ -76,7 +76,10 @@ class _Signup2State extends State<Signup2> {
                                 name: _controllerUsername.text,
                                 gender: user.gender,
                                 DOB: user.DOB,
+                                email: user.email,
+                                isLoggedIn: true,
                               );
+                              await UserController().addToDB(user);
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (context) => const Hello()),

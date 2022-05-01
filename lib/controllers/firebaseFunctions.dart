@@ -2,127 +2,61 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:monstermind/models/objectColor.dart';
 import 'package:monstermind/models/objectComp.dart';
+import 'package:monstermind/models/picTextCard.dart';
 import 'package:monstermind/models/textPicCard.dart';
 
-List<TextPicCard> list = [
-  TextPicCard(
-    topText: 1,
-    bottomText: "One",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/muffin.png",
+List<PicTextCard> list = [
+  PicTextCard(
+    text: "Bear",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/bear.png",
   ),
-  TextPicCard(
-    topText: 1,
-    bottomText: "One",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/rabbit.png",
+  PicTextCard(
+    text: "Jellyfish",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/jellyfish.png",
   ),
-  TextPicCard(
-    topText: 1,
-    bottomText: "One",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/squirrel.png",
-  ),
-  TextPicCard(
-    topText: 1,
-    bottomText: "One",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/cow.png",
-  ),
-  TextPicCard(
-    topText: 1,
-    bottomText: "One",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/strawberry.png",
-  ),
-  TextPicCard(
-    topText: 3,
-    bottomText: "Three",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/3squirrels.png",
-  ),
-  TextPicCard(
-    topText: 3,
-    bottomText: "Three",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/3ducks.png",
+  PicTextCard(
+    text: "Butterfly",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/butterfly.png",
   ),
   //
-  TextPicCard(
-    topText: 4,
-    bottomText: "Four",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/4carrots.png",
+  PicTextCard(
+    text: "Penguin",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/penguin.png",
   ),
-  TextPicCard(
-    topText: 4,
-    bottomText: "Four",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/4rabbits.png",
+
+  PicTextCard(
+    text: "Frog",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/frog.png",
   ),
-  TextPicCard(
-    topText: 4,
-    bottomText: "Four",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/4radishes.png",
+  PicTextCard(
+    text: "Panda",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/panda.png",
   ),
-  //
-  TextPicCard(
-    topText: 5,
-    bottomText: "Five",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/5balloons.png",
+  PicTextCard(
+    text: "Bat",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/bat.png",
   ),
-  TextPicCard(
-    topText: 5,
-    bottomText: "Five",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/5slices.png",
+  PicTextCard(
+    text: "Snake",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/snake.png",
   ),
-  //
-  TextPicCard(
-    topText: 6,
-    bottomText: "Six",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/6ants.png",
+  PicTextCard(
+    text: "Shark",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/shark.png",
   ),
-  TextPicCard(
-    topText: 6,
-    bottomText: "Six",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/6spiders.png",
+  PicTextCard(
+    text: "Snail",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/snail.png",
   ),
-  TextPicCard(
-    topText: 7,
-    bottomText: "Seven",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/7muffins.png",
-  ),
-  TextPicCard(
-    topText: 8,
-    bottomText: "Eight",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/8ants.png",
-  ),
-  TextPicCard(
-    topText: 8,
-    bottomText: "Eight",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/8carrots.png",
-  ),
-  TextPicCard(
-    topText: 8,
-    bottomText: "Eight",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/8muffins.png",
-  ),
-  TextPicCard(
-    topText: 8,
-    bottomText: "Eight",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/8spiders.png",
-  ),
-  TextPicCard(
-    topText: 9,
-    bottomText: "Nine",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/9watermelon.png",
-  ),
-  TextPicCard(
-    topText: 10,
-    bottomText: "Ten",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/10balloons.png",
-  ),
-  TextPicCard(
-    topText: 10,
-    bottomText: "Ten",
-    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/10muffins.png",
+  PicTextCard(
+    text: "Sealion",
+    imgPath: "gs://monstermind-d1783.appspot.com/assets/images/sealion.png",
   ),
 ];
 
 void addToDB() {
   // addFCBodyParts();
-  // addToCollection('FCBodyParts');
+  // addToCollection('FCAnimals');
   // addToCollection('Rhymes');
   // addToCollection('GNumbersQuest');
 }
