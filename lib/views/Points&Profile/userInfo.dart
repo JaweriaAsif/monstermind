@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/Points&Profile/infoWidgets.dart';
-import 'package:provider/provider.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
@@ -26,7 +25,7 @@ class _UserInfoState extends State<UserInfo> {
           const SizedBox(height: 5),
           infoRow(
             title: "Age",
-            info: context.watch<UserController>().calculateAge(),
+            info: UserController().calculateAge(),
           ),
         ],
       ),

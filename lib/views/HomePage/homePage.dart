@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/pointsProvider.dart';
+import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/HomePage/option.dart';
 import 'package:monstermind/views/LetsMain/drawMain.dart';
 import 'package:monstermind/views/LetsMain/learnMain.dart';
@@ -6,7 +8,9 @@ import 'package:monstermind/views/LetsMain/playMain.dart';
 import 'package:monstermind/views/Rhymes/rhymesMain.dart';
 
 import 'package:monstermind/views/avatar.dart';
+import 'package:monstermind/views/exitDialog.dart';
 import 'package:monstermind/views/hello.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async => showExitPopup(context),
       child: Scaffold(
         extendBodyBehindAppBar: true,
         body: Stack(

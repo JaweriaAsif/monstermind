@@ -31,29 +31,26 @@ class Btn extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //set Google icon
               if (icon) ...[
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 20.0,
-                    child: CircleAvatar(
-                        child: const Icon(
-                          FontAwesomeIcons.google, //put in coloured icon
-                          color: Colors.white,
-                        ),
-                        radius: 17.0,
-                        backgroundColor: btnBlue),
+                const Padding(
+                  padding: EdgeInsets.only(right: 10, left: 0),
+                  child: Image(
+                    image: AssetImage("assets/images/googleCircle.png"),
+                    width: 40,
                   ),
+                  // child: CircleAvatar(
+                  //   backgroundColor: Colors.white,
+                  //   radius: 20.0,
+                  //   child: CircleAvatar(
+                  //       child: const Icon(
+                  //         FontAwesomeIcons.google, //put in coloured icon
+                  //         color: Colors.white,
+                  //       ),
+                  //       radius: 17.0,
+                  //       backgroundColor: btnBlue),
+                  // ),
                 ),
-
-                // const Padding(
-                //   padding: EdgeInsets.only(right: 12),
-                //   child: CircleAvatar(
-                //     child: Icon(FontAwesomeIcons.google),
-
-                //   ),
-                // ),
               ],
               Text(
                 text,

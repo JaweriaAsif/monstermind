@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/firebaseFunctions.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/button.dart';
+import 'package:monstermind/views/exitDialog.dart';
 import 'package:monstermind/views/hello.dart';
 import 'package:monstermind/views/textfield.dart';
 import 'package:monstermind/models/user.dart';
@@ -34,7 +35,7 @@ class _Signup2State extends State<Signup2> {
   Widget build(BuildContext context) {
     DateTime selectedDate = DateTime.now();
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async => showExitPopup(context),
       child: Scaffold(
         backgroundColor: Colors.white,
         // resizeToAvoidBottomInset: false,

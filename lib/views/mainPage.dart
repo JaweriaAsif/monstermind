@@ -1,28 +1,15 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:just_audio/just_audio.dart';
-
+import 'package:monstermind/controllers/googleSignIn.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/controllers/firebaseFunctions.dart';
-import 'package:monstermind/models/user.dart';
 import 'package:monstermind/views/hello.dart';
 import 'package:monstermind/views/signup1.dart';
 
-GoogleSignIn googleSignIn = GoogleSignIn(
-  // Optional clientId
-  // clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
-  scopes: <String>[
-    'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
-  ],
-);
-
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -37,8 +24,6 @@ class _MyHomePageState extends State<MyHomePage>
   late AnimationController _controller;
   late Animation<double> _animation;
 
-  // GoogleSignIn googleSignIn = GoogleSign().googleSignIn;
-
   GoogleSignInAccount? currentUser;
 
   @override
@@ -48,12 +33,8 @@ class _MyHomePageState extends State<MyHomePage>
 
     //google sign in
 
-    signIn(context);
+    signIn();
     googleSignIn.signInSilently();
-
-    // print("Signed in: ${user.email}");
-
-    // UserController().getFromDB(_googleSignIn.currentUser!.email);
 
     //animation and sound
 
@@ -91,17 +72,6 @@ class _MyHomePageState extends State<MyHomePage>
     addToDB();
   }
 
-  Future<void> _handleSignIn() async {
-    try {
-      await googleSignIn.signIn();
-      print("signed in!");
-      print(googleSignIn.currentUser!.email);
-    } catch (error) {
-      print(error);
-      print("Can't sign in :(");
-    }
-  }
-
   @override
   void dispose() {
     player.stop();
@@ -116,28 +86,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   route() {
-    if (UserController().userNotFound()) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SignUp1(
-            signUp: true,
-          ),
-        ),
-      );
-    } else if (!user.isLoggedIn) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SignUp1(
-            signUp: false,
-          ),
-        ),
-      );
-    } else {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Hello()));
-    }
+    GoogleSign().handleNavigation1(context);
   }
 
   playSound() async {
@@ -197,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage>
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
-  signIn(context) async {
+  signIn() async {
     await googleSignIn.onCurrentUserChanged
         .listen((GoogleSignInAccount? account) {
       setState(() async {

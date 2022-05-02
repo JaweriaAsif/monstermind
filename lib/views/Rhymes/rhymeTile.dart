@@ -1,5 +1,6 @@
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/ryhmesProvider.dart';
 import 'package:monstermind/models/rhymes.dart';
 
@@ -26,7 +27,7 @@ class _RhymeTileState extends State<RhymeTile> {
     return SizedBox(
       height: 75,
       child: Card(
-        color: const Color(0xffFA978B),
+        color: bgRed,
         child: Align(
           child: ListTile(
             leading: Image(

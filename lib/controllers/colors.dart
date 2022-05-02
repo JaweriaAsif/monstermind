@@ -40,9 +40,11 @@ Color red = const Color(0xffEE412A);
 Color darkYellow = const Color(0xffF1B111);
 
 Color bgYellow = const Color(0xffFCE79A);
+Color bgRed = const Color(0xffFA978B);
 
 Color btnBlue = const Color(0xff2EADB5);
 Color halkaBlue = const Color(0xff1D9EA6);
+Color tezBlue = const Color(0xff12777D);
 
 //String colors
 String Turquoise = "0xff30D5C8";

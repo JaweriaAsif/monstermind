@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/colors.dart';
+import 'package:monstermind/controllers/googleSignIn.dart';
+import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/Points&Profile/userInfo.dart';
+import 'package:monstermind/views/button.dart';
+import 'package:monstermind/views/mainPage.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -29,6 +33,34 @@ class _ProfileState extends State<Profile> {
             ),
           ),
         ),
+        //logout icon
+        actions: [
+          InkWell(
+            onTap: () {
+              UserController().setLoggedIn(false);
+              _handleSignOut();
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const MyHomePage()),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.power_settings_new, size: 25, color: halkaBlue),
+                  Text(
+                    "Log Out",
+                    style: TextStyle(
+                        fontSize: 11,
+                        color: halkaBlue,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -50,4 +82,6 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
+
+  Future<void> _handleSignOut() => googleSignIn.disconnect();
 }

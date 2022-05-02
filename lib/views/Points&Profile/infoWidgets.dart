@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/userController.dart';
-// import 'package:monstermind/views/signup2.dart';
-
 import 'package:provider/provider.dart';
 
 //Avatar + username
@@ -27,8 +26,8 @@ class PicAndName extends StatelessWidget {
         //username
         Text(
           user.name,
-          style: const TextStyle(
-            color: Color(0xff12777D),
+          style: TextStyle(
+            color: tezBlue,
             fontSize: 30,
           ),
         ),
