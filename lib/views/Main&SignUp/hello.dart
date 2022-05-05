@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/HomePage/homePage.dart';
-import 'package:monstermind/views/signup2.dart';
+import 'package:monstermind/views/exitDialog.dart';
+import 'package:monstermind/views/Main&SignUp/signup2.dart';
 import 'dart:async';
+
+import 'package:provider/provider.dart';
 
 class Hello extends StatefulWidget {
   const Hello({Key? key}) : super(key: key);
@@ -35,8 +39,9 @@ class _HelloState extends State<Hello> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<PointsProvider>().getPointsDB();
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async => showExitPopup(context),
       child: Scaffold(
         body: Center(
           child: InkWell(

@@ -3,8 +3,8 @@ import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/googleSignIn.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/Points&Profile/userInfo.dart';
-import 'package:monstermind/views/button.dart';
-import 'package:monstermind/views/mainPage.dart';
+import 'package:monstermind/views/Main&SignUp/button.dart';
+import 'package:monstermind/views/Main&SignUp/mainPage.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);

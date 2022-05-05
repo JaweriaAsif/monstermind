@@ -2,10 +2,10 @@ import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/firebaseFunctions.dart';
 import 'package:monstermind/controllers/userController.dart';
-import 'package:monstermind/views/button.dart';
+import 'package:monstermind/views/Main&SignUp/button.dart';
 import 'package:monstermind/views/exitDialog.dart';
-import 'package:monstermind/views/hello.dart';
-import 'package:monstermind/views/textfield.dart';
+import 'package:monstermind/views/Main&SignUp/hello.dart';
+import 'package:monstermind/views/Main&SignUp/textfield.dart';
 import 'package:monstermind/models/user.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

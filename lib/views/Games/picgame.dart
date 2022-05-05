@@ -1,7 +1,7 @@
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/colors.dart';
-import 'package:monstermind/views/avatar.dart';
+import 'package:monstermind/views/Points&Profile/avatar.dart';
 import 'package:monstermind/views/loadingCircle.dart';
 
 class PicGame extends StatelessWidget {

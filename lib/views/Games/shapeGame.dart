@@ -7,7 +7,7 @@ import 'package:monstermind/views/Games/gameoptionTile.dart';
 import 'package:monstermind/views/Games/picgame.dart';
 import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/views/loadingCircle.dart';
-import 'package:monstermind/views/tts.dart';
+import 'package:monstermind/controllers/tts.dart';
 import 'package:provider/provider.dart';
 
 late bool isCorrect;

@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:monstermind/controllers/googleSignIn.dart';
+import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/controllers/firebaseFunctions.dart';
-import 'package:monstermind/views/hello.dart';
-import 'package:monstermind/views/signup1.dart';
+import 'package:monstermind/views/Main&SignUp/hello.dart';
+import 'package:monstermind/views/Main&SignUp/signup1.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -98,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     // print("Signed in: ${user.email}");
-
+    // context.watch<PointsProvider>().getPointsDB();
     super.build(context);
     return Scaffold(
       body: Center(
@@ -156,8 +158,9 @@ class _MyHomePageState extends State<MyHomePage>
         print("Signed in: ${googleSignIn.currentUser!.email}");
 
         await UserController().getFromDB(googleSignIn.currentUser!.email);
-
         print("Signed in: ${user.name}");
+
+        // print("${user.name}'s points: ${user.points}");
       });
     });
 

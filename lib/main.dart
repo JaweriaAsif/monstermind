@@ -7,7 +7,7 @@ import 'package:monstermind/controllers/games/questions.dart';
 import 'package:monstermind/controllers/ryhmesProvider.dart';
 import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/userController.dart';
-import 'package:monstermind/views/mainPage.dart';
+import 'package:monstermind/views/Main&SignUp/mainPage.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 

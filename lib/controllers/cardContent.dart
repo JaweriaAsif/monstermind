@@ -6,7 +6,7 @@ import 'package:monstermind/models/PicTextCard.dart';
 
 import 'package:monstermind/models/TextPicCard.dart';
 import 'package:monstermind/controllers/firebaseFunctions.dart';
-import 'package:monstermind/views/tts.dart';
+import 'package:monstermind/controllers/tts.dart';
 
 class CardContent extends ChangeNotifier {
   List _list = [];

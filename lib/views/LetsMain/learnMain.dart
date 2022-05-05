@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/views/Flashcards/cardPage.dart';
 import 'package:monstermind/views/LetsMain/letsPageMain.dart';
 import 'package:monstermind/views/LetsMain/optionTile.dart';
-import 'package:monstermind/views/avatar.dart';
+import 'package:monstermind/views/Points&Profile/avatar.dart';
 
 class LearnMain extends StatefulWidget {
   const LearnMain({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:monstermind/views/tts.dart';
+import 'package:monstermind/controllers/tts.dart';
 
 class GameController {
   bool questioncheck(String ques, String ans) => ques == ans;

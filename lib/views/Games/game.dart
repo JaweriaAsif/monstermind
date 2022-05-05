@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:monstermind/views/avatar.dart';
+import 'package:monstermind/views/Points&Profile/avatar.dart';
 
 class Game extends StatelessWidget {
   const Game(

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/views/Games/comparisonGame.dart';
-import 'package:monstermind/views/tts.dart';
+import 'package:monstermind/controllers/tts.dart';
 
 class Comparison {
   double small = 60;

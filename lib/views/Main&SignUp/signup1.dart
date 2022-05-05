@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:monstermind/controllers/googleSignIn.dart';
+import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/userController.dart';
-import 'package:monstermind/views/button.dart';
-import 'package:monstermind/views/hello.dart';
-import 'package:monstermind/views/signup2.dart';
+import 'package:monstermind/views/Main&SignUp/button.dart';
+import 'package:monstermind/views/exitDialog.dart';
+import 'package:monstermind/views/Main&SignUp/hello.dart';
+import 'package:monstermind/views/Main&SignUp/signup2.dart';
+import 'package:provider/provider.dart';
 
 class SignUp1 extends StatefulWidget {
   const SignUp1({Key? key, required this.signUp}) : super(key: key);
@@ -18,13 +21,7 @@ class SignUp1 extends StatefulWidget {
 class _SignUp1State extends State<SignUp1> {
   GoogleSignInAccount? _currentUser;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  Future<void> _handleSignIn() async {
+  Future<void> _handleSignIn(context) async {
     try {
       await googleSignIn.signIn();
       print("signed in!");
@@ -39,7 +36,7 @@ class _SignUp1State extends State<SignUp1> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async => showExitPopup(context),
       child: Scaffold(
         body: Center(
           child: Stack(
@@ -57,8 +54,9 @@ class _SignUp1State extends State<SignUp1> {
                 text: "Sign In",
                 icon: widget.signUp,
                 onPress: () async {
-                  await _handleSignIn();
+                  await _handleSignIn(context);
                   await UserController().getFromDB(user.email);
+                  // await context.watch<PointsProvider>().getPointsDB();
                   GoogleSign().handleNavigation2(widget.signUp, context);
                 },
                 alignment: const Alignment(0, 0.2),

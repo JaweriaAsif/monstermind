@@ -9,7 +9,7 @@ import 'package:monstermind/models/TextPicCard.dart';
 import 'package:monstermind/views/loadingCircle.dart';
 import 'package:provider/provider.dart';
 
-import '../tts.dart';
+import '../../controllers/tts.dart';
 import 'dart:convert';
 
 class FlashCard extends StatefulWidget {

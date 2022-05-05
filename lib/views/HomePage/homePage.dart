@@ -7,9 +7,9 @@ import 'package:monstermind/views/LetsMain/learnMain.dart';
 import 'package:monstermind/views/LetsMain/playMain.dart';
 import 'package:monstermind/views/Rhymes/rhymesMain.dart';
 
-import 'package:monstermind/views/avatar.dart';
+import 'package:monstermind/views/Points&Profile/avatar.dart';
 import 'package:monstermind/views/exitDialog.dart';
-import 'package:monstermind/views/hello.dart';
+import 'package:monstermind/views/Main&SignUp/hello.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {

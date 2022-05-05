@@ -11,7 +11,7 @@ import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/views/loadingCircle.dart';
 import 'package:provider/provider.dart';
 
-import '../tts.dart';
+import '../../controllers/tts.dart';
 import 'picgame.dart';
 
 late bool isCorrect;

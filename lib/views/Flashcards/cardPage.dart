@@ -3,7 +3,7 @@ import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/views/Flashcards/flashCard.dart';
-import 'package:monstermind/views/avatar.dart';
+import 'package:monstermind/views/Points&Profile/avatar.dart';
 import 'package:monstermind/views/loadingCircle.dart';
 import 'package:provider/provider.dart';
 
