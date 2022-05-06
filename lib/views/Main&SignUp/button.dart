@@ -39,17 +39,6 @@ class Btn extends StatelessWidget {
                     image: AssetImage("assets/images/googleCircle.png"),
                     width: 40,
                   ),
-                  // child: CircleAvatar(
-                  //   backgroundColor: Colors.white,
-                  //   radius: 20.0,
-                  //   child: CircleAvatar(
-                  //       child: const Icon(
-                  //         FontAwesomeIcons.google, //put in coloured icon
-                  //         color: Colors.white,
-                  //       ),
-                  //       radius: 17.0,
-                  //       backgroundColor: btnBlue),
-                  // ),
                 ),
               ],
               Text(

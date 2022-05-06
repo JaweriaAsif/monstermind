@@ -5,7 +5,6 @@ import 'package:monstermind/controllers/games/gameController.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Games/gameOptionTile.dart';
 import 'package:monstermind/controllers/pointsProvider.dart';
-import 'package:monstermind/views/loadingCircle.dart';
 
 import 'package:provider/provider.dart';
 
@@ -24,8 +23,6 @@ class AlphabetGame extends StatefulWidget {
 }
 
 class _AlphabetGameState extends State<AlphabetGame> {
-  List<alphabetOptions> options = [];
-
   @override
   Widget build(BuildContext context) {
     c = get4colors();
@@ -38,20 +35,6 @@ class _AlphabetGameState extends State<AlphabetGame> {
     flutterTts.speak(
         "Select the alphabet ${alphabets[ques].toString().substring(0, 1)}");
 
-    options = [
-      alphabetOptions(
-        index: 0,
-      ),
-      alphabetOptions(
-        index: 1,
-      ),
-      alphabetOptions(
-        index: 2,
-      ),
-      alphabetOptions(
-        index: 3,
-      ),
-    ];
     return Game(
       question: "Select the alphabet from the audio",
       onPressed: () {
@@ -61,8 +44,8 @@ class _AlphabetGameState extends State<AlphabetGame> {
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => TextGameOptionRow(
-          tile1: options[index * 2],
-          tile2: options[index * 2 + 1],
+          tile1: alphabetOptions(index: index * 2),
+          tile2: alphabetOptions(index: index * 2 + 1),
         ),
         itemCount: 2,
       ),

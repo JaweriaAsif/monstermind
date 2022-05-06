@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/views/Games/comparisonGame.dart';
 import 'package:monstermind/views/Games/alphabetGame.dart';
 import 'package:monstermind/views/Games/animalGame.dart';
@@ -28,7 +29,7 @@ class _PlayMainState extends State<PlayMain> {
       OptionTile(
         imgPath: 'assets/images/numbers.png',
         text: 'Numbers',
-        color: const Color(0xffF8DA6B),
+        color: yellow,
         ontap: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const NumberGame()),
@@ -39,7 +40,7 @@ class _PlayMainState extends State<PlayMain> {
       OptionTile(
         imgPath: 'assets/images/alphabets.png',
         text: 'Alphabets',
-        color: const Color(0xffF8DA6B),
+        color: yellow,
         ontap: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const AlphabetGame()),
@@ -51,7 +52,7 @@ class _PlayMainState extends State<PlayMain> {
       OptionTile(
         imgPath: 'assets/images/shapes.png',
         text: 'Shapes',
-        color: const Color(0xffF8DA6B),
+        color: yellow,
         ontap: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const ShapeGame()),
@@ -62,7 +63,7 @@ class _PlayMainState extends State<PlayMain> {
       OptionTile(
         imgPath: 'assets/images/colours.png',
         text: 'Colours',
-        color: const Color(0xffF8DA6B),
+        color: yellow,
         ontap: () {
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const ColourGame()));
@@ -73,7 +74,7 @@ class _PlayMainState extends State<PlayMain> {
       OptionTile(
         imgPath: 'assets/images/animals.png',
         text: 'Animals',
-        color: const Color(0xffF8DA6B),
+        color: yellow,
         ontap: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const AnimalGame()),
@@ -84,7 +85,7 @@ class _PlayMainState extends State<PlayMain> {
       OptionTile(
         imgPath: 'assets/images/body.png',
         text: 'Body Parts',
-        color: const Color(0xffF8DA6B),
+        color: yellow,
         ontap: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const BodyPartGame()),
@@ -96,7 +97,7 @@ class _PlayMainState extends State<PlayMain> {
       OptionTile(
         imgPath: 'assets/images/fruits.png',
         text: 'Fruits',
-        color: const Color(0xffF8DA6B),
+        color: yellow,
         ontap: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const FruitsGame()),
@@ -108,7 +109,7 @@ class _PlayMainState extends State<PlayMain> {
       OptionTile(
         imgPath: 'assets/images/compare.png',
         text: 'Comparisons',
-        color: const Color(0xffF8DA6B),
+        color: yellow,
         ontap: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const ComparisonGame()),
@@ -122,7 +123,7 @@ class _PlayMainState extends State<PlayMain> {
       bgImgPath: 'assets/images/aloobg color.jpg',
       monsterImgPath: 'assets/images/aloohq.png',
       title: 'Games',
-      titleColour: const Color(0xffF1B111),
+      titleColour: darkYellow,
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => OptionRow(

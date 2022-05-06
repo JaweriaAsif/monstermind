@@ -87,9 +87,9 @@ class _CardPageState extends State<CardPage> {
                                 index--;
                                 setState(() {});
                               },
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.arrow_back_ios_rounded,
-                                color: Color(0xff946DDF),
+                                color: purple,
                                 size: 50,
                               ),
                             ),
@@ -106,9 +106,9 @@ class _CardPageState extends State<CardPage> {
                                 index == list.length - 1 ? index = 0 : index++;
                                 setState(() {});
                               },
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.arrow_forward_ios_rounded,
-                                color: Color(0xff946DDF),
+                                color: purple,
                                 size: 50,
                               ),
                             ),

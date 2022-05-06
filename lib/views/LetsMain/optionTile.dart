@@ -25,7 +25,7 @@ class OptionTile extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
           child: Align(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
+              padding: const EdgeInsets.symmetric(vertical: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

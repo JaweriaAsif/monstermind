@@ -1,16 +1,13 @@
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/models/PicTextCard.dart';
 import 'package:monstermind/models/TextPicCard.dart';
 import 'package:monstermind/views/loadingCircle.dart';
 import 'package:provider/provider.dart';
-
 import '../../controllers/tts.dart';
-import 'dart:convert';
 
 class FlashCard extends StatefulWidget {
   FlashCard({Key? key, required this.content, required this.from})
@@ -51,10 +48,10 @@ class _FlashCardState extends State<FlashCard> {
                         .read<CardContent>()
                         .speak(from: widget.from, content: widget.content);
                   },
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.volume_up_rounded,
                     size: 40,
-                    color: Color(0xff946DE0),
+                    color: purple,
                   ),
                 ),
               ),

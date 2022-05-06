@@ -37,14 +37,21 @@ List<Color> colors = [
 
 Color purple = const Color(0xff946DDF);
 Color red = const Color(0xffEE412A);
+Color green = const Color(0xff8CAD25);
+Color yellow = const Color(0xffF8DA6B);
+
 Color darkYellow = const Color(0xffF1B111);
+Color darkPurple = const Color(0xff8D64BF);
 
 Color bgYellow = const Color(0xffFCE79A);
 Color bgRed = const Color(0xffFA978B);
+Color bgPurple = const Color(0xffD3BDF4);
 
 Color btnBlue = const Color(0xff2EADB5);
 Color halkaBlue = const Color(0xff1D9EA6);
 Color tezBlue = const Color(0xff12777D);
+
+Color grey = const Color(0xffA4B7B8);
 
 //String colors
 String Turquoise = "0xff30D5C8";

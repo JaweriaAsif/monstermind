@@ -29,7 +29,6 @@ class _MonsterBgState extends State<MonsterBg>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     player = AudioPlayer();
     _controller = AnimationController(
@@ -88,6 +87,5 @@ class _MonsterBgState extends State<MonsterBg>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

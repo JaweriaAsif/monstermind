@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/googleSignIn.dart';
 import 'package:monstermind/controllers/userController.dart';
+import 'package:monstermind/models/user.dart';
 import 'package:monstermind/views/Points&Profile/userInfo.dart';
-import 'package:monstermind/views/Main&SignUp/button.dart';
 import 'package:monstermind/views/Main&SignUp/mainPage.dart';
 
 class Profile extends StatefulWidget {
@@ -42,6 +42,7 @@ class _ProfileState extends State<Profile> {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const MyHomePage()),
               );
+              user = User();
             },
             child: Padding(
               padding: const EdgeInsets.only(right: 10),

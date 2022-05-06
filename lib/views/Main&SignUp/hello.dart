@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/HomePage/homePage.dart';
@@ -65,10 +66,10 @@ class _HelloState extends State<Hello> {
                   alignment: const Alignment(0.09, -0.18),
                   child: Text(
                     "Hello, \n${user.name}!",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xff2EADB5),
+                      color: btnBlue,
                     ),
                     textAlign: TextAlign.center,
                   ),

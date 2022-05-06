@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/views/Points&Profile/avatar.dart';
 
 class Game extends StatelessWidget {
@@ -16,7 +17,7 @@ class Game extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffFCE79A),
+      backgroundColor: bgYellow,
       body: Column(
         children: [
           AvatarAppbar(),
@@ -55,8 +56,8 @@ class Game extends StatelessWidget {
                               child: Text(
                                 question,
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: const Color(0xffF1B111),
+                                style: TextStyle(
+                                  color: darkYellow,
                                   fontSize: 25,
                                   fontWeight: FontWeight.w700,
                                 ),

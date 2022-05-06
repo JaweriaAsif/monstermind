@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/Points&Profile/profile.dart';
@@ -44,7 +45,7 @@ class AvatarState extends State<Avatar> {
                         ),
                       ),
                     ),
-                    color: const Color(0xff1D9EA6),
+                    color: halkaBlue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
@@ -56,8 +57,8 @@ class AvatarState extends State<Avatar> {
                   child: Align(
                     child: Text(
                       "$points points",
-                      style: const TextStyle(
-                        color: Color(0xff1D9EA6),
+                      style: TextStyle(
+                        color: halkaBlue,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -117,9 +118,9 @@ class AvatarAppbar extends StatelessWidget {
                         () {
                           Navigator.pop(context);
                         },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_back_ios,
-                      color: Color(0xff1D9EA6),
+                      color: halkaBlue,
                     ),
                   ),
                 ),

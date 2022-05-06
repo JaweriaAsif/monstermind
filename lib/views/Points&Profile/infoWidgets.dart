@@ -61,7 +61,7 @@ class PointsState extends State<Points> {
             textAlign: TextAlign.center,
           ),
         ),
-        color: const Color(0xff1D9EA6),
+        color: halkaBlue,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.0),
         ),
@@ -88,15 +88,15 @@ class infoRow extends StatelessWidget {
       children: [
         Text(
           title + ": ",
-          style: const TextStyle(
-            color: Color(0xff12777D),
+          style: TextStyle(
+            color: tezBlue,
             fontSize: 20,
           ),
         ),
         Text(
           info,
-          style: const TextStyle(
-            color: Color(0xffA4B7B8),
+          style: TextStyle(
+            color: grey,
             fontSize: 18,
           ),
         ),

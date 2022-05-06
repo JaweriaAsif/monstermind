@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/userController.dart';
 
 // import 'package:monstermind/main.dart';
@@ -25,8 +26,8 @@ class Textfield extends StatelessWidget {
         ),
         decoration: InputDecoration(
           hintText: label,
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Color(0xff2EADB5), width: 2),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: btnBlue, width: 2),
           ),
         ),
         validator: (text) {
@@ -64,10 +65,10 @@ class DateTextfield extends StatelessWidget {
         style: const TextStyle(
           fontSize: 18,
         ),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           hintText: 'Date of Birth',
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Color(0xff2EADB5), width: 2),
+            borderSide: BorderSide(color: btnBlue, width: 2),
           ),
         ),
         onTap: () async {
@@ -158,13 +159,13 @@ class _DropdownState extends State<Dropdown> {
           return null;
         },
         value: _category,
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           hintText: "Gender",
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontSize: 18,
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Color(0xff2EADB5), width: 2),
+            borderSide: BorderSide(color: btnBlue, width: 2),
           ),
         ),
       ),

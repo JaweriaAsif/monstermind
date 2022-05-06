@@ -8,13 +8,13 @@ class GameOptionTile extends StatelessWidget {
     required this.text,
     required this.height,
     required this.ontap,
-    this.textcolor,
+    this.textcolor = "0xff000000",
   }) : super(key: key);
 
   final String imgPath;
   final double height;
   final String text;
-  final String? textcolor;
+  final String textcolor;
   final Function() ontap;
 
   @override
@@ -23,7 +23,7 @@ class GameOptionTile extends StatelessWidget {
       child: InkWell(
         onTap: ontap,
         child: Card(
-          color: const Color(0xffffffff),
+          color: Colors.white,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
           child: Align(
@@ -45,9 +45,7 @@ class GameOptionTile extends StatelessWidget {
                   Text(
                     text,
                     style: TextStyle(
-                      color: textcolor == null
-                          ? const Color(0xffF000000)
-                          : Color(int.parse(textcolor!)),
+                      color: Color(int.parse(textcolor)),
                       fontSize: 18,
                     ),
                   ),
@@ -106,7 +104,7 @@ class TextGameOptionTile extends StatelessWidget {
         // child: SizedBox(
         //height: isAlphabet ? 100 : MediaQuery.of(context).size.height * 0.17,
         child: Card(
-          color: const Color(0xffffffff),
+          color: Colors.white,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
           child: Align(

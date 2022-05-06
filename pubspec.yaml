@@ -40,10 +40,11 @@ dependencies:
   scribble: ^0.3.1
   font_awesome_flutter: ^10.1.0
   just_audio: ^0.9.20
-  spring: ^2.0.2
   curved_animation_controller: ^1.1.0+1
   google_sign_in: ^5.3.0
   firebase_auth: ^3.3.16
+  learning_digital_ink_recognition: ^0.0.2
+  gallery_saver: ^2.3.2
   flutter:
     sdk: flutter
 

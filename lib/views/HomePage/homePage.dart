@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:monstermind/controllers/pointsProvider.dart';
-import 'package:monstermind/controllers/userController.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/views/HomePage/option.dart';
 import 'package:monstermind/views/LetsMain/drawMain.dart';
 import 'package:monstermind/views/LetsMain/learnMain.dart';
 import 'package:monstermind/views/LetsMain/playMain.dart';
 import 'package:monstermind/views/Rhymes/rhymesMain.dart';
-
 import 'package:monstermind/views/Points&Profile/avatar.dart';
 import 'package:monstermind/views/exitDialog.dart';
-import 'package:monstermind/views/Main&SignUp/hello.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -45,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 190),
                 Option(
                   path: 'assets/images/remi.png',
-                  color: const Color(0xff8D64BF),
+                  color: darkPurple,
                   text: "Learn",
                   ontap: () {
                     Navigator.of(context).push(
@@ -57,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Option(
                   path: 'assets/images/crab.png',
-                  color: const Color(0xffEE412A),
+                  color: red,
                   text: "Sing",
                   ontap: () {
                     Navigator.of(context).push(
@@ -69,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Option(
                   path: 'assets/images/aloo.png',
-                  color: const Color(0xffF1B111),
+                  color: darkYellow,
                   text: "Play",
                   ontap: () {
                     Navigator.of(context).push(
@@ -80,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Option(
                   path: 'assets/images/brocolli.png',
-                  color: const Color(0xff8CAD25),
+                  color: green,
                   text: "Draw",
                   ontap: () {
                     Navigator.of(context).push(

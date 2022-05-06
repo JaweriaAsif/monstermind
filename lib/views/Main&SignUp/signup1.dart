@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:monstermind/controllers/googleSignIn.dart';
-import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/Main&SignUp/button.dart';
 import 'package:monstermind/views/exitDialog.dart';
-import 'package:monstermind/views/Main&SignUp/hello.dart';
-import 'package:monstermind/views/Main&SignUp/signup2.dart';
-import 'package:provider/provider.dart';
 
 class SignUp1 extends StatefulWidget {
   const SignUp1({Key? key, required this.signUp}) : super(key: key);

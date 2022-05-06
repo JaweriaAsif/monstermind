@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:scribble/scribble.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:learning_digital_ink_recognition/learning_digital_ink_recognition.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 class DrawMain extends StatefulWidget {
   const DrawMain({Key? key}) : super(key: key);
@@ -15,15 +17,88 @@ class DrawMain extends StatefulWidget {
 class _DrawMainState extends State<DrawMain> {
   late ScribbleNotifier notifier;
 
+  String _model = 'en-US';
+  // DigitalInkRecognition recognition = DigitalInkRecognition(model: _model);
+  late DigitalInkRecognition _recognition;
+  List<RecognitionCandidate> data = [];
+  bool isProcessing = false;
+
+  @override
+  void dispose() {
+    _recognition.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   void initState() {
     notifier = ScribbleNotifier();
+    _recognition = DigitalInkRecognition(model: _model);
+    // _init();
 
     super.initState();
   }
 
+  Future<void> _checkModel() async {
+    bool isDownloaded = await DigitalInkModelManager.isDownloaded(_model);
+
+    if (!isDownloaded) {
+      await DigitalInkModelManager.download(_model);
+    }
+  }
+
+  Future<void> _init() async {
+    //print('Writing Area: ($_width, $_height)');
+    await _recognition.start(
+        writingArea: Size(MediaQuery.of(context).size.width,
+            MediaQuery.of(context).size.height));
+    // always check the availability of model before being used for recognition
+    await _checkModel();
+  }
+
+  Future<void> _startRecognition() async {
+    if (!isProcessing) {
+      //   state.startProcessing();
+      isProcessing = true;
+      // always check the availability of model before being used for recognition
+      await _checkModel();
+      data = await _recognition.process();
+      // state.stopProcessing();
+      isProcessing = false;
+    }
+  }
+
+  Future<void> _actionDown(Offset point) async {
+    await _recognition.actionDown(point);
+  }
+
+  Future<void> _actionMove(Offset point) async {
+    await _recognition.actionMove(point);
+  }
+
+  Future<void> _actionUp() async {
+    await _recognition.actionUp();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // _recognition
+    //     .actionDown(notifier.currentSketch.lines.first.points.first.asOffset);
+    // notifier.addListener((state) {
+    //   if (state.active) {
+    //     _recognition.actionMove(state.pointerPosition!.asOffset);
+    //   } else {
+    //     _recognition.actionUp();
+    //   }
+    //   _startRecognition();
+    // });
+
+    // _startRecognition();
+    // _recognition.actionMove();
+    if (data.isNotEmpty) {
+      print("Data list index 0 ${data.first}");
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xffFFF6D8),
       body: Stack(
@@ -33,6 +108,37 @@ class _DrawMainState extends State<DrawMain> {
             height: MediaQuery.of(context).size.height,
             child: Stack(
               children: [
+                // Builder(builder: (_) {
+
+                //   _init();
+                //   return GestureDetector(
+                //     onTap: () => print("tapped"),
+                //     onScaleStart: (details) async {
+                //       await _recognition.actionDown(details.localFocalPoint);
+                //       setState(() {});
+                //       print("Scale started");
+                //       if (data.isNotEmpty) {
+                //         print("Data list index 0 ${data.first}");
+                //       }
+                //     },
+                //     onScaleUpdate: (details) async {
+                //       await _recognition.actionDown(details.localFocalPoint);
+                //       setState(() {});
+                //       print("Scale updated");
+                //       if (data.isNotEmpty) {
+                //         print("Data list index 0 ${data.first}");
+                //       }
+                //     },
+                //     onScaleEnd: (details) async {
+                //       await _recognition.actionUp();
+                //       _startRecognition();
+                //       print("Scale ended");
+                //       if (data.isNotEmpty) {
+                //         print("Data list index 0 ${data.first}");
+                //       }
+                //     },
+                //   );
+                // }),
                 Scribble(
                   notifier: notifier,
                   drawPen: true,
@@ -41,6 +147,7 @@ class _DrawMainState extends State<DrawMain> {
                   top: 16,
                   right: 16,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       _buildColorToolbar(context),
                       const Divider(
@@ -91,7 +198,16 @@ class _DrawMainState extends State<DrawMain> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text("Your Image"),
-        content: Image.memory(image.buffer.asUint8List()),
+        content: Column(
+          children: [
+            Image.memory(image.buffer.asUint8List()),
+            ElevatedButton(
+                onPressed: () {
+                  // GallerySaver.saveImage(image.buffer.);
+                },
+                child: const Text("Save to Gallery")),
+          ],
+        ),
       ),
     );
   }
@@ -155,14 +271,28 @@ class _DrawMainState extends State<DrawMain> {
     return StateNotifierBuilder<ScribbleState>(
       stateNotifier: notifier,
       builder: (context, state, _) => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          _buildUndoButton(context),
+          Row(
+            // mainAxisSize: MainAxisSize.min,
+
+            children: [
+              _buildUndoButton(context),
+              // const Divider(
+              //   height: 1.0,
+              // ),
+              _buildRedoButton(context),
+            ],
+          ),
           const Divider(
             height: 4.0,
           ),
-          _buildRedoButton(context),
+          IconButton(
+            icon: const Icon(Icons.save),
+            tooltip: "Save to Image",
+            onPressed: () => _saveImage(context),
+          ),
 
           const Divider(
             height: 20.0,
@@ -195,31 +325,6 @@ class _DrawMainState extends State<DrawMain> {
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildPointerModeSwitcher(BuildContext context,
-      {required bool penMode}) {
-    return FloatingActionButton.small(
-      heroTag: null,
-      onPressed: () => notifier.setAllowedPointersMode(
-        penMode ? ScribblePointerMode.all : ScribblePointerMode.penOnly,
-      ),
-      backgroundColor: Colors.white,
-      tooltip:
-          "Switch drawing mode to " + (penMode ? "all pointers" : "pen only"),
-      child: AnimatedSwitcher(
-        duration: kThemeAnimationDuration,
-        child: !penMode
-            ? const Icon(
-                Icons.touch_app,
-                key: ValueKey(true),
-              )
-            : const Icon(
-                Icons.do_not_touch,
-                key: ValueKey(false),
-              ),
       ),
     );
   }

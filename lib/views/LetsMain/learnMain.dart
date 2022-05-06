@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/views/Flashcards/cardPage.dart';
 import 'package:monstermind/views/LetsMain/letsPageMain.dart';
 import 'package:monstermind/views/LetsMain/optionTile.dart';
@@ -22,14 +23,14 @@ class _LearnMainState extends State<LearnMain> {
       OptionTile(
         imgPath: 'assets/images/numbers.png',
         text: 'Numbers',
-        color: const Color(0xffD3BDF4),
+        color: bgPurple,
         ontap: () => toCardMain(context, "numbers"),
       ),
       // alphabets
       OptionTile(
         imgPath: 'assets/images/alphabets.png',
         text: 'Alphabets',
-        color: const Color(0xffD3BDF4),
+        color: bgPurple,
         ontap: () => toCardMain(context, "alphabets"),
       ),
 
@@ -37,14 +38,14 @@ class _LearnMainState extends State<LearnMain> {
       OptionTile(
         imgPath: 'assets/images/shapes.png',
         text: 'Shapes',
-        color: const Color(0xffD3BDF4),
+        color: bgPurple,
         ontap: () => toCardMain(context, "shapes"),
       ),
       //colours
       OptionTile(
         imgPath: 'assets/images/colours.png',
         text: 'Colours',
-        color: const Color(0xffD3BDF4),
+        color: bgPurple,
         ontap: () => toCardMain(context, "colours"),
       ),
 
@@ -52,14 +53,14 @@ class _LearnMainState extends State<LearnMain> {
       OptionTile(
         imgPath: 'assets/images/animals.png',
         text: 'Animals',
-        color: const Color(0xffD3BDF4),
+        color: bgPurple,
         ontap: () => toCardMain(context, "animals"),
       ),
       //body parts
       OptionTile(
         imgPath: 'assets/images/body.png',
         text: 'Body Parts',
-        color: const Color(0xffD3BDF4),
+        color: bgPurple,
         ontap: () => toCardMain(context, "body"),
       ),
 
@@ -67,14 +68,14 @@ class _LearnMainState extends State<LearnMain> {
       OptionTile(
         imgPath: 'assets/images/fruits.png',
         text: 'Fruits',
-        color: const Color(0xffD3BDF4),
+        color: bgPurple,
         ontap: () => toCardMain(context, "fruits"),
       ),
       //veggies
       OptionTile(
         imgPath: 'assets/images/vegetables.png',
         text: 'Vegetables',
-        color: const Color(0xffD3BDF4),
+        color: bgPurple,
         ontap: () => toCardMain(context, "veggies"),
       ),
     ];
@@ -84,7 +85,7 @@ class _LearnMainState extends State<LearnMain> {
       bgImgPath: 'assets/images/remibg color.png',
       monsterImgPath: 'assets/images/remihq.png',
       title: 'Flash Cards',
-      titleColour: const Color(0xff8D64BF),
+      titleColour: darkPurple,
       list: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, index) => OptionRow(
