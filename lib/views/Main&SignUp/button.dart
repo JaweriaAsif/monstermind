@@ -5,13 +5,13 @@ import 'package:monstermind/controllers/colors.dart';
 //2EADB5
 
 class Btn extends StatelessWidget {
-  const Btn({
-    Key? key,
-    required this.text,
-    required this.onPress,
-    required this.alignment,
-    this.icon = false,
-  }) : super(key: key);
+  const Btn(
+      {Key? key,
+      required this.text,
+      required this.onPress,
+      required this.alignment,
+      this.icon = false})
+      : super(key: key);
 
   final String text;
   final Alignment alignment;

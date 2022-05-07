@@ -2,6 +2,7 @@
     package="com.example.monstermind">
 
    <application
+        android:requestLegacyExternalStorage="true"
         android:label="monstermind"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

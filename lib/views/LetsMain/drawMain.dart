@@ -1,9 +1,16 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:scribble/scribble.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learning_digital_ink_recognition/learning_digital_ink_recognition.dart';
-import 'package:gallery_saver/gallery_saver.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:ui' as ui;
+import 'package:screenshot/screenshot.dart';
 
 class DrawMain extends StatefulWidget {
   const DrawMain({Key? key}) : super(key: key);
@@ -16,6 +23,7 @@ class DrawMain extends StatefulWidget {
 
 class _DrawMainState extends State<DrawMain> {
   late ScribbleNotifier notifier;
+  ScreenshotController screenshotController = ScreenshotController();
 
   String _model = 'en-US';
   // DigitalInkRecognition recognition = DigitalInkRecognition(model: _model);
@@ -80,6 +88,8 @@ class _DrawMainState extends State<DrawMain> {
     await _recognition.actionUp();
   }
 
+  GlobalKey _globalKey = new GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     // _recognition
@@ -139,9 +149,21 @@ class _DrawMainState extends State<DrawMain> {
                 //     },
                 //   );
                 // }),
-                Scribble(
-                  notifier: notifier,
-                  drawPen: true,
+                Screenshot(
+                  controller: screenshotController,
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        color: const Color(0xffFFF6D8),
+                      ),
+                      Scribble(
+                        notifier: notifier,
+                        drawPen: true,
+                      ),
+                    ],
+                  ),
                 ),
                 Positioned(
                   top: 16,
@@ -193,19 +215,61 @@ class _DrawMainState extends State<DrawMain> {
   }
 
   Future<void> _saveImage(BuildContext context) async {
-    final image = await notifier.renderImage();
+    final image = await notifier.renderImage(format: ui.ImageByteFormat.png);
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Your Image"),
-        content: Column(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("Your Image"),
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(
+                Icons.cancel,
+                color: btnBlue,
+              ),
+            ),
+          ],
+        ),
+        content:
+
+            //image+button
+            Column(
           children: [
             Image.memory(image.buffer.asUint8List()),
             ElevatedButton(
-                onPressed: () {
-                  // GallerySaver.saveImage(image.buffer.);
-                },
-                child: const Text("Save to Gallery")),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(btnBlue),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    side: BorderSide(color: btnBlue),
+                  ),
+                ),
+              ),
+              child: const Text("Save to Gallery"),
+              onPressed: () async {
+                //ss
+                screenshotController
+                    .capture(delay: Duration(milliseconds: 10))
+                    .then((capturedImage) async {
+                  final result =
+                      await ImageGallerySaver.saveImage(capturedImage!);
+                  print(result);
+                  Navigator.of(context).pop();
+                  Fluttertoast.showToast(
+                      msg: "Saved image to Gallery",
+                      toastLength: Toast.LENGTH_LONG);
+                }).catchError((onError) {
+                  print(onError);
+                });
+              },
+            )
           ],
         ),
       ),
@@ -286,28 +350,19 @@ class _DrawMainState extends State<DrawMain> {
             ],
           ),
           const Divider(
-            height: 4.0,
+            height: 15.0,
           ),
-          IconButton(
-            icon: const Icon(Icons.save),
-            tooltip: "Save to Image",
-            onPressed: () => _saveImage(context),
-          ),
-
+          _buildSaveButton(context),
           const Divider(
-            height: 20.0,
+            height: 2.0,
+          ),
+          _buildEraserButton(context, isSelected: state is Erasing),
+          const Divider(
+            height: 2.0,
           ),
           _buildClearButton(context),
           const Divider(
-            height: 5.0,
-          ),
-          // _buildPointerModeSwitcher(context,
-          //     penMode:
-          //         state.allowedPointersMode == ScribblePointerMode.penOnly),
-
-          _buildEraserButton(context, isSelected: state is Erasing),
-          const Divider(
-            height: 20.0,
+            height: 15.0,
           ),
           Column(
             children: [
@@ -329,13 +384,29 @@ class _DrawMainState extends State<DrawMain> {
     );
   }
 
+  Widget _buildSaveButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: FloatingActionButton.small(
+        heroTag: null,
+        tooltip: "Save image",
+        backgroundColor: Colors.white,
+        child: const Icon(
+          Icons.save_alt_rounded,
+          color: Colors.black,
+        ),
+        onPressed: () => _saveImage(context),
+      ),
+    );
+  }
+
   Widget _buildEraserButton(BuildContext context, {required bool isSelected}) {
     return Padding(
       padding: const EdgeInsets.all(4),
       child: FloatingActionButton.small(
         heroTag: null,
         tooltip: "Erase",
-        backgroundColor: const Color(0xFFF7FBFF),
+        backgroundColor: Colors.white,
         elevation: isSelected ? 10 : 2,
         shape: !isSelected
             ? const CircleBorder()
@@ -404,15 +475,18 @@ class _DrawMainState extends State<DrawMain> {
   }
 
   Widget _buildClearButton(BuildContext context) {
-    return FloatingActionButton.small(
-      heroTag: null,
-      tooltip: "Clear",
-      onPressed: notifier.clear,
-      disabledElevation: 0,
-      backgroundColor: Colors.white,
-      child: const Icon(
-        Icons.delete_forever,
-        color: Color(0xffb51818),
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: FloatingActionButton.small(
+        heroTag: null,
+        tooltip: "Clear",
+        onPressed: notifier.clear,
+        disabledElevation: 0,
+        backgroundColor: Colors.white,
+        child: const Icon(
+          Icons.delete_forever,
+          color: Color(0xffb51818),
+        ),
       ),
     );
   }
