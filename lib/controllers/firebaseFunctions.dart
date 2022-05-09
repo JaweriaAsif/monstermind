@@ -66,6 +66,6 @@ Future<void> addToCollection(String coll) async {
   });
 }
 
-void cacheFBImage(String imgPath) async {
+Future<void> cacheFBImage(String imgPath) async {
   await FirebaseImage(imgPath).preCache();
 }

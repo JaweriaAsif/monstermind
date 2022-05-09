@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:monstermind/controllers/colors.dart';
+import 'package:monstermind/controllers/ssController.dart';
 import 'package:scribble/scribble.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learning_digital_ink_recognition/learning_digital_ink_recognition.dart';
@@ -24,71 +24,72 @@ class DrawMain extends StatefulWidget {
 class _DrawMainState extends State<DrawMain> {
   late ScribbleNotifier notifier;
   ScreenshotController screenshotController = ScreenshotController();
+  SSController _ssController = SSController();
 
-  String _model = 'en-US';
+  // String _model = 'en-US';
   // DigitalInkRecognition recognition = DigitalInkRecognition(model: _model);
-  late DigitalInkRecognition _recognition;
-  List<RecognitionCandidate> data = [];
-  bool isProcessing = false;
+  // late DigitalInkRecognition _recognition;
+  // List<RecognitionCandidate> data = [];
+  // bool isProcessing = false;
 
-  @override
-  void dispose() {
-    _recognition.dispose();
-    // TODO: implement dispose
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _recognition.dispose();
+  //   // TODO: implement dispose
+  //   super.dispose();
+  // }
 
   @override
   void initState() {
     notifier = ScribbleNotifier();
-    _recognition = DigitalInkRecognition(model: _model);
+    // _recognition = DigitalInkRecognition(model: _model);
     // _init();
 
     super.initState();
   }
 
-  Future<void> _checkModel() async {
-    bool isDownloaded = await DigitalInkModelManager.isDownloaded(_model);
+  // Future<void> _checkModel() async {
+  //   bool isDownloaded = await DigitalInkModelManager.isDownloaded(_model);
 
-    if (!isDownloaded) {
-      await DigitalInkModelManager.download(_model);
-    }
-  }
+  //   if (!isDownloaded) {
+  //     await DigitalInkModelManager.download(_model);
+  //   }
+  // }
 
-  Future<void> _init() async {
-    //print('Writing Area: ($_width, $_height)');
-    await _recognition.start(
-        writingArea: Size(MediaQuery.of(context).size.width,
-            MediaQuery.of(context).size.height));
-    // always check the availability of model before being used for recognition
-    await _checkModel();
-  }
+  // Future<void> _init() async {
+  //   //print('Writing Area: ($_width, $_height)');
+  //   await _recognition.start(
+  //       writingArea: Size(MediaQuery.of(context).size.width,
+  //           MediaQuery.of(context).size.height));
+  //   // always check the availability of model before being used for recognition
+  //   await _checkModel();
+  // }
 
-  Future<void> _startRecognition() async {
-    if (!isProcessing) {
-      //   state.startProcessing();
-      isProcessing = true;
-      // always check the availability of model before being used for recognition
-      await _checkModel();
-      data = await _recognition.process();
-      // state.stopProcessing();
-      isProcessing = false;
-    }
-  }
+  // Future<void> _startRecognition() async {
+  //   if (!isProcessing) {
+  //     //   state.startProcessing();
+  //     isProcessing = true;
+  //     // always check the availability of model before being used for recognition
+  //     await _checkModel();
+  //     data = await _recognition.process();
+  //     // state.stopProcessing();
+  //     isProcessing = false;
+  //   }
+  // }
 
-  Future<void> _actionDown(Offset point) async {
-    await _recognition.actionDown(point);
-  }
+  // Future<void> _actionDown(Offset point) async {
+  //   await _recognition.actionDown(point);
+  // }
 
-  Future<void> _actionMove(Offset point) async {
-    await _recognition.actionMove(point);
-  }
+  // Future<void> _actionMove(Offset point) async {
+  //   await _recognition.actionMove(point);
+  // }
 
-  Future<void> _actionUp() async {
-    await _recognition.actionUp();
-  }
+  // Future<void> _actionUp() async {
+  //   await _recognition.actionUp();
+  // }
 
-  GlobalKey _globalKey = new GlobalKey();
+  // GlobalKey _globalKey = new GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -105,9 +106,9 @@ class _DrawMainState extends State<DrawMain> {
 
     // _startRecognition();
     // _recognition.actionMove();
-    if (data.isNotEmpty) {
-      print("Data list index 0 ${data.first}");
-    }
+    // if (data.isNotEmpty) {
+    //   print("Data list index 0 ${data.first}");
+    // }
 
     return Scaffold(
       backgroundColor: const Color(0xffFFF6D8),
@@ -150,7 +151,7 @@ class _DrawMainState extends State<DrawMain> {
                 //   );
                 // }),
                 Screenshot(
-                  controller: screenshotController,
+                  controller: _ssController.screenshotController,
                   child: Stack(
                     children: [
                       Container(
@@ -216,7 +217,10 @@ class _DrawMainState extends State<DrawMain> {
 
   Future<void> _saveImage(BuildContext context) async {
     final image = await notifier.renderImage(format: ui.ImageByteFormat.png);
+    screenshotDialog(image, context);
+  }
 
+  screenshotDialog(ByteData image, BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -235,10 +239,8 @@ class _DrawMainState extends State<DrawMain> {
             ),
           ],
         ),
-        content:
-
-            //image+button
-            Column(
+        //image+button
+        content: Column(
           children: [
             Image.memory(image.buffer.asUint8List()),
             ElevatedButton(
@@ -253,21 +255,9 @@ class _DrawMainState extends State<DrawMain> {
                 ),
               ),
               child: const Text("Save to Gallery"),
-              onPressed: () async {
+              onPressed: () {
                 //ss
-                screenshotController
-                    .capture(delay: Duration(milliseconds: 10))
-                    .then((capturedImage) async {
-                  final result =
-                      await ImageGallerySaver.saveImage(capturedImage!);
-                  print(result);
-                  Navigator.of(context).pop();
-                  Fluttertoast.showToast(
-                      msg: "Saved image to Gallery",
-                      toastLength: Toast.LENGTH_LONG);
-                }).catchError((onError) {
-                  print(onError);
-                });
+                _ssController.takeScreenshot(context);
               },
             )
           ],
@@ -275,6 +265,20 @@ class _DrawMainState extends State<DrawMain> {
       ),
     );
   }
+
+  // void takeScreenshot() {
+  //   screenshotController
+  //       .capture(delay: Duration(milliseconds: 10))
+  //       .then((capturedImage) async {
+  //     final result = await ImageGallerySaver.saveImage(capturedImage!);
+  //     print(result);
+  //     Navigator.of(context).pop();
+  //     Fluttertoast.showToast(
+  //         msg: "Saved image to Gallery", toastLength: Toast.LENGTH_LONG);
+  //   }).catchError((onError) {
+  //     print(onError);
+  //   });
+  // }
 
   Widget _buildStrokeToolbar(BuildContext context) {
     return StateNotifierBuilder<ScribbleState>(
@@ -339,13 +343,8 @@ class _DrawMainState extends State<DrawMain> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
-            // mainAxisSize: MainAxisSize.min,
-
             children: [
               _buildUndoButton(context),
-              // const Divider(
-              //   height: 1.0,
-              // ),
               _buildRedoButton(context),
             ],
           ),

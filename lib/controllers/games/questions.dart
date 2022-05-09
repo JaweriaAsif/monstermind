@@ -29,11 +29,11 @@ class Questions extends ChangeNotifier {
         .collection('GShapesQuest')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         ObjectShape toAdd =
             ObjectShape.fromJson(doc.data() as Map<String, dynamic>);
         shapesQuest.add(toAdd);
-        cacheFBImage(toAdd.imgPath);
+        await cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -45,11 +45,11 @@ class Questions extends ChangeNotifier {
         .collection('GColorsQuest')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         ObjectColor toAdd =
             ObjectColor.fromJson(doc.data() as Map<String, dynamic>);
         colorsQuest.add(toAdd);
-        cacheFBImage(toAdd.imgPath);
+        await cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -61,11 +61,11 @@ class Questions extends ChangeNotifier {
         .collection('GNumbersQuest')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         TextPicCard toAdd =
             TextPicCard.fromJson(doc.data() as Map<String, dynamic>);
         numbersQuest.add(toAdd);
-        cacheFBImage(toAdd.imgPath);
+        await cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -77,11 +77,11 @@ class Questions extends ChangeNotifier {
         .collection('GCompQuest')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         ObjectComp toAdd =
             ObjectComp.fromJson(doc.data() as Map<String, dynamic>);
         compQuest.add(toAdd);
-        cacheFBImage(toAdd.imgPath);
+        await cacheFBImage(toAdd.imgPath);
       });
     });
 

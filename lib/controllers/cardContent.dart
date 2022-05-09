@@ -96,11 +96,11 @@ class CardContent extends ChangeNotifier {
         .collection('FCShapes')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         PicTextCard toAdd =
             PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
         shapesList.add(toAdd);
-        cacheFBImage(toAdd.imgPath);
+        await cacheFBImage(toAdd.imgPath);
       });
     });
     notifyListeners();
@@ -114,11 +114,11 @@ class CardContent extends ChangeNotifier {
         .collection('FCColours')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         PicTextCard toAdd =
             PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
         coloursList.add(toAdd);
-        cacheFBImage(toAdd.imgPath);
+        await cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -133,11 +133,11 @@ class CardContent extends ChangeNotifier {
         .collection('FCAnimals')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         PicTextCard toAdd =
             PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
         animalsList.add(toAdd);
-        cacheFBImage(toAdd.imgPath);
+        await cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -152,11 +152,11 @@ class CardContent extends ChangeNotifier {
         .collection('FCBodyParts')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         PicTextCard toAdd =
             PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
         bodyPartsList.add(toAdd);
-        cacheFBImage(toAdd.imgPath);
+        await cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -171,11 +171,11 @@ class CardContent extends ChangeNotifier {
         .collection('FCFruits')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         PicTextCard toAdd =
             PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
         fruitsList.add(toAdd);
-        cacheFBImage(toAdd.imgPath);
+        await cacheFBImage(toAdd.imgPath);
       });
     });
 
@@ -190,11 +190,11 @@ class CardContent extends ChangeNotifier {
         .collection('FCVeggies')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         PicTextCard toAdd =
             PicTextCard.fromJson(doc.data() as Map<String, dynamic>);
         veggiesList.add(toAdd);
-        cacheFBImage(toAdd.imgPath);
+        await cacheFBImage(toAdd.imgPath);
       });
     });
 
