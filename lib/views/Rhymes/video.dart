@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:monstermind/views/Rhymes/rhymesMain.dart';
-import 'package:monstermind/views/Points&Profile/avatar.dart';
+import 'package:monstermind/controllers/colors.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:video_player/video_player.dart';
 
 class Video extends StatefulWidget {
   const Video({Key? key, required this.id}) : super(key: key);
@@ -56,9 +54,9 @@ class _VideoState extends State<Video> {
           padding: const EdgeInsets.only(left: 10),
           child: IconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_ios,
-              color: Color(0xff1D9EA6),
+              color: halkaBlue,
             ),
           ),
         ),

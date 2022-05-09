@@ -21,7 +21,6 @@ class CardContent extends ChangeNotifier {
   List getList(String from) {
     if (from == "alphabets") {
       _list = alphabetList();
-      notifyListeners();
     } else if (from == "numbers") {
       _list = numbersList;
     } else if (from == "shapes") {

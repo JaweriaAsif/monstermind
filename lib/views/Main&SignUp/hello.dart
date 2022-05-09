@@ -4,7 +4,6 @@ import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/views/HomePage/homePage.dart';
 import 'package:monstermind/views/exitDialog.dart';
-import 'package:monstermind/views/Main&SignUp/signup2.dart';
 import 'dart:async';
 
 import 'package:provider/provider.dart';

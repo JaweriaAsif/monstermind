@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:monstermind/controllers/googleSignIn.dart';
-import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/controllers/firebaseFunctions.dart';
-import 'package:monstermind/views/Main&SignUp/hello.dart';
-import 'package:monstermind/views/Main&SignUp/signup1.dart';
-import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);

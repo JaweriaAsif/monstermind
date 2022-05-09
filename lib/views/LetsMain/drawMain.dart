@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:monstermind/controllers/colors.dart';
@@ -32,7 +31,7 @@ class _DrawMainState extends State<DrawMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffFFF6D8),
+      backgroundColor: canvas,
       body: Stack(
         children: [
           //canvas
@@ -47,7 +46,7 @@ class _DrawMainState extends State<DrawMain> {
                       Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
-                        color: const Color(0xffFFF6D8),
+                        color: canvas,
                       ),
                       Scribble(
                         notifier: notifier,
@@ -93,9 +92,9 @@ class _DrawMainState extends State<DrawMain> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back_ios,
-                  color: Color(0xff1D9EA6),
+                  color: halkaBlue,
                 ),
               ),
             ),

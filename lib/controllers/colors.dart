@@ -46,6 +46,7 @@ Color darkPurple = const Color(0xff8D64BF);
 Color bgYellow = const Color(0xffFCE79A);
 Color bgRed = const Color(0xffFA978B);
 Color bgPurple = const Color(0xffD3BDF4);
+Color canvas = const Color(0xffFFF6D8);
 
 Color btnBlue = const Color(0xff2EADB5);
 Color halkaBlue = const Color(0xff1D9EA6);

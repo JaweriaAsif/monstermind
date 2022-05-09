@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:monstermind/controllers/firebaseFunctions.dart';
 import 'package:monstermind/models/rhymes.dart';
 
@@ -46,10 +47,10 @@ class RhymesProvider extends ChangeNotifier {
         .orderBy('isFav', descending: true)
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      querySnapshot.docs.forEach((doc) async {
         Rhymes toAdd = Rhymes.fromJson(doc.data() as Map<String, dynamic>);
         rhymes.add(toAdd);
-        cacheFBImage(toAdd.icon);
+        await cacheFBImage(toAdd.icon);
       });
     });
 
@@ -69,6 +70,10 @@ class RhymesProvider extends ChangeNotifier {
       });
     }).onError((error, stackTrace) {
       rhyme.isFav = !rhyme.isFav;
+      String fav = setFav ? "set" : "unset";
+      Fluttertoast.showToast(
+          msg: "Database error. Cannot $fav rhyme as favourite",
+          toastLength: Toast.LENGTH_LONG);
       notifyListeners();
     });
   }

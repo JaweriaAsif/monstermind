@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/tts.dart';
+import 'package:monstermind/views/Games/alphabetDraw.dart';
+import 'package:monstermind/views/Games/numbersDraw.dart';
 
 class GameController {
   bool questioncheck(String ques, String ans) => ques == ans;
@@ -14,8 +16,8 @@ class GameController {
     required context,
   }) {
     if (questioncheck(ques, ans)) {
-      Navigator.pop(context);
-      Navigator.of(context).push(
+      Navigator.pushReplacement(
+        context,
         MaterialPageRoute(builder: (context) => navTo),
       );
       return true;
@@ -25,31 +27,94 @@ class GameController {
     }
   }
 
+  bool isNumeric(String s) {
+    if (s == null) {
+      return false;
+    }
+    return double.tryParse(s) != null;
+  }
+
   bool checkDrawing({
     required String ques,
     required String ans,
     required String speak,
-    // required Widget navTo,
+    required context,
+    required bool isAlphabet,
+  }) {
+    if (isAlphabet) {
+      return checkAlphabetDrawing(
+          ques: ques,
+          ans: ans,
+          speak: speak,
+          navTo: const AlphabetDrawingGame(),
+          context: context);
+    }
+    return checkNumberDrawing(
+        ques: ques,
+        ans: ans,
+        speak: speak,
+        navTo: const NumberDrawingGame(),
+        context: context);
+  }
+
+  bool checkNumberDrawing({
+    required String ques,
+    required String ans,
+    required String speak,
+    required Widget navTo,
+    required context,
+  }) {
+    List<String> ansList = ans.split(", ");
+    ques = ques.toLowerCase();
+    List<bool> answers = [];
+    String answer = "";
+
+    for (int i = 0; i < ansList.length; i++) {
+      if (isNumeric(ansList[i])) {
+        answers.add(questioncheck(ques, ansList[i]));
+      }
+    }
+
+    if (answers.contains(true)) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => navTo),
+      );
+
+      return true;
+    } else {
+      flutterTts.speak("Incorrect, you have drawn ${ansList[0]} ... $speak");
+      return false;
+    }
+  }
+
+  bool checkAlphabetDrawing({
+    required String ques,
+    required String ans,
+    required String speak,
+    required Widget navTo,
     required context,
   }) {
     List<String> ansList = ans.split(", ");
 
     ques = ques.toLowerCase();
-    ansList[0] = ansList[0].toLowerCase();
-    ansList[1] = ansList[1].toLowerCase();
-    ansList[2] = ansList[2].toLowerCase();
 
-    print("answer: " + ansList[0]);
-    print("ques: " + ques);
+    List<bool> answers = [];
 
-    if (questioncheck(ques, ansList[0]) ||
-        questioncheck(ques, ansList[1]) ||
-        questioncheck(ques, ansList[2])) {
+    for (int i = 0; i < min(3, ansList.length); i++) {
+      ansList[i] = ansList[i].toLowerCase();
+      answers.add(questioncheck(ques, ansList[i]));
+    }
+
+    if (answers.contains(true)) {
       // Navigator.pop(context);
       // Navigator.of(context).push(
       //   MaterialPageRoute(builder: (context) => navTo),
       // );
-      // flutterTts.speak("hellloooooooo hi");
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => navTo),
+      );
       return true;
     } else {
       flutterTts.speak("Incorrect, you have drawn ${ansList[0]} ... $speak");

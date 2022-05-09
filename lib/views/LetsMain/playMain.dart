@@ -121,7 +121,7 @@ class _PlayMainState extends State<PlayMain> {
 
       //drawing
       OptionTile(
-        imgPath: 'assets/images/compare.png',
+        imgPath: 'assets/images/abcdraw.png',
         text: 'Draw Letters',
         color: yellow,
         ontap: () {
@@ -134,7 +134,7 @@ class _PlayMainState extends State<PlayMain> {
 
       //numbers
       OptionTile(
-        imgPath: 'assets/images/compare.png',
+        imgPath: 'assets/images/123draw.png',
         text: 'Draw Numbers',
         color: yellow,
         ontap: () {
