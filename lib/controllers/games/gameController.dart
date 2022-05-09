@@ -61,6 +61,10 @@ class GameController {
     return Random().nextInt(list.length);
   }
 
+  int getnum(int lastNum) {
+    return Random().nextInt(lastNum) + 1;
+  }
+
   List getlistof4(List list) {
     List l = [];
     int i = 0;

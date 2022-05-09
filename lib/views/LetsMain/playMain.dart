@@ -8,6 +8,7 @@ import 'package:monstermind/views/Games/bodyPartGame.dart';
 import 'package:monstermind/views/Games/colourGame.dart';
 import 'package:monstermind/views/Games/fruitsGame.dart';
 import 'package:monstermind/views/Games/numberGame.dart';
+import 'package:monstermind/views/Games/numbersDraw.dart';
 import 'package:monstermind/views/Games/shapeGame.dart';
 import 'package:monstermind/views/LetsMain/letsPageMain.dart';
 import 'package:monstermind/views/LetsMain/optionTile.dart';
@@ -131,14 +132,14 @@ class _PlayMainState extends State<PlayMain> {
         },
       ),
 
-      //drawing
+      //numbers
       OptionTile(
         imgPath: 'assets/images/compare.png',
-        text: 'Draw Letters',
+        text: 'Draw Numbers',
         color: yellow,
         ontap: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const AlphabetDraw()),
+            MaterialPageRoute(builder: (context) => const NumberDrawingGame()),
           );
         },
       ),

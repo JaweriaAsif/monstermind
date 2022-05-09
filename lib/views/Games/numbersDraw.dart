@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learning_digital_ink_recognition/learning_digital_ink_recognition.dart';
-import 'package:monstermind/controllers/cardContent.dart';
 import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/digitalInk.dart';
 import 'package:monstermind/controllers/digitalInkPainter.dart';
@@ -11,17 +10,17 @@ import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Main&SignUp/button.dart';
 import 'package:provider/provider.dart';
 
-List alphabets = [];
+// List numbers = [];
 late int ques;
 
-class AlphabetDraw extends StatefulWidget {
-  const AlphabetDraw({Key? key}) : super(key: key);
+class NumberDraw extends StatefulWidget {
+  const NumberDraw({Key? key}) : super(key: key);
 
   @override
-  State<AlphabetDraw> createState() => _AlphabetDrawState();
+  State<NumberDraw> createState() => _NumberDrawState();
 }
 
-class _AlphabetDrawState extends State<AlphabetDraw> {
+class _NumberDrawState extends State<NumberDraw> {
   final String _model = 'en-US';
 
   DigitalInkRecognitionState get state => Provider.of(context, listen: false);
@@ -109,12 +108,12 @@ class _AlphabetDrawState extends State<AlphabetDraw> {
 
   @override
   Widget build(BuildContext context) {
-    alphabets = context.watch<CardContent>().alphabetList();
-    ques = GameController().getquest(alphabets);
+    // alphabets = context.watch<CardContent>().alphabetList();
+    // ques = GameController().getquest(alphabets);
+    ques = GameController().getnum(10); //can change to 20 later
 
     setTtsConfig();
-    flutterTts.speak(
-        "Draw the alphabet ${alphabets[ques].toString().substring(0, 1)}");
+    flutterTts.speak("Draw the number $ques");
 
     // _reset();
 
@@ -178,10 +177,9 @@ class _AlphabetDrawState extends State<AlphabetDraw> {
             print("list: ${state.toCompleteString()}");
 
             bool isCorrect = GameController().checkDrawing(
-              ques: alphabets[ques].toString().substring(0, 1),
+              ques: ques.toString(),
               ans: state.toCompleteString(),
-              speak:
-                  "Draw the alphabet ${alphabets[ques].toString().substring(0, 1)}",
+              speak: "Draw the number $ques",
               context: context,
             );
             if (isCorrect) {
@@ -199,22 +197,21 @@ class _AlphabetDrawState extends State<AlphabetDraw> {
   }
 }
 
-class AlphabetDrawingGame extends StatefulWidget {
-  const AlphabetDrawingGame({Key? key}) : super(key: key);
+class NumberDrawingGame extends StatefulWidget {
+  const NumberDrawingGame({Key? key}) : super(key: key);
 
   @override
-  State<AlphabetDrawingGame> createState() => Alphabet_DrawingGameState();
+  State<NumberDrawingGame> createState() => Number_DrawingGameState();
 }
 
-class Alphabet_DrawingGameState extends State<AlphabetDrawingGame> {
+class Number_DrawingGameState extends State<NumberDrawingGame> {
   @override
   Widget build(BuildContext context) {
     return Game(
         question: "Draw the alphabet from the audio",
-        list: AlphabetDraw(),
+        list: NumberDraw(),
         onPressed: () {
-          flutterTts.speak(
-              "Draw the alphabet ${alphabets[ques].toString().substring(0, 1)} ");
+          flutterTts.speak("Draw the number $ques");
         });
   }
 }
