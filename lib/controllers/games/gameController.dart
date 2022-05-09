@@ -25,6 +25,37 @@ class GameController {
     }
   }
 
+  bool checkDrawing({
+    required String ques,
+    required String ans,
+    required String speak,
+    required Widget navTo,
+    required context,
+  }) {
+    List<String> ansList = ans.split(", ");
+
+    ques = ques.toLowerCase();
+    ansList[0] = ansList[0].toLowerCase();
+    ansList[1] = ansList[1].toLowerCase();
+    ansList[2] = ansList[2].toLowerCase();
+
+    print("answer: " + ansList[0]);
+    print("ques: " + ques);
+
+    if (questioncheck(ques, ansList[0]) ||
+        questioncheck(ques, ansList[1]) ||
+        questioncheck(ques, ansList[2])) {
+      Navigator.pop(context);
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => navTo),
+      );
+      return true;
+    } else {
+      flutterTts.speak("Incorrect, you have drawn ${ansList[0]} ... $speak");
+      return false;
+    }
+  }
+
   int getquest(List list) {
     return Random().nextInt(list.length);
   }

@@ -6,9 +6,6 @@ import 'package:monstermind/controllers/colors.dart';
 import 'package:monstermind/controllers/ssController.dart';
 import 'package:scribble/scribble.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:learning_digital_ink_recognition/learning_digital_ink_recognition.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:ui' as ui;
 import 'package:screenshot/screenshot.dart';
 
@@ -26,90 +23,14 @@ class _DrawMainState extends State<DrawMain> {
   ScreenshotController screenshotController = ScreenshotController();
   SSController _ssController = SSController();
 
-  // String _model = 'en-US';
-  // DigitalInkRecognition recognition = DigitalInkRecognition(model: _model);
-  // late DigitalInkRecognition _recognition;
-  // List<RecognitionCandidate> data = [];
-  // bool isProcessing = false;
-
-  // @override
-  // void dispose() {
-  //   _recognition.dispose();
-  //   // TODO: implement dispose
-  //   super.dispose();
-  // }
-
   @override
   void initState() {
     notifier = ScribbleNotifier();
-    // _recognition = DigitalInkRecognition(model: _model);
-    // _init();
-
     super.initState();
   }
 
-  // Future<void> _checkModel() async {
-  //   bool isDownloaded = await DigitalInkModelManager.isDownloaded(_model);
-
-  //   if (!isDownloaded) {
-  //     await DigitalInkModelManager.download(_model);
-  //   }
-  // }
-
-  // Future<void> _init() async {
-  //   //print('Writing Area: ($_width, $_height)');
-  //   await _recognition.start(
-  //       writingArea: Size(MediaQuery.of(context).size.width,
-  //           MediaQuery.of(context).size.height));
-  //   // always check the availability of model before being used for recognition
-  //   await _checkModel();
-  // }
-
-  // Future<void> _startRecognition() async {
-  //   if (!isProcessing) {
-  //     //   state.startProcessing();
-  //     isProcessing = true;
-  //     // always check the availability of model before being used for recognition
-  //     await _checkModel();
-  //     data = await _recognition.process();
-  //     // state.stopProcessing();
-  //     isProcessing = false;
-  //   }
-  // }
-
-  // Future<void> _actionDown(Offset point) async {
-  //   await _recognition.actionDown(point);
-  // }
-
-  // Future<void> _actionMove(Offset point) async {
-  //   await _recognition.actionMove(point);
-  // }
-
-  // Future<void> _actionUp() async {
-  //   await _recognition.actionUp();
-  // }
-
-  // GlobalKey _globalKey = new GlobalKey();
-
   @override
   Widget build(BuildContext context) {
-    // _recognition
-    //     .actionDown(notifier.currentSketch.lines.first.points.first.asOffset);
-    // notifier.addListener((state) {
-    //   if (state.active) {
-    //     _recognition.actionMove(state.pointerPosition!.asOffset);
-    //   } else {
-    //     _recognition.actionUp();
-    //   }
-    //   _startRecognition();
-    // });
-
-    // _startRecognition();
-    // _recognition.actionMove();
-    // if (data.isNotEmpty) {
-    //   print("Data list index 0 ${data.first}");
-    // }
-
     return Scaffold(
       backgroundColor: const Color(0xffFFF6D8),
       body: Stack(
@@ -119,37 +40,6 @@ class _DrawMainState extends State<DrawMain> {
             height: MediaQuery.of(context).size.height,
             child: Stack(
               children: [
-                // Builder(builder: (_) {
-
-                //   _init();
-                //   return GestureDetector(
-                //     onTap: () => print("tapped"),
-                //     onScaleStart: (details) async {
-                //       await _recognition.actionDown(details.localFocalPoint);
-                //       setState(() {});
-                //       print("Scale started");
-                //       if (data.isNotEmpty) {
-                //         print("Data list index 0 ${data.first}");
-                //       }
-                //     },
-                //     onScaleUpdate: (details) async {
-                //       await _recognition.actionDown(details.localFocalPoint);
-                //       setState(() {});
-                //       print("Scale updated");
-                //       if (data.isNotEmpty) {
-                //         print("Data list index 0 ${data.first}");
-                //       }
-                //     },
-                //     onScaleEnd: (details) async {
-                //       await _recognition.actionUp();
-                //       _startRecognition();
-                //       print("Scale ended");
-                //       if (data.isNotEmpty) {
-                //         print("Data list index 0 ${data.first}");
-                //       }
-                //     },
-                //   );
-                // }),
                 Screenshot(
                   controller: _ssController.screenshotController,
                   child: Stack(
@@ -265,20 +155,6 @@ class _DrawMainState extends State<DrawMain> {
       ),
     );
   }
-
-  // void takeScreenshot() {
-  //   screenshotController
-  //       .capture(delay: Duration(milliseconds: 10))
-  //       .then((capturedImage) async {
-  //     final result = await ImageGallerySaver.saveImage(capturedImage!);
-  //     print(result);
-  //     Navigator.of(context).pop();
-  //     Fluttertoast.showToast(
-  //         msg: "Saved image to Gallery", toastLength: Toast.LENGTH_LONG);
-  //   }).catchError((onError) {
-  //     print(onError);
-  //   });
-  // }
 
   Widget _buildStrokeToolbar(BuildContext context) {
     return StateNotifierBuilder<ScribbleState>(

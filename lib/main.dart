@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monstermind/controllers/cardContent.dart';
+import 'package:monstermind/controllers/digitalInk.dart';
 import 'package:monstermind/controllers/games/questions.dart';
 import 'package:monstermind/controllers/ryhmesProvider.dart';
 import 'package:monstermind/controllers/pointsProvider.dart';
@@ -23,6 +24,7 @@ Future<void> main() async {
           ChangeNotifierProvider(create: (_) => RhymesProvider()),
           ChangeNotifierProvider(create: (_) => CardContent()),
           ChangeNotifierProvider(create: (_) => Questions()),
+          ChangeNotifierProvider(create: (_) => DigitalInkRecognitionState()),
         ],
         child: const MyApp(),
       ),

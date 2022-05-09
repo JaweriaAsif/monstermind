@@ -47,6 +47,7 @@ dependencies:
   image_gallery_saver: ^1.7.1
   fluttertoast: ^8.0.9
   screenshot: ^1.2.3
+  learning_input_image: ^0.0.6+2
   flutter:
     sdk: flutter
 

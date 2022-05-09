@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/colors.dart';
+import 'package:monstermind/views/Games/alphabetDraw.dart';
 import 'package:monstermind/views/Games/comparisonGame.dart';
 import 'package:monstermind/views/Games/alphabetGame.dart';
 import 'package:monstermind/views/Games/animalGame.dart';
@@ -116,6 +117,31 @@ class _PlayMainState extends State<PlayMain> {
           );
         },
       ),
+
+      //drawing
+      OptionTile(
+        imgPath: 'assets/images/compare.png',
+        text: 'Draw Letters',
+        color: yellow,
+        ontap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) => const AlphabetDrawingGame()),
+          );
+        },
+      ),
+
+      //drawing
+      OptionTile(
+        imgPath: 'assets/images/compare.png',
+        text: 'Draw Letters',
+        color: yellow,
+        ontap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const AlphabetDraw()),
+          );
+        },
+      ),
     ];
 
     return LetsPageMain(
@@ -130,7 +156,7 @@ class _PlayMainState extends State<PlayMain> {
           tile1: options[index * 2],
           tile2: options[index * 2 + 1],
         ),
-        itemCount: 4,
+        itemCount: 5,
       ),
     );
   }
