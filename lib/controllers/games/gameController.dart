@@ -29,7 +29,7 @@ class GameController {
     required String ques,
     required String ans,
     required String speak,
-    required Widget navTo,
+    // required Widget navTo,
     required context,
   }) {
     List<String> ansList = ans.split(", ");
@@ -45,10 +45,11 @@ class GameController {
     if (questioncheck(ques, ansList[0]) ||
         questioncheck(ques, ansList[1]) ||
         questioncheck(ques, ansList[2])) {
-      Navigator.pop(context);
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => navTo),
-      );
+      // Navigator.pop(context);
+      // Navigator.of(context).push(
+      //   MaterialPageRoute(builder: (context) => navTo),
+      // );
+      // flutterTts.speak("hellloooooooo hi");
       return true;
     } else {
       flutterTts.speak("Incorrect, you have drawn ${ansList[0]} ... $speak");

@@ -9,9 +9,7 @@ import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/tts.dart';
 import 'package:monstermind/views/Games/game.dart';
 import 'package:monstermind/views/Main&SignUp/button.dart';
-import 'package:monstermind/views/Points&Profile/avatar.dart';
 import 'package:provider/provider.dart';
-import 'package:learning_input_image/learning_input_image.dart';
 
 List alphabets = [];
 late int ques;
@@ -30,7 +28,7 @@ class _AlphabetDrawState extends State<AlphabetDraw> {
   late DigitalInkRecognition _recognition;
 
   double get _width => MediaQuery.of(context).size.width;
-  double _height = 360;
+  double _height = 340;
 
   @override
   void initState() {
@@ -109,8 +107,6 @@ class _AlphabetDrawState extends State<AlphabetDraw> {
     );
   }
 
-  bool isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     alphabets = context.watch<CardContent>().alphabetList();
@@ -174,27 +170,27 @@ class _AlphabetDrawState extends State<AlphabetDraw> {
             ),
           ],
         ),
-        const SizedBox(height: 7),
+        const SizedBox(height: 15),
 
         Btn(
           text: "Done",
-          onPress: () {
-            _startRecognition();
+          onPress: () async {
+            await _startRecognition();
             print("list: ${state.toCompleteString()}");
-
-            //loading before check
 
             bool isCorrect = GameController().checkDrawing(
               ques: alphabets[ques].toString().substring(0, 1),
               ans: state.toCompleteString(),
               speak:
                   "Draw the alphabet ${alphabets[ques].toString().substring(0, 1)}",
-              navTo: AlphabetDrawingGame(),
               context: context,
             );
             if (isCorrect) {
               _reset();
               context.read<PointsProvider>().addPoints(10);
+              setState(() {});
+            } else {
+              _reset();
             }
           },
           alignment: Alignment.bottomCenter,
