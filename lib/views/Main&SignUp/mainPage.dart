@@ -5,6 +5,8 @@ import 'package:just_audio/just_audio.dart';
 import 'package:monstermind/controllers/googleSignIn.dart';
 import 'package:monstermind/controllers/userController.dart';
 import 'package:monstermind/controllers/firebaseFunctions.dart';
+import 'package:monstermind/views/Main&SignUp/offline.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -83,8 +85,18 @@ class _MyHomePageState extends State<MyHomePage>
     return Timer(duration, route);
   }
 
-  route() {
-    GoogleSign().handleNavigation1(context);
+  route() async {
+    bool result = await InternetConnectionChecker().hasConnection;
+    if (result) {
+      GoogleSign().handleNavigation1(context);
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Offline(),
+        ),
+      );
+    }
   }
 
   playSound() async {

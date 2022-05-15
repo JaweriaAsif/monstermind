@@ -4,27 +4,35 @@ import 'package:monstermind/controllers/colors.dart';
 //2EADB5
 
 class Btn extends StatelessWidget {
-  const Btn(
-      {Key? key,
-      required this.text,
-      required this.onPress,
-      required this.alignment,
-      this.icon = false})
-      : super(key: key);
+  const Btn({
+    Key? key,
+    required this.text,
+    required this.onPress,
+    required this.alignment,
+    this.icon = false,
+    this.height = 50,
+    this.font = 27,
+    this.color = const Color(0xff2EADB5),
+    this.minWidth = 150,
+  }) : super(key: key);
 
   final String text;
   final Alignment alignment;
   final Function onPress;
   final bool icon;
+  final double height;
+  final double font;
+  final Color color;
+  final double minWidth;
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: alignment,
       child: Container(
-        constraints: const BoxConstraints(minWidth: 150),
+        constraints: BoxConstraints(minWidth: minWidth),
         // width: 150,
-        height: 50,
+        height: height,
         child: ElevatedButton(
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -42,8 +50,8 @@ class Btn extends StatelessWidget {
               ],
               Text(
                 text,
-                style: const TextStyle(
-                  fontSize: 27,
+                style: TextStyle(
+                  fontSize: font,
                 ),
               ),
             ],
@@ -55,11 +63,11 @@ class Btn extends StatelessWidget {
           //button style
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            backgroundColor: MaterialStateProperty.all<Color>(btnBlue),
+            backgroundColor: MaterialStateProperty.all<Color>(color),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
-                side: BorderSide(color: btnBlue),
+                side: BorderSide(color: color),
               ),
             ),
           ),

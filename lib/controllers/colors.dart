@@ -53,6 +53,7 @@ Color halkaBlue = const Color(0xff1D9EA6);
 Color tezBlue = const Color(0xff12777D);
 
 Color grey = const Color(0xffA4B7B8);
+Color maraGrey = const Color(0xff8B999A);
 
 //String colors
 String Turquoise = "0xff30D5C8";
