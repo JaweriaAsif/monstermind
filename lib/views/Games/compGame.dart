@@ -163,6 +163,7 @@ class CompOption extends StatelessWidget {
             context: context,
             navTo: const ComparisonGame(),
             speak: "Select the $question",
+            isComp: true,
           );
           if (isCorrect) {
             context.read<PointsProvider>().addPoints(10);

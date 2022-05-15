@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:learning_digital_ink_recognition/learning_digital_ink_recognition.dart';
 import 'package:monstermind/controllers/cardContent.dart';
-import 'package:monstermind/controllers/colors.dart';
-import 'package:monstermind/controllers/digitalInk.dart';
-import 'package:monstermind/models/digitalInkPainter.dart';
 import 'package:monstermind/controllers/games/gameController.dart';
-import 'package:monstermind/controllers/pointsProvider.dart';
 import 'package:monstermind/controllers/tts.dart';
 import 'package:monstermind/views/Games/drawingGame.dart';
 import 'package:monstermind/views/Games/game.dart';
-import 'package:monstermind/views/Main&SignUp/button.dart';
 import 'package:provider/provider.dart';
 
 List alphabets = [];

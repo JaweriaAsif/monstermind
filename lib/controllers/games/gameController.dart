@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:monstermind/controllers/tts.dart';
 import 'package:monstermind/views/Games/alphabetDraw.dart';
+import 'package:monstermind/views/Games/comparisonGame.dart';
 import 'package:monstermind/views/Games/numbersDraw.dart';
 
 class GameController {
@@ -13,19 +15,25 @@ class GameController {
     required String ans,
     required String speak,
     required Widget navTo,
+    bool isComp = false,
     required context,
   }) {
     if (questioncheck(ques, ans)) {
+      flutterTts.speak("Correct!");
+      sleep(const Duration(milliseconds: 700));
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => navTo),
       );
       return true;
     } else {
-      flutterTts.speak(speak);
+      flutterTts.speak("$speak");
       return false;
     }
   }
+
+  //Check drawing games answers
 
   bool isNumeric(String s) {
     if (s == null) {
@@ -41,6 +49,10 @@ class GameController {
     required context,
     required bool isAlphabet,
   }) {
+    Function() onTrue = () {};
+
+    Function() onFalse = () {};
+
     if (isAlphabet) {
       return checkAlphabetDrawing(
           ques: ques,
@@ -50,11 +62,14 @@ class GameController {
           context: context);
     }
     return checkNumberDrawing(
-        ques: ques,
-        ans: ans,
-        speak: speak,
-        navTo: const NumberDrawingGame(),
-        context: context);
+      ques: ques,
+      ans: ans,
+      speak: speak,
+      navTo: const NumberDrawingGame(),
+      context: context,
+      onTrue: onTrue,
+      onFalse: onFalse,
+    );
   }
 
   bool checkNumberDrawing({
@@ -63,6 +78,8 @@ class GameController {
     required String speak,
     required Widget navTo,
     required context,
+    required Function() onTrue,
+    required Function() onFalse,
   }) {
     List<String> ansList = ans.split(", ");
     ques = ques.toLowerCase();
@@ -76,11 +93,7 @@ class GameController {
     }
 
     if (answers.contains(true)) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => navTo),
-      );
-
+      onDrawingTrue(context, navTo);
       return true;
     } else {
       flutterTts.speak("Incorrect, you have drawn ${ansList[0]} ... $speak");
@@ -107,20 +120,24 @@ class GameController {
     }
 
     if (answers.contains(true)) {
-      // Navigator.pop(context);
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(builder: (context) => navTo),
-      // );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => navTo),
-      );
+      onDrawingTrue(context, navTo);
       return true;
     } else {
       flutterTts.speak("Incorrect, you have drawn ${ansList[0]} ... $speak");
       return false;
     }
   }
+
+  onDrawingTrue(context, Widget navTo) {
+    flutterTts.speak("Correct!");
+    sleep(const Duration(milliseconds: 700));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => navTo),
+    );
+  }
+
+  //get questions randomly
 
   int getquest(List list) {
     return Random().nextInt(list.length);
